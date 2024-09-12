@@ -1,1 +1,16 @@
 /* You can add global styles to this file, and also import other style files */
+/* Reset básico para eliminar márgenes y rellenos predeterminados */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* Estilo de fuente global */
+body {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  line-height: 1.6;
+  color: #333;
+  background-color: #f8f9fa;
+  padding-top: 56px; /* Espacio para el navbar si usas uno */
+}

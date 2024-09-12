@@ -1,0 +1,15 @@
+/* Estilos adicionales para ajustar el tamaño del card */
+.card {
+  max-width: 400px;
+  margin: auto;
+}
+
+.form-control-sm {
+  font-size: 0.875rem;
+  padding: 0.5rem;
+}
+
+.btn-sm {
+  font-size: 0.875rem;
+  padding: 0.5rem 1rem;
+}
