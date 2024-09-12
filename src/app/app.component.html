@@ -1,1 +1,9 @@
 <app-auth-layout></app-auth-layout>
+<div>
+  <div *ngIf="isAunthenticated()">
+    <app-sidebar></app-sidebar>
+  </div>
+  <div>
+    <router-outlet></router-outlet>
+  </div>
+</div>

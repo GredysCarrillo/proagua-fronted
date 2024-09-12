@@ -1,5 +1,5 @@
-/* You can add global styles to this file, and also import other style files */
-/* Reset básico para eliminar márgenes y rellenos predeterminados */
+@import 'ngx-toastr/toastr';
+
 * {
   margin: 0;
   padding: 0;
@@ -14,3 +14,4 @@ body {
   background-color: #f8f9fa;
   padding-top: 56px; /* Espacio para el navbar si usas uno */
 }
+

@@ -1,4 +1,4 @@
-
+<form [formGroup]="myForm" (submit)="onSubmit()">
   <div class="container py-5 h-100">
     <div class="row d-flex justify-content-center align-items-center h-100">
       <div class="col-12 col-md-6 col-lg-4 col-xl-3">
@@ -10,17 +10,23 @@
               <h2 class="fw-bold mb-3 text-uppercase">Login</h2>
               <p class="text-white-50 mb-4">Por favor ingrese su usuario y contraseña!</p>
               <div class="form-outline form-white mb-3">
-                <input type="email" id="typeEmailX" class="form-control form-control-sm" />
+                <input
+                type="text"
+                formControlName="dpi"
+                class="form-control form-control-sm" />
                 <label class="form-label" for="typeEmailX">Numero de DPI</label>
               </div>
 
               <div class="form-outline form-white mb-3">
-                <input type="password" id="typePasswordX" class="form-control form-control-sm" />
+                <input
+                type="password"
+                id="typePasswordX"
+                formControlName="password"
+                class="form-control form-control-sm" />
                 <label class="form-label" for="typePasswordX">Contraseña</label>
               </div>
 
               <p class="small mb-4 pb-lg-2"><a class="text-white-50" href="auth/register">Olvido su contraseña?</a></p>
-
               <button class="btn btn-outline-light btn-sm px-4" type="submit">Iniciar</button>
 
             </div>
@@ -29,3 +35,4 @@
       </div>
     </div>
   </div>
+</form>
