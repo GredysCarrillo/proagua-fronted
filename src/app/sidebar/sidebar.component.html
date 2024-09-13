@@ -1,1 +1,9 @@
-<p>sidebar works!</p>
+<div class="sidebar">
+  <h5 style="text-align: center;">Menu</h5>
+  <ul class="unorded-list">
+    <li *ngFor="let item of items" class="btn btn-light text-start"
+        [routerLink]="['/', item.toLowerCase().replace(' ', '-')]">
+      <a>{{ item }}</a>
+    </li>
+  </ul>
+</div>

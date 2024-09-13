@@ -1,16 +1,28 @@
 import { HttpClient, HttpClientModule, HttpHeaders } from '@angular/common/http';
-import { computed, Injectable, signal } from '@angular/core';
+import { computed, Inject, Injectable, PLATFORM_ID, signal } from '@angular/core';
 import { catchError, map, Observable, of, throwError } from 'rxjs';
 import { environment } from '../../../../environments/environments';
 import { AuthStatus } from '../interfaces/auth-status.enum';
 import { User } from '../interfaces/user.interface';
 import { checkTokenResponse } from '../interfaces/check-token.response';
 import { loginResponse } from '../interfaces/login.response';
+import { isPlatformBrowser } from '@angular/common';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
+
+
+  constructor(
+    private http: HttpClient,
+    @Inject(PLATFORM_ID) private platformId: Object
+  ) {
+    if (isPlatformBrowser(this.platformId)) {
+      this.checkAuthStatus().subscribe();
+    }
+  }
+
 
   private readonly baseUrl: string = environment.baseUrl;
   private _currentUser = signal<User | null>(null);
@@ -18,10 +30,6 @@ export class AuthService {
 
   public currentUser = computed(() => this._currentUser());
   public authStatus = computed(() => this._authStatus());
-
-  constructor(
-    private http: HttpClient,
-  ) { }
 
 
   private setAuthentication(user: User, token: string): boolean {
