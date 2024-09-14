@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { AuthService } from '../auth/services/login-service.service';
+import { AuthService } from '../../auth/services/login-service.service';
 
 @Component({
   selector: 'app-dashboard',
@@ -11,14 +11,17 @@ import { AuthService } from '../auth/services/login-service.service';
 export class DashboardComponent {
 
   constructor(private authService: AuthService){
-
   }
+
+  
+
+
 
   closeSesion(){
     this.authService.closeSesion();
   }
 
 
-  
+
 
 }

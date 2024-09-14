@@ -1,4 +1,4 @@
-<form [formGroup]="myForm" (submit)="onSubmit()">
+<form [formGroup]="myForm" (submit)="onSubmitUser()">
 <section class="h-100 gradient-custom-2 d-flex align-items-center justify-content-center">
   <div class="container-fluid h-100">
     <div class="row h-100">
@@ -57,7 +57,7 @@
                   <label class="form-label text-black">Departamento</label>
                   <select
                   class="form-select form-select-lg"
-                  formControlName="colonia">
+                  formControlName="Colonia">
                     <option value="" disabled selected>Selecciona un departamento</option>
                     <option *ngFor="let depto of deptos" value="depto.id">{{depto}}</option>
                   </select>
@@ -81,7 +81,7 @@
                   type="textarea" rows="3"
                   class="form-control form-control-sm"
                   placeholder="Direccion"
-                  formControlName="address"></textarea>
+                  formControlName="Address"></textarea>
                 </div>
               </div>
               <div class="text-center">

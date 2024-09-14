@@ -9,7 +9,6 @@ import { CommonModule } from '@angular/common';
   standalone: true,
   imports: [RouterModule, CommonModule],
   templateUrl: './auth-layout.component.html',
-  styleUrl: './auth-layout.component.css'
 })
 export class AuthLayoutComponent {
 

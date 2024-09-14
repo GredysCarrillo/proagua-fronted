@@ -1,14 +1,14 @@
-import { HttpClient, HttpClientModule, HttpHeaders } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { computed, Inject, Injectable, PLATFORM_ID, signal } from '@angular/core';
 import { catchError, map, Observable, of, throwError } from 'rxjs';
 import { environment } from '../../../../environments/environments';
 import { AuthStatus } from '../interfaces/auth-status.enum';
-import { User } from '../interfaces/user.interface';
 import { checkTokenResponse } from '../interfaces/check-token.response';
 import { loginResponse } from '../interfaces/login.response';
 import { isPlatformBrowser } from '@angular/common';
-import { UserInfo } from 'os';
-import { RegisterInterface } from '../interfaces/user-register.interface';
+import { RegisterService } from '../interfaces/service-register.interface';
+import { RegisterUser } from '../interfaces/user-register.interface';
+import { User } from '../interfaces/user.interface';
 
 @Injectable({
   providedIn: 'root'
@@ -51,18 +51,25 @@ export class AuthService {
     return this.http.post<loginResponse>(`${this.baseUrl}/auth/login`, { dpi, password })
       .pipe(
         map(({ user, token }) => this.setAuthentication(user, token,)),
-        catchError(err => throwError(() => err.error.message + 'Ocurio un error')
+        catchError(err => throwError(() => err.error.message)
         )
       );
   }
 
-  register(body: RegisterInterface): Observable<RegisterInterface> {
-    return this.http.post<RegisterInterface>(`${this.baseUrl}/auth/create`, body)
+  registerUser(body: RegisterUser): Observable<RegisterUser> {
+    return this.http.post<RegisterUser>(`${this.baseUrl}/auth/createUser`, body)
       .pipe(
         catchError(err => throwError(() => err.error.message))
       )
   }
 
+  registerService(body:RegisterService):Observable<RegisterService>{
+    console.log('Datos enviados para crear el servicio:', body);
+    return this.http.post<RegisterService>(`${this.baseUrl}/auth/createService`, body)
+    .pipe(
+      catchError(err => throwError(() => err.error.message))
+    )
+  }
 
   checkAuthStatus(): Observable<boolean> {
     const url = `${this.baseUrl}/auth/check-token`;

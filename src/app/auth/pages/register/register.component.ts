@@ -4,7 +4,8 @@ import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { AuthService } from '../../services/login-service.service';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
-import { RegisterInterface } from '../../interfaces/user-register.interface';
+import { RegisterService } from '../../interfaces/service-register.interface';
+import { RegisterUser } from '../../interfaces/user-register.interface';
 
 
 @Component({
@@ -30,9 +31,9 @@ export class RegisterComponent {
     dpi: ['3423354132206', [Validators.required, Validators.minLength(13)]],
     email: ['anner123escobar@gmail.com', [Validators.required, Validators.email]],
     phoneNumber: ['41284104', [Validators.required, Validators.minLength(8)]],
-    colonia: ['1', [Validators.required]],
+    Colonia: ['1', [Validators.required]],
     serviceType: ['1', [Validators.required]],
-    address: ['5ta Avenida 10-28, zona 1', [Validators.required]]
+    Address: ['5ta Avenida 10-28, zona 1', [Validators.required]]
   });
 
   deptos = [
@@ -48,18 +49,34 @@ export class RegisterComponent {
     "Colonia El Mirador",
   ]
 
-  onSubmit() {
-    const _id = this.authService.getUserId();
-    const { name, dpi, email, phoneNumber, colonia, serviceType, address } = this.myForm.value;
-
-    const body: RegisterInterface = {_id, dpi, email, name, phoneNumber, colonia, serviceType, address};
-
-    console.log({body});
-    this.authService.register(body)
+  onSubmitUser() {
+    const { name, dpi, email, phoneNumber } = this.myForm.value;
+    const body: RegisterUser = { dpi, email, name, phoneNumber};
+    this.authService.registerUser(body)
     .subscribe({
-      next: () => this.route.navigateByUrl('/dashboard'),
+      next: (response) =>{
+        const userId = response._id;
+        this.toastr.success('Usuario registrado con exito', 'Registro');
+        this.onSubmitService(userId)
+      },
       error: (message) =>{
         this.toastr.error(message, 'Error')
+      }
+    })
+  }
+
+  onSubmitService(_Id:string |null |undefined){
+    const {Colonia, serviceType, Address} = this.myForm.value;
+    const body: RegisterService = {_Id, Address, Colonia, serviceType };
+    console.log('otro body',{body})
+    this.authService.registerService(body)
+    .subscribe({
+      next: () =>{
+        this.toastr.success('Registro de servicio', 'Registro')
+        this.route.navigateByUrl('/dashboard')
+      },
+      error:(message)=>{
+        this.toastr.error('Ocurrio un error', message)
       }
     })
   }
