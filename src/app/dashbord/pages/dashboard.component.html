@@ -50,7 +50,7 @@
 
   <!-- Últimos 5 Clientes Registrados -->
   <div class="card">
-    <div class="card-header bg-ligh text-black">
+    <div class="card-header bg-light text-black">
       Lista de usuarios
     </div>
     <div class="card-body">
@@ -64,35 +64,10 @@
           </tr>
         </thead>
         <tbody>
-          <tr>
-            <td>1</td>
-            <td>Juan Pérez</td>
-            <td><span class="badge bg-success">Activo</span></td>
-            <td>2024-09-10</td>
-          </tr>
-          <tr>
-            <td>2</td>
-            <td>María Gómez</td>
-            <td><span class="badge bg-danger">Suspendido</span></td>
-            <td>2024-09-09</td>
-          </tr>
-          <tr>
-            <td>3</td>
-            <td>Carlos López</td>
-            <td><span class="badge bg-success">Activo</span></td>
-            <td>2024-09-08</td>
-          </tr>
-          <tr>
-            <td>4</td>
-            <td>Ana Torres</td>
-            <td><span class="badge bg-success">Activo</span></td>
-            <td>2024-09-07</td>
-          </tr>
-          <tr>
-            <td>5</td>
-            <td>Pedro Ramírez</td>
-            <td><span class="badge bg-danger">Suspendido</span></td>
-            <td>2024-09-06</td>
+          <tr *ngFor="let user of users; let i = index">
+            <td>{{ i + 1 }}</td>
+            <td>{{ user.name }}</td>
+            <td><span [ngClass]="{'badge bg-success': user.status === 'Activo', 'badge bg-danger': user.status === 'Suspendido'}">{{ user.status }}</span></td>
           </tr>
         </tbody>
       </table>

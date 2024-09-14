@@ -1,8 +1,8 @@
 import { Routes } from '@angular/router';
-import { DashboardComponent } from './dashbord/dashboard.component';
 import { isNotAuthenticatedGuard } from './auth/guards/is-not-authenticated.guard';
 import { isAuthenticatedGuard } from './auth/guards/is-authenticated.guard';
 import { RegisterComponent } from './auth/pages/register/register.component';
+import { DashboardComponent } from './dashbord/pages/dashboard.component';
 
 export const routes: Routes = [
 
