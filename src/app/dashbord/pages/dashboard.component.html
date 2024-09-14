@@ -59,15 +59,30 @@
           <tr>
             <th>#</th>
             <th>Nombre del Cliente</th>
+            <th>Correo</th>
+            <th>Telefono</th>
             <th>Estado</th>
-            <th>Fecha de Registro</th>
+            <th>Usuario</th>
+            <th>Tickets</th>
           </tr>
         </thead>
         <tbody>
           <tr *ngFor="let user of users; let i = index">
             <td>{{ i + 1 }}</td>
             <td>{{ user.name }}</td>
-            <td><span [ngClass]="{'badge bg-success': user.status === 'Activo', 'badge bg-danger': user.status === 'Suspendido'}">{{ user.status }}</span></td>
+            <td>{{user.email}}</td>
+            <td>{{user.phoneNumber}}</td>
+            <td>
+              <span
+              [class.badge]="true"
+              [class.text-bg-success]="user.status === true"
+              [class.text-bg-danger]="user.status === false"
+              class="rounded-pill">
+              {{ user.status === true ? 'Activo' : 'Suspendido' }}
+            </span>
+            </td>
+            <td><button type="button" class="btn btn-outline-info">OJO</button></td>
+            <td><button type="button" class="btn btn-outline-info">OJO</button></td>
           </tr>
         </tbody>
       </table>
