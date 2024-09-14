@@ -1,3 +1,4 @@
+<form [formGroup]="myForm" (submit)="onSubmit()">
 <section class="h-100 gradient-custom-2 d-flex align-items-center justify-content-center">
   <div class="container-fluid h-100">
     <div class="row h-100">
@@ -10,22 +11,42 @@
 
                 <div class="mb-3">
                   <label>Nombre del cliente</label>
-                  <input type="text" class="form-control form-control-sm" placeholder="Nombre" />
+                  <input
+                  type="text"
+                  class="form-control form-control-sm"
+                  placeholder="Nombre"
+                  formControlName="name"
+                  />
                 </div>
 
                 <div class="mb-3">
                   <label>Numero de Indentificacion</label>
-                  <input type="text" class="form-control form-control-sm" placeholder="DPI" />
+                  <input
+                  type="text"
+                  class="form-control form-control-sm"
+                  placeholder="DPI"
+                  formControlName="dpi"
+                  />
                 </div>
 
                 <div class="mb-3">
                   <label>Correo electronico</label>
-                  <input type="email" class="form-control form-control-sm" placeholder="Correo" />
+                  <input
+                  type="email"
+                  class="form-control form-control-sm"
+                  placeholder="Correo"
+                  formControlName="email"
+                  />
                 </div>
 
                 <div class="mb-3">
                   <label>Numero telefonico</label>
-                  <input type="text" class="form-control form-control-sm" placeholder="Numero telefonico" />
+                  <input
+                  type="text"
+                  class="form-control form-control-sm"
+                  placeholder="Numero telefonico"
+                  formControlName="phoneNumber"
+                  />
                 </div>
               </div>
 
@@ -34,7 +55,9 @@
 
                 <div class="mb-4 pb-2">
                   <label class="form-label text-black">Departamento</label>
-                  <select class="form-select form-select-lg">
+                  <select
+                  class="form-select form-select-lg"
+                  formControlName="colonia">
                     <option value="" disabled selected>Selecciona un departamento</option>
                     <option *ngFor="let depto of deptos" value="depto.id">{{depto}}</option>
                   </select>
@@ -42,7 +65,9 @@
 
                 <div class="mb-4 pb-2">
                   <label class="form-label text-black">Tipo de Servicio</label>
-                  <select class="form-select form-select-lg">
+                  <select
+                  class="form-select form-select-lg"
+                  formControlName="serviceType">
                     <option value="" disabled selected>Tipo de servicio</option>
                     <option value="1">Domestico</option>
                     <option value="2">Comercial</option>
@@ -51,11 +76,16 @@
 
                 <div class="mb-3">
                   <label>Calle/avenida/numeral/referencia</label>
-                  <textarea style="height: 95px;" type="textarea" rows="3" class="form-control form-control-sm" placeholder="Direccion"></textarea>
+                  <textarea
+                  style="height: 95px;"
+                  type="textarea" rows="3"
+                  class="form-control form-control-sm"
+                  placeholder="Direccion"
+                  formControlName="address"></textarea>
                 </div>
               </div>
               <div class="text-center">
-                <button type="button" class="btn btn-primary btn-sm">Registrar</button>
+                <button type="submit" class="btn btn-primary btn-sm" >Registrar</button>
               </div>
             </div>
           </div>
@@ -64,3 +94,4 @@
     </div>
   </div>
 </section>
+</form>

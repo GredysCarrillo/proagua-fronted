@@ -1,12 +1,18 @@
 <div class="container-fluid p-4">
-  <!-- Título del Dashboard -->
+  <!-- Título del Dashboard y Botón de Cerrar Sesión -->
   <div class="d-flex justify-content-between align-items-center mb-4">
     <h2 class="text-primary">Proagua - Servicios de Agua Potable</h2>
-    <!-- Barra de Búsqueda -->
-    <form class="d-flex">
-      <input class="form-control me-2" type="search" placeholder="Buscar cliente" aria-label="Buscar">
-      <button class="btn btn-outline-primary" type="submit">Buscar</button>
-    </form>
+
+    <div class="d-flex align-items-center">
+      <!-- Barra de Búsqueda -->
+      <form class="d-flex me-3">
+        <input class="form-control me-2" type="search" placeholder="Buscar cliente" aria-label="Buscar">
+        <button class="btn btn-outline-primary" type="submit">Buscar</button>
+      </form>
+
+      <!-- Botón de Cerrar Sesión -->
+      <button class="btn btn-outline-danger" (click)="closeSesion()" type="button">Cerrar Sesión</button>
+    </div>
   </div>
 
   <!-- Sección de Estadísticas -->

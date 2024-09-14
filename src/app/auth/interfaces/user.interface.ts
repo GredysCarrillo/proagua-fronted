@@ -5,6 +5,7 @@ export interface User {
   dpi:string;
   email: string;
   phoneNumber:string;
-  isActive: boolean;
-  roles: string[];
+  colonia:string;
+  serviceType:string;
+  address:string;
 }

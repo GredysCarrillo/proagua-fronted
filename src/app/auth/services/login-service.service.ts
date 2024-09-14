@@ -7,6 +7,8 @@ import { User } from '../interfaces/user.interface';
 import { checkTokenResponse } from '../interfaces/check-token.response';
 import { loginResponse } from '../interfaces/login.response';
 import { isPlatformBrowser } from '@angular/common';
+import { UserInfo } from 'os';
+import { RegisterInterface } from '../interfaces/user-register.interface';
 
 @Injectable({
   providedIn: 'root'
@@ -44,6 +46,7 @@ export class AuthService {
     return localStorage.getItem('userId');
   }
 
+
   login(dpi: string, password: string): Observable<boolean> {
     return this.http.post<loginResponse>(`${this.baseUrl}/auth/login`, { dpi, password })
       .pipe(
@@ -53,19 +56,23 @@ export class AuthService {
       );
   }
 
+  register(body: RegisterInterface): Observable<RegisterInterface> {
+    return this.http.post<RegisterInterface>(`${this.baseUrl}/auth/create`, body)
+      .pipe(
+        catchError(err => throwError(() => err.error.message))
+      )
+  }
+
 
   checkAuthStatus(): Observable<boolean> {
-
     const url = `${this.baseUrl}/auth/check-token`;
     const token = localStorage.getItem('token');
-
     if (!token) {
       this.closeSesion();
       return of(false);
     }
     const headers = new HttpHeaders()
       .set('Authorization', `Bearer ${token}`);
-
     return this.http.get<checkTokenResponse>(url, { headers })
       .pipe(
         map(({ user, token }) => this.setAuthentication(user, token)),
@@ -75,7 +82,7 @@ export class AuthService {
         })
       );
 
-    }
+  }
 
   closeSesion() {
     localStorage.removeItem('token');
