@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { TicketDashbordComponent } from './pages/dashbord.component';
+import { CreateTicketComponent } from '../tickets-user/pages/create-ticket.component';
 
 const routes: Routes = [
   {

@@ -16,7 +16,7 @@ export class SidebarComponent {
     'dashboard-tickets',
     'informacion',
     'profile',
-    'creat-ticket'
+    'create-ticket'
   ]
 
 }

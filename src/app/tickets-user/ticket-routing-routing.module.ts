@@ -7,9 +7,7 @@ const routes: Routes = [
     path: '',
     component: CreateTicketComponent,
     children:[
-      {
-        path: '**', redirectTo: 'login',
-      }
+      {path: '**', redirectTo: 'login'}
     ]
   }
 ];
@@ -18,4 +16,4 @@ const routes: Routes = [
   imports: [RouterModule.forChild(routes)],
   exports: [RouterModule]
 })
-export class RoutUserTicketRoutingModule { }
+export class TicketRoutingRoutingModule { }

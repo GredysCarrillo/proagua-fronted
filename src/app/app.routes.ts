@@ -32,9 +32,8 @@ export const routes: Routes = [
     loadChildren: () => import('./profile/profile-routing.module').then(m => m.ProfileRoutingModule),
   },
   {
-    path: 'creat-ticket',
-    canActivate:[isAuthenticatedGuard],
-    loadChildren :() => import('./tickets-user/rout-user-ticket.module').then(m => m.RoutUserTicketModule),
+    path: 'create-ticket',
+    loadChildren: ()=> import('./tickets-user/ticket-routing.module').then(m => m.TicketRoutingModule),
   },
   {
     path: '**',
