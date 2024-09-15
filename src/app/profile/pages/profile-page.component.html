@@ -1,0 +1,104 @@
+<div class="container mt-4">
+  <!-- Encabezado del perfil -->
+  <div class="profile-header">
+    <img src="path/to/profile-image.jpg" alt="Foto de perfil" class="profile-img">
+    <h2>Nombre del Usuario</h2>
+    <p>Email: usuarioejemplo.com</p>
+  </div>
+
+  <!-- Información del usuario -->
+  <div class="row">
+    <div class="col-md-6">
+      <div class="card">
+        <div class="card-header section-header">
+          <h5>Información Personal</h5>
+        </div>
+        <div class="card-body">
+          <p><strong>Nombre:</strong> Juan Pérez</p>
+          <p><strong>Correo Electrónico:</strong> juan.perezejemplo.com</p>
+          <p><strong>Teléfono:</strong> +123456789</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Datos del servicio -->
+    <div class="col-md-6">
+      <div class="card">
+        <div class="card-header section-header">
+          <h5>Datos del Servicio</h5>
+        </div>
+        <div class="card-body">
+          <p><strong>Servicio:</strong> Agua Potable</p>
+          <p><strong>Estado:</strong> Activo</p>
+          <p><strong>Última Facturación:</strong> 2024-09-01</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Acciones -->
+  <div class="row mt-4">
+    <div class="col-md-12">
+      <div class="d-flex justify-content-center">
+        <button class="btn btn-custom me-3" data-bs-toggle="modal" data-bs-target="#changePasswordModal">Cambiar Contraseña</button>
+        <button class="btn btn-outline-primary" data-bs-toggle="modal" data-bs-target="#uploadPhotoModal">Cargar Fotografía</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Modal para cambiar la contraseña -->
+<div class="modal fade" id="changePasswordModal" tabindex="-1" aria-labelledby="changePasswordModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="changePasswordModalLabel">Cambiar Contraseña</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <form>
+          <div class="mb-3">
+            <label for="currentPassword" class="form-label">Contraseña Actual</label>
+            <input type="password" class="form-control" id="currentPassword" required>
+          </div>
+          <div class="mb-3">
+            <label for="newPassword" class="form-label">Nueva Contraseña</label>
+            <input type="password" class="form-control" id="newPassword" required>
+          </div>
+          <div class="mb-3">
+            <label for="confirmPassword" class="form-label">Confirmar Nueva Contraseña</label>
+            <input type="password" class="form-control" id="confirmPassword" required>
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+        <button type="button" class="btn btn-custom">Guardar Cambios</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Modal para cargar una fotografía -->
+<div class="modal fade" id="uploadPhotoModal" tabindex="-1" aria-labelledby="uploadPhotoModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="uploadPhotoModalLabel">Cargar Fotografía de Perfil</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <form>
+          <div class="mb-3">
+            <label for="profilePhoto" class="form-label">Seleccionar Archivo</label>
+            <input type="file" class="form-control" id="profilePhoto" accept="image/*" required>
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+        <button type="button" class="btn btn-custom">Cargar Foto</button>
+      </div>
+    </div>
+  </div>
+</div>

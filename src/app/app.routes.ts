@@ -12,9 +12,9 @@ export const routes: Routes = [
     loadChildren: () => import('./auth/auth-routing.module').then(m => m.AuthRoutingModule),
   },
   {
-    path: 'Ticket',
-    canActivate:[isNotAuthenticatedGuard],
-    loadChildren: () => import('./tickets/tickets-routing.module').then(m => m.TicketsRoutingModule),
+    path: 'dashboard-tickets',
+    canActivate: [isAuthenticatedGuard],
+    loadChildren: () => import('./tickets/dahs-routes.module').then(m => m.DahsRoutesModule),
   },
   {
     path: 'dashboard',
@@ -23,8 +23,18 @@ export const routes: Routes = [
   },
   {
     path: 'registrar',
-    canActivate:[isAuthenticatedGuard],
+    canActivate: [isAuthenticatedGuard],
     component: RegisterComponent,
+  },
+  {
+    path: 'profile',
+    canActivate: [isAuthenticatedGuard],
+    loadChildren: () => import('./profile/profile-routing.module').then(m => m.ProfileRoutingModule),
+  },
+  {
+    path: 'creat-ticket',
+    canActivate:[isAuthenticatedGuard],
+    loadChildren :() => import('./tickets-user/rout-user-ticket.module').then(m => m.RoutUserTicketModule),
   },
   {
     path: '**',

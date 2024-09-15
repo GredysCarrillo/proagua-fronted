@@ -1,0 +1,87 @@
+<div class="container mt-4">
+  <div class="row">
+    <!-- Formulario para registrar un ticket -->
+    <div class="col-md-6">
+      <div class="card">
+        <div class="card-header bg-primary text-white">
+          <h4>Registrar un Nuevo Ticket</h4>
+        </div>
+        <div class="card-body">
+          <form>
+            <!-- Selección del problema predefinido -->
+            <div class="mb-3">
+              <label for="problemType" class="form-label">Seleccionar Tipo de Problema</label>
+              <select class="form-select" id="problemType" required>
+                <option value="">-- Selecciona un problema --</option>
+                <option value="Conexión lenta">Conexión lenta</option>
+                <option value="Sin servicio">Sin servicio</option>
+                <option value="Corte inesperado">Corte inesperado</option>
+                <option value="Problema con el router">Problema con el router</option>
+                <option value="Otros">Otros</option>
+              </select>
+            </div>
+
+            <!-- Descripción del problema -->
+            <div class="mb-3">
+              <label for="problemDescription" class="form-label">Descripción del Problema</label>
+              <textarea class="form-control" id="problemDescription" rows="4" placeholder="Describe tu problema aquí..." required></textarea>
+            </div>
+
+            <!-- Botón para enviar el ticket -->
+            <div class="d-grid">
+              <button type="submit" class="btn btn-success">Registrar Ticket</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+
+    <!-- Historial de tickets -->
+    <div class="col-md-6">
+      <div class="card">
+        <div class="card-header bg-info text-white">
+          <h4>Historial de Tickets</h4>
+        </div>
+        <div class="card-body">
+          <ul class="list-group">
+            <!-- Ejemplo de ticket -->
+            <li class="list-group-item">
+              <div class="d-flex justify-content-between">
+                <div>
+                  <h5 class="mb-1">Ticket #1: Conexión lenta</h5>
+                  <p class="mb-1">Fecha: 2024-09-14</p>
+                  <p class="mb-1"><strong>Estado:</strong> Resuelto</p>
+                </div>
+                <button class="btn btn-outline-info btn-sm">Ver Detalles</button>
+              </div>
+            </li>
+
+            <!-- Otro ejemplo de ticket -->
+            <li class="list-group-item">
+              <div class="d-flex justify-content-between">
+                <div>
+                  <h5 class="mb-1">Ticket #2: Sin servicio</h5>
+                  <p class="mb-1">Fecha: 2024-09-10</p>
+                  <p class="mb-1"><strong>Estado:</strong> En proceso</p>
+                </div>
+                <button class="btn btn-outline-info btn-sm">Ver Detalles</button>
+              </div>
+            </li>
+
+            <!-- Más tickets -->
+            <li class="list-group-item">
+              <div class="d-flex justify-content-between">
+                <div>
+                  <h5 class="mb-1">Ticket #3: Problema con el router</h5>
+                  <p class="mb-1">Fecha: 2024-09-08</p>
+                  <p class="mb-1"><strong>Estado:</strong> Abierto</p>
+                </div>
+                <button class="btn btn-outline-info btn-sm">Ver Detalles</button>
+              </div>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

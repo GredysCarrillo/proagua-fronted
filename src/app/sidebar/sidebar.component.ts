@@ -13,9 +13,10 @@ export class SidebarComponent {
   items = [
     'dashboard',
     'registrar',
-    'Tickets',
-    'Informacion',
-    'Mi perfil',
+    'dashboard-tickets',
+    'informacion',
+    'profile',
+    'creat-ticket'
   ]
 
 }
