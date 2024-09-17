@@ -12,7 +12,7 @@
       <div class="card text-center bg-primary text-white">
         <div class="card-body">
           <h5 class="card-title">Tickets Abiertos</h5>
-          <p class="card-text">10</p> <!-- Número estático de ejemplo -->
+          <p class="card-text">{{ticketCounts.abiertos}}</p> <!-- Número estático de ejemplo -->
         </div>
       </div>
     </div>
@@ -20,7 +20,7 @@
       <div class="card text-center bg-warning text-white">
         <div class="card-body">
           <h5 class="card-title">Tickets En Proceso</h5>
-          <p class="card-text">5</p> <!-- Número estático de ejemplo -->
+          <p class="card-text">{{ticketCounts.enProceso}}</p> <!-- Número estático de ejemplo -->
         </div>
       </div>
     </div>
@@ -28,7 +28,7 @@
       <div class="card text-center bg-success text-white">
         <div class="card-body">
           <h5 class="card-title">Tickets Cerrados</h5>
-          <p class="card-text">15</p> <!-- Número estático de ejemplo -->
+          <p class="card-text">{{ticketCounts.cerrados}}</p> <!-- Número estático de ejemplo -->
         </div>
       </div>
     </div>
@@ -50,49 +50,41 @@
           <tr>
             <th>#</th>
             <th>Usuario</th>
-            <th>Asunto</th>
+            <th>Descripción</th>
             <th>Estado</th>
             <th>Fecha de creación</th>
+            <th>Acciones</th>
           </tr>
         </thead>
         <tbody>
-          <tr>
-            <td>1</td>
-            <td>Juan Pérez</td>
-            <td>Problema con el servicio</td>
-            <td>Abierto</td>
-            <td>2024-09-01</td>
-          </tr>
-          <tr>
-            <td>2</td>
-            <td>Ana López</td>
-            <td>Consulta de facturación</td>
-            <td>En Proceso</td>
-            <td>2024-09-02</td>
-          </tr>
-          <tr>
-            <td>3</td>
-            <td>Carlos Díaz</td>
-            <td>Reclamo de calidad</td>
-            <td>Cerrado</td>
-            <td>2024-09-03</td>
-          </tr>
-          <tr>
-            <td>4</td>
-            <td>Lucía Martínez</td>
-            <td>Solicitud de soporte técnico</td>
-            <td>Abierto</td>
-            <td>2024-09-04</td>
-          </tr>
-          <tr>
-            <td>5</td>
-            <td>Pedro Hernández</td>
-            <td>Revisión de cuenta</td>
-            <td>Cerrado</td>
-            <td>2024-09-05</td>
+          <tr *ngFor="let ticket of allTickets | paginate: { itemsPerPage: 4, currentPage: p }; let i = index">
+            <td>{{ i + 1 }}</td>
+            <td>{{ ticket.userId }}</td>
+            <td>{{ ticket.description }}</td>
+            <td>{{ ticket.status }}</td>
+            <td>{{ ticket.CreatedAt| date: 'shortDate'}}</td>
+            <td>
+              <button
+                class="btn btn-warning btn-sm"
+                (click)="ticket._id && changeTicketStatus(ticket._id, 'En Proceso')"
+                [disabled]="ticket.status === 'En Proceso' || ticket.status === 'Cerrado'">
+                Marcar como En Proceso
+              </button>
+              <button
+                class="btn btn-success btn-sm"
+                (click)="ticket._id && changeTicketStatus(ticket._id, 'Cerrado')"
+                [disabled]="ticket.status === 'Cerrado'">
+                Marcar como Cerrado
+              </button>
+            </td>
           </tr>
         </tbody>
       </table>
+      <div class="container-fluid">
+        <div class="d-flex justify-content-center align-items-center">
+          <pagination-controls (pageChange)="p = $event"></pagination-controls>
+        </div>
+      </div>
     </div>
   </div>
-</div>
+

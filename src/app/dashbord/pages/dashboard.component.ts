@@ -22,6 +22,7 @@ export class DashboardComponent implements OnInit {
   suspendedUsersCount: number = 0;
   searchTerm:string ='';
   filteredUsers: any[] = [];
+  activeTickets: any = { abiertos: 0 };
 
   constructor(
     private authService: AuthService,
@@ -33,6 +34,7 @@ export class DashboardComponent implements OnInit {
 
   ngOnInit(): void {
     this.getUsers();
+    this.getTicketsCount();
   }
 
 
@@ -75,6 +77,19 @@ export class DashboardComponent implements OnInit {
       );
     }
     this.countUserStatus();
+  }
+
+  getTicketsCount():void {
+    this.dashService.getActiveTickes()
+      .subscribe({
+        next: (data) => {
+          console.log('Contador tickets activos', {data})
+          this.activeTickets = data;
+        },
+        error: (error) => {
+          this.toast.error('Erro al traer los contadores de tickets', error)
+        }
+      })
   }
 
 

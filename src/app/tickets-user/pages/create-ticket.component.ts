@@ -6,17 +6,19 @@ import { CreatTicketServiceService } from '../services/creat-ticket-service.serv
 import { ticket } from '../interfaces/ticket-interface';
 import { ToastrService } from 'ngx-toastr';
 import { Router } from '@angular/router';
+import { NgxPaginationModule } from 'ngx-pagination';
 
 @Component({
   selector: 'app-create-ticket',
   standalone: true,
-  imports: [ReactiveFormsModule, CommonModule],
+  imports: [ReactiveFormsModule, CommonModule, NgxPaginationModule],
   templateUrl: './create-ticket.component.html',
   styleUrl: './create-ticket.component.css'
 })
 export class CreateTicketComponent implements OnInit {
 
   tickets: ticket[] = [];
+  p: number = 1; // Página actual
 
   constructor(
     private fb: FormBuilder,
@@ -36,7 +38,7 @@ export class CreateTicketComponent implements OnInit {
   })
 
   createTicket() {
-    let status = 'Enviado'
+    let status = 'Abierto'
     const userId = this.authService.getUserId();
     const CreatedAt = new Date;
 

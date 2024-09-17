@@ -54,7 +54,7 @@
         <div class="card-body">
           <ul class="list-group">
             <!-- Ejemplo de ticket -->
-            <li *ngFor="let ticket of tickets; let i = index" class="list-group-item">
+            <li *ngFor="let ticket of tickets | paginate: { itemsPerPage: 5, currentPage: p } ; let i = index" class="list-group-item">
               <div class="d-flex justify-content-between">
                 <div>
                   <h5 class="mb-1">Ticket #{{i + 1}}: {{ticket._id}}</h5>
@@ -65,6 +65,11 @@
               </div>
             </li>
           </ul>
+        </div>
+      </div>
+      <div class="container-fluid">
+        <div class="d-flex justify-content-center align-items-center">
+          <pagination-controls (pageChange)="p = $event"></pagination-controls>
         </div>
       </div>
     </div>

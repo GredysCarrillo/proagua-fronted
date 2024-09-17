@@ -21,5 +21,7 @@ export class DashServiceService {
     return this.http.get<any>(`${this.baseUrl}/auth/users`)
   }
 
-
+  getActiveTickes(): Observable<any>{
+    return this.http.get(`${this.baseUrl}/data-tickets/count-active-ticket`)
+  }
 }
