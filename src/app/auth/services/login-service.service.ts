@@ -46,7 +46,6 @@ export class AuthService {
     return localStorage.getItem('userId');
   }
 
-
   login(dpi: string, password: string): Observable<boolean> {
     return this.http.post<loginResponse>(`${this.baseUrl}/auth/login`, { dpi, password })
       .pipe(
@@ -63,12 +62,12 @@ export class AuthService {
       )
   }
 
-  registerService(body:RegisterService):Observable<RegisterService>{
+  registerService(body: RegisterService): Observable<RegisterService> {
     console.log('Datos enviados para crear el servicio:', body);
     return this.http.post<RegisterService>(`${this.baseUrl}/data/createService`, body)
-    .pipe(
-      catchError(err => throwError(() => err.error.message))
-    )
+      .pipe(
+        catchError(err => throwError(() => err.error.message))
+      )
   }
 
   checkAuthStatus(): Observable<boolean> {

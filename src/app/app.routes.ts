@@ -3,6 +3,7 @@ import { isNotAuthenticatedGuard } from './auth/guards/is-not-authenticated.guar
 import { isAuthenticatedGuard } from './auth/guards/is-authenticated.guard';
 import { RegisterComponent } from './auth/pages/register/register.component';
 import { DashboardComponent } from './dashbord/pages/dashboard.component';
+import { InformationPageComponent } from './informacion/pages/information-page.component';
 
 export const routes: Routes = [
 
@@ -36,8 +37,13 @@ export const routes: Routes = [
     loadChildren: ()=> import('./tickets-user/ticket-routing.module').then(m => m.TicketRoutingModule),
   },
   {
+    path: 'information',
+    component: InformationPageComponent
+  },
+  {
     path: '**',
     redirectTo: 'auth'
   },
+
 
 ];
