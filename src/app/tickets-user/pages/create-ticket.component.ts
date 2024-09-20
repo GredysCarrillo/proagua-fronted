@@ -1,6 +1,6 @@
 import { AuthService } from './../../auth/services/login-service.service';
 import { CommonModule } from '@angular/common';
-import { Component, OnInit } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { CreatTicketServiceService } from '../services/creat-ticket-service.service';
 import { ticket } from '../interfaces/ticket-interface';
@@ -16,6 +16,8 @@ import { NgxPaginationModule } from 'ngx-pagination';
   styleUrl: './create-ticket.component.css'
 })
 export class CreateTicketComponent implements OnInit {
+
+  @ViewChild('ticketModal') ticketModal: ElementRef | undefined;
 
   tickets: ticket[] = [];
   p: number = 1; // Página actual

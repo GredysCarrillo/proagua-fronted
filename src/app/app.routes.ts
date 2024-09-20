@@ -37,7 +37,7 @@ export const routes: Routes = [
     loadChildren: ()=> import('./tickets-user/ticket-routing.module').then(m => m.TicketRoutingModule),
   },
   {
-    path: 'information',
+    path: 'informacion',
     component: InformationPageComponent
   },
   {
