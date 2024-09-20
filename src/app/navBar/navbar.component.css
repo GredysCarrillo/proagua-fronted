@@ -1,0 +1,37 @@
+
+.btn-outline-danger{
+  background-color: #0B2F9F; /* Fondo azul */
+  color: white;              /* Texto blanco */
+  padding: 10px 20px;         /* Espaciado interno */
+  border-radius: 5px;         /* Bordes redondeados */
+  border: none;               /* Sin borde */
+  cursor: pointer;            /* Cambio de cursor al pasar por encima */
+  font-size: 16px;            /* Tamaño de fuente */
+  width: auto;
+}
+
+.btn-outline-danger:hover {
+  background-color: #161D6F;  /* Cambia el fondo al color azul oscuro en hover */
+}
+
+.menu-toggle {
+  background-color: #0B2F9F;  /* Fondo azul */
+  color: white;               /* Icono blanco */
+  padding: 10px;              /* Espaciado interno */
+  border-radius: 5px;         /* Bordes redondeados */
+  border: none;               /* Sin borde */
+  cursor: pointer;            /* Cambia el cursor al pasar */
+  font-size: 20px;            /* Tamaño del icono */
+  display: flex;              /* Para alinear el icono correctamente */
+  align-items: center;        /* Centra el contenido verticalmente */
+  justify-content: center;    /* Centra el icono horizontalmente */
+  transition: background-color 0.3s ease; /* Transición suave para hover */
+}
+
+.menu-toggle:hover {
+  background-color: #161D6F;  /* Fondo azul más oscuro en hover */
+}
+
+.menu-toggle:focus {
+  outline: none;              /* Elimina el borde de enfoque */
+}

@@ -4,7 +4,7 @@
      <form class="col-md-6" [formGroup]="myForm" (submit)="createTicket()">
       <div class="card">
         <div class="card-header bg-primary text-white">
-          <h4>Registrar un Nuevo Ticket</h4>
+          <h4>Agregar reporte</h4>
         </div>
         <div class="card-body">
             <!-- Selección del problema predefinido -->
@@ -39,7 +39,7 @@
 
             <!-- Botón para enviar el ticket -->
             <div class="d-grid">
-              <button type="submit" class="btn btn-primary">Registrar Ticket</button>
+              <button type="submit" class="btn btn-primary">Agregar reporte</button>
             </div>
         </div>
       </div>
@@ -49,7 +49,7 @@
     <div class="col-md-6">
       <div class="card">
         <div class="card-header bg-info text-white">
-          <h4>Historial de Tickets</h4>
+          <h4>Historial de reportes</h4>
         </div>
         <div class="card-body">
           <ul class="list-group">
@@ -57,7 +57,7 @@
             <li *ngFor="let ticket of tickets | paginate: { itemsPerPage: 5, currentPage: p } ; let i = index" class="list-group-item">
               <div class="d-flex justify-content-between">
                 <div>
-                  <h5 class="mb-1">Ticket #{{i + 1}}: {{ticket._id}}</h5>
+                  <h5 class="mb-1">Reporte: #{{i + 1}}: {{ticket._id}}</h5>
                   <p class="mb-1"> Fecha: {{ ticket.CreatedAt | date: 'yyyy-MM-dd' }}</p>
                   <p class="mb-1"><strong>Estado:</strong> {{ticket.status}}</p>
                 </div>

@@ -1,24 +1,41 @@
 .sidebar {
-  height: 100vh;
-  width: 100%;
-  background-color: #0d6efd ;
-  padding: 0 20px;
+  height: 100vh; /* Mantiene el sidebar con la altura completa de la ventana */
+  overflow-y: auto; /* Permite el desplazamiento en el sidebar si es necesario */
+  width: 220px; /* Ancho del sidebar */
+  background-color: #161D6F; /* Color de fondo del sidebar */
+  color: white; /* Color del texto */
+  top: 0;
+  left: 0;
+  padding: 10px;
+  position: fixed; /* Mantiene el sidebar fijo en su lugar */
 }
 
-.unorded-list {
-  padding: 0;
+body {
+  margin-left: 250px; /* Deja espacio para el sidebar */
 }
 
 .unorded-list li {
-  list-style: none;
-  margin-bottom: 2px;
-}
-
-a {
-  color: black;
-  text-decoration: none;
+  list-style: none; /* Elimina los puntos de la lista */
 }
 
 li {
-  width: 100%;
+  width: 100%; /* Asegura que los elementos de la lista ocupen todo el ancho */
+}
+
+li:hover {
+  background-color: #0B2F9F; /* Color al pasar el ratón */
+}
+
+ul {
+  width: 100%; /* Asegura que las listas ocupen todo el ancho */
+}
+
+/* Ajustes adicionales opcionales */
+.sidebar h5 {
+  text-align: center; /* Centra el título */
+  margin-bottom: 15px; /* Añade un margen inferior */
+}
+
+.sidebar i {
+  margin-right: 10px; /* Espacio entre el icono y el texto */
 }

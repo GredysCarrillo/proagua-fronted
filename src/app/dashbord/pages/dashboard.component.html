@@ -1,17 +1,27 @@
+
 <div class="container-fluid p-4">
   <!-- Título del Dashboard y Botón de Cerrar Sesión -->
   <div class="d-flex justify-content-between align-items-center mb-4">
-    <h2 class="text-primary">Proagua - Servicios de Agua Potable</h2>
-
+    <h2 class="text-primary"><i class="bi bi-speedometer2" style="font-size: 35px; color: black;">Dashboard</i></h2>
     <div class="d-flex align-items-center">
       <!-- Barra de Búsqueda -->
       <form class="d-flex me-3">
-        <input class="form-control me-2" type="text" name="search" [(ngModel)]="searchTerm" (input)="filterUsers()"
-          placeholder="Buscar cliente" aria-label="Buscar">
-      </form>
+        <div class="input-group">
+          <span class="input-group-text" id="search-icon">
+            <i class="bi bi-search" style="color: #0B2F9F;"></i>
+          </span>
+          <input
+            class="form-control"
+            type="text"
+            name="search"
+            [(ngModel)]="searchTerm"
+            (input)="filterUsers()"
+            placeholder="Buscar cliente"
+            aria-label="Buscar"
+          >
+        </div>
 
-      <!-- Botón de Cerrar Sesión -->
-      <button class="btn btn-outline-danger" (click)="closeSesion()" type="button">Cerrar Sesión</button>
+      </form>
     </div>
   </div>
 
@@ -19,8 +29,9 @@
   <div class="row mb-4">
     <!-- Clientes Activos -->
     <div class="col-md-4">
-      <div class="card text-white bg-success mb-3">
+      <div class="card text-white mb-3" style="background-color: #0B2F9F;">
         <div class="card-body">
+          <i class="bi bi-person-check-fill" style="position: absolute; top: 10px; right: 10px; font-size: 35px; color: #98DED9;"></i>
           <h5 class="card-title">Clientes Activos</h5>
           <p class="card-text display-4">{{ activeUsersCount }}</p>
         </div>
@@ -29,33 +40,35 @@
 
     <!-- Clientes Suspendidos -->
     <div class="col-md-4">
-      <div class="card text-white bg-danger mb-3">
-        <div class="card-body">
+      <div class="card text-white mb-3" style="background-color: #0B2F9F;">
+        <div class="card-body d-flex flex-column position-relative" style="padding: 15px;">
+          <i class="bi bi-person-fill-slash" style="position: absolute; top: 10px; right: 10px; font-size: 35px; color: #98DED9"></i>
           <h5 class="card-title">Clientes Suspendidos</h5>
           <p class="card-text display-4">{{ suspendedUsersCount }}</p>
         </div>
       </div>
     </div>
 
+
     <!-- Tickets Pendientes -->
     <div class="col-md-4">
-      <div class="card text-white bg-warning mb-3">
+      <div class="card text-white mb-3" style="background-color: #0B2F9F;">
         <div class="card-body">
+          <i class="bi bi-file-earmark-text" style="position: absolute; top: 10px; right: 10px; font-size: 35px; color: #98DED9"></i>
           <h5 class="card-title">Tickets Pendientes</h5>
           <p class="card-text display-4">{{activeTickets.Abiertos}}</p>
         </div>
       </div>
     </div>
   </div>
-
   <!-- Lista de Clientes -->
   <div class="card">
-    <div class="card-header bg-light text-black">
+    <div class="card-header" style="background-color: #98DED9; color: white;">
       Lista de usuarios
     </div>
     <div class="card-body">
-      <table class="table table-striped table-hover">
-        <thead>
+      <table class="table table-hover">
+        <thead style="background-color: #161D6F; color: white;">
           <tr>
             <th>#</th>
             <th>Nombre del Cliente</th>
@@ -67,17 +80,16 @@
           </tr>
         </thead>
         <tbody>
-          <tr *ngFor="let user of filteredUsers | paginate: { itemsPerPage: 4, currentPage: p }; let i = index">
+          <tr *ngFor="let user of filteredUsers | paginate: { itemsPerPage: 10, currentPage: p }; let i = index">
             <td>{{ i + 1 }}</td>
             <td>{{ user.name }}</td>
             <td>{{ user.email }}</td>
             <td>{{ user.phoneNumber }}</td>
             <td>
-              <span [class.badge]="true" [class.text-bg-success]="user.status === true"
-                [class.text-bg-danger]="user.status === false" class="rounded-pill">
+              <span [class.badge]="true" [class.text-bg-succes]="user.status === true"
+                [class.text-bg-dange]="user.status === false" class="rounded-pill">
                 {{ user.status === true ? 'Activo' : 'Suspendido' }}
               </span>
-
             </td>
             <td><button type="button" class="btn btn-outline-info">OJO</button></td>
             <td><button type="button" class="btn btn-outline-info">OJO</button></td>
@@ -92,4 +104,5 @@
       </div>
     </div>
   </div>
+
 </div>

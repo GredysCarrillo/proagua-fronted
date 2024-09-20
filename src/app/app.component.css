@@ -13,8 +13,16 @@
 
 .container-router{
 width: 100%;
-margin-top: 0;
+margin-top: 70px;
 flex: 1;
-padding: 20px;
 height: 100%;
 }
+
+app-navbar {
+  position: fixed;
+  top: 0; /* Asegúrate de que esté en la parte superior */
+  left: 220px; /* Ajusta según el ancho del sidebar */
+  width: calc(100% - 220px); /* Asegúrate de que ocupe el resto del ancho */
+  z-index: 1000; /* Asegura que esté por encima de otros elementos */
+}
+

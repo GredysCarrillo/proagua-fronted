@@ -25,7 +25,6 @@ export class DashboardComponent implements OnInit {
   activeTickets: any = { abiertos: 0 };
 
   constructor(
-    private authService: AuthService,
     private dashService: DashServiceService,
     private toast: ToastrService
 
@@ -38,9 +37,6 @@ export class DashboardComponent implements OnInit {
   }
 
 
-  closeSesion() {
-    this.authService.closeSesion();
-  }
 
   getUsers(): void {
     this.dashService.getUsers()

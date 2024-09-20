@@ -6,11 +6,12 @@ import { AuthService } from './auth/services/login-service.service';
 import { delay } from 'rxjs';
 import { SidebarComponent } from "./sidebar/sidebar.component";
 import { CommonModule } from '@angular/common';
+import { NavbarComponent } from "./navBar/navbar.component";
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [RouterOutlet, AuthLayoutComponent, SidebarComponent, CommonModule],
+  imports: [RouterOutlet, AuthLayoutComponent, SidebarComponent, CommonModule, NavbarComponent],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css'
 })
