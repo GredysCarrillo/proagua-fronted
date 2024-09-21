@@ -8,6 +8,21 @@
   left: 0;
   padding: 10px;
   position: fixed; /* Mantiene el sidebar fijo en su lugar */
+  transition: width 0.3s;
+}
+
+.sidebar.hidden {
+  width: 0; /* Oculte el sidebar */
+  padding: 0; /* Remover padding */
+}
+
+.main-content {
+  margin-left: 250px; /* Deja espacio para el sidebar */
+  transition: margin-left 0.3s; /* Animación para el cambio de margen */
+}
+
+.main-content.sidebar-hidden {
+  margin-left: 0; /* Sin margen si el sidebar está oculto */
 }
 
 body {

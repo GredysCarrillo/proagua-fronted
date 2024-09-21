@@ -18,9 +18,15 @@ import { NavbarComponent } from "./navBar/navbar.component";
 export class AppComponent {
 
   title = 'proagua';
+  isSidebarVisible = true;
 
   private authService = inject(AuthService);
   private router = inject(Router);
+
+  toggleSidebar() {
+    console.log(this.isSidebarVisible);
+    this.isSidebarVisible = !this.isSidebarVisible; // Cambia el estado
+  }
 
   public finishedAuthCheck = computed<boolean>(() => {
     if (this.authService.authStatus() === AuthStatus.checking) {

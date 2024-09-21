@@ -1,10 +1,9 @@
-<app-navbar></app-navbar>
+<app-navbar (toggleSidebar)="toggleSidebar()"></app-navbar>
 <div class="container-principal">
-  <div class="sidebar-container">
+  <div class="sidebar-container" [ngClass]="{'hidden': !isSidebarVisible}">
     <app-sidebar></app-sidebar>
   </div>
   <div class="container-router">
     <router-outlet />
   </div>
 </div>
-

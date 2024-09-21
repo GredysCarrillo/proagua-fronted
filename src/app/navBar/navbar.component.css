@@ -35,3 +35,13 @@
 .menu-toggle:focus {
   outline: none;              /* Elimina el borde de enfoque */
 }
+
+.menu-toggle {
+  background: transparent; /* Fondo transparente */
+  border: none; /* Sin borde */
+  cursor: pointer; /* Cambiar cursor */
+}
+
+.menu-toggle:hover {
+  opacity: 0.8; /* Efecto hover */
+}

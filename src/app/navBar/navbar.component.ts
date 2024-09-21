@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, EventEmitter, Output } from '@angular/core';
 import { AuthService } from '../auth/services/login-service.service';
 
 @Component({
@@ -16,5 +16,11 @@ constructor(
 
   closeSesion() {
     this.authService.closeSesion();
+  }
+
+  @Output() toggleSidebar = new EventEmitter<void>();
+
+  onToggleSidebar() {
+    this.toggleSidebar.emit(); // Emitir el evento al hacer clic
   }
 }
