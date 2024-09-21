@@ -1,85 +1,96 @@
 <div class="container mt-5">
   <!-- Encabezado del Dashboard -->
-  <div class="row mb-4">
-    <div class="col">
-      <h2 class="text-center">Dashboard de Gestión de Tickets</h2>
+  <div class="d-flex justify-content-between align-items-center mb-4">
+    <h2 class="text-primary"><i class="bi bi-speedometer2" style="font-size: 35px; color: black;">Dashboard - Reportes</i></h2>
+    <div class="d-flex align-items-center">
+      <!-- Barra de Búsqueda -->
+      <form class="d-flex me-3">
+        <div class="input-group">
+          <span class="input-group-text" id="search-icon">
+            <i class="bi bi-search" style="color: #0B2F9F;"></i>
+          </span>
+          <input class="form-control" type="text" name="search" (input)="filterUsers()"
+            placeholder="Buscar cliente" aria-label="Buscar">
+        </div>
+      </form>
     </div>
   </div>
 
   <!-- Tarjetas de resumen -->
   <div class="row mb-4">
     <div class="col-lg-4 col-md-6 mb-3">
-      <div class="card text-center bg-primary text-white">
+      <div class="card text-center text-white" style="background-color: #0B2F9F;">
         <div class="card-body">
-          <h5 class="card-title">Tickets Abiertos</h5>
+          <i class="bi bi-envelope-open"
+            style="position: absolute; top: 10px; right: 10px; font-size: 35px; color: #98DED9;"></i>
+          <h5 class="card-title">Reportes Abiertos</h5>
           <p class="card-text">{{ticketCounts.abiertos}}</p> <!-- Número estático de ejemplo -->
         </div>
       </div>
     </div>
     <div class="col-lg-4 col-md-6 mb-3">
-      <div class="card text-center bg-warning text-white">
+      <div class="card text-center text-white" style="background-color: #0B2F9F;">
         <div class="card-body">
-          <h5 class="card-title">Tickets En Proceso</h5>
+          <i class="bi bi-tools"
+            style="position: absolute; top: 10px; right: 10px; font-size: 35px; color: #98DED9;"></i>
+          <h5 class="card-title">Reportes en Proceso</h5>
           <p class="card-text">{{ticketCounts.enProceso}}</p> <!-- Número estático de ejemplo -->
         </div>
       </div>
     </div>
     <div class="col-lg-4 col-md-6 mb-3">
-      <div class="card text-center bg-success text-white">
+      <div class="card text-center text-white" style="background-color: #0B2F9F;">
         <div class="card-body">
-          <h5 class="card-title">Tickets Cerrados</h5>
+          <i class="bi bi-x-square"
+            style="position: absolute; top: 10px; right: 10px; font-size: 35px; color: #98DED9;"></i>
+          <h5 class="card-title">Reportes Cerrados</h5>
           <p class="card-text">{{ticketCounts.cerrados}}</p> <!-- Número estático de ejemplo -->
         </div>
       </div>
     </div>
   </div>
 
-  <!-- Barra de búsqueda -->
-  <div class="row mb-4">
-    <div class="col">
-      <input type="text" class="form-control" placeholder="Buscar ticket...">
+  <div class="card">
+    <div class="card-header" style="background-color: #98DED9; color: white;">
+      Reportes de usuarios
     </div>
-  </div>
-
-  <!-- Tabla de tickets recientes -->
-  <div class="row">
-    <div class="col">
-      <h4>Últimos 5 Tickets</h4>
+    <div class="card-body">
       <table class="table table-hover">
-        <thead>
+        <thead style="background-color: #161D6F; color: white;">
           <tr>
             <th>#</th>
             <th>Usuario</th>
             <th>Descripción</th>
             <th>Estado</th>
             <th>Fecha de creación</th>
-            <th>Acciones</th>
+            <th>Marcar en Proceso</th>
+            <th>Cerrar Reporte</th>
+            <th>Ver detalles</th>
           </tr>
         </thead>
         <tbody>
-          <tr *ngFor="let ticket of allTickets | paginate: { itemsPerPage: 4, currentPage: p }; let i = index">
+          <tr *ngFor="let ticket of allTickets | paginate: { itemsPerPage: 10, currentPage: p }; let i = index">
             <td>{{ i + 1 }}</td>
             <td>{{ ticket.userId }}</td>
             <td>{{ ticket.description }}</td>
             <td>{{ ticket.status }}</td>
-            <td>{{ ticket.CreatedAt| date: 'shortDate'}}</td>
+            <td>{{ ticket.CreatedAt | date: 'shortDate'}}</td>
             <td>
-              <button
-                class="btn btn-warning btn-sm"
+              <button class="btn btn-primary"
                 (click)="ticket._id && changeTicketStatus(ticket._id, 'En Proceso')"
                 [disabled]="ticket.status === 'En Proceso' || ticket.status === 'Cerrado'">
-                Marcar como En Proceso
-              </button>
-              <button
-                class="btn btn-success btn-sm"
-                (click)="ticket._id && changeTicketStatus(ticket._id, 'Cerrado')"
-                [disabled]="ticket.status === 'Cerrado'">
-                Marcar como Cerrado
+                Marcar en Proceso
               </button>
             </td>
+            <td><button class="btn btn-primary" (click)="ticket._id && changeTicketStatus(ticket._id, 'Cerrado')"
+              [disabled]="ticket.status === 'Cerrado'">
+              Cerrar Reporte
+            </button></td>
+            <td><button class="btn ver"><i class="bi bi-eye"></i></button></td>
           </tr>
         </tbody>
       </table>
+
       <div class="container-fluid">
         <div class="d-flex justify-content-center align-items-center">
           <pagination-controls (pageChange)="p = $event"></pagination-controls>
@@ -88,3 +99,4 @@
     </div>
   </div>
 
+  </div>

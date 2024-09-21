@@ -1,0 +1,103 @@
+/* Estilos generales */
+.tabla {
+  border: solid 1px black;
+  margin: auto;
+  font-size: 22px;
+  padding: 25px;
+  width: 100%;
+}
+
+.tbody {
+  background-color: #C7FFD8;
+}
+
+.td {
+  color: purple;
+}
+
+/* Estilo de la tabla */
+.table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-bottom: 20px;
+}
+
+/* Estilo del encabezado */
+.table thead {
+  background-color: #161D6F;
+  color: white;
+  text-align: left;
+}
+
+.table thead th {
+  padding: 15px;
+  font-size: 16px;
+}
+
+/* Estilo de las filas */
+.table tbody tr {
+  border-bottom: 1px solid #0B2F9F;
+  background-color: #C7FFD8;
+}
+
+.table tbody tr:hover {
+  background-color: #0B2F9F;
+  color: white;
+  cursor: pointer;
+}
+
+/* Estilo de las celdas */
+.table tbody td {
+  padding: 12px;
+  text-align: left;
+  color: #161D6F;
+}
+
+/* Etiquetas de estado */
+.text-bg-succes {
+  background-color: #C7FFD8 !important;
+  color: #161D6F;
+}
+
+.text-bg-dange {
+  background-color: #98DED9 !important;
+  color: #161D6F;
+}
+
+/* Encabezado de la tarjeta */
+.card-header {
+  background-color: #0B2F9F;
+  color: white;
+}
+
+/* Botones de acción */
+.btn {
+  padding:10px;
+  font-size: 14px;
+  margin: 0 5px;
+}
+
+.btn-primary {
+  width: 145px;
+  background-color: #0B2F9F;
+  color: white;
+  border-color: #0B2F9F;
+}
+
+.btn-primary:hover {
+  background-color: #98DED9;
+  color: white;
+  border-color: #98DED9;
+}
+
+.ver{
+  background-color: #0B2F9F;
+  color: white;
+  border-color: #0B2F9F;
+}
+
+.ver:hover {
+  background-color: #98DED9;
+  color: white;
+  border-color: #98DED9;
+}
