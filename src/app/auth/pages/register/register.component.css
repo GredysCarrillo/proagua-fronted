@@ -34,4 +34,12 @@
 
 textarea{
   resize: none;
+
 }
+
+.form-label{
+  color:#161D6F ;
+}
+
+
+/* Para que ocupe toda la pantalla */

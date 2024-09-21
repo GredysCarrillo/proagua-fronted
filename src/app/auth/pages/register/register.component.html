@@ -1,97 +1,104 @@
 <form [formGroup]="myForm" (submit)="onSubmitUser()">
-<section class="h-100 gradient-custom-2 d-flex align-items-center justify-content-center">
-  <div class="container-fluid h-100">
-    <div class="row h-100">
-      <div class="col-12">
-        <div class="card card-registration h-100 w-100" style="border-radius: 10px; background-color:whitesmoke;">
-          <div class="card-body p-4">
-            <div class="row g-3 h-100">
-              <div class="col-md-6 bg-indigo text-black">
-                <h4 class="fw-normal mb-4 text-black">Informacion del cliente</h4>
+  <!-- Encabezado del formulario -->
 
-                <div class="mb-3">
-                  <label>Nombre del cliente</label>
-                  <input
-                  type="text"
-                  class="form-control form-control-sm"
-                  placeholder="Nombre"
-                  formControlName="name"
-                  />
+  <div class="d-flex justify-content-between align-items-center mb-4" style="padding-top: 15px; margin-left: 20px;">
+    <h2 class="text-primary" style="margin-left: 15px;"><i class="bi bi-person-add" style="font-size: 35px; color: black;">  Agregar Usuario</i></h2>
+  </div>
+
+      <div class="row justify-content-center">
+        <div class="col-12">
+          <div class="card card-registration w-100">
+            <div class="card-body p-1">
+              <div class="row g-4">
+
+                <!-- Columna Izquierda - Información del cliente -->
+                <div class="col-md-6">
+                  <h4 class="fw-normal mb-4" style="color: #0B2F9F;">Información del cliente</h4>
+
+                  <div class="mb-3">
+                    <label class="form-label">Nombre del cliente</label>
+                    <input
+                      type="text"
+                      class="form-control form-control-sm"
+                      placeholder="Nombre"
+                      formControlName="name"
+                    />
+                  </div>
+
+                  <div class="mb-3">
+                    <label class="form-label">Número de Identificación</label>
+                    <input
+                      type="text"
+                      class="form-control form-control-sm"
+                      placeholder="DPI"
+                      formControlName="dpi"
+                    />
+                  </div>
+
+                  <div class="mb-3">
+                    <label class="form-label">Correo electrónico</label>
+                    <input
+                      type="email"
+                      class="form-control form-control-sm"
+                      placeholder="Correo"
+                      formControlName="email"
+                    />
+                  </div>
+
+                  <div class="mb-3">
+                    <label class="form-label">Número telefónico</label>
+                    <input
+                      type="text"
+                      class="form-control form-control-sm"
+                      placeholder="Número telefónico"
+                      formControlName="phoneNumber"
+                    />
+                  </div>
                 </div>
 
-                <div class="mb-3">
-                  <label>Numero de Indentificacion</label>
-                  <input
-                  type="text"
-                  class="form-control form-control-sm"
-                  placeholder="DPI"
-                  formControlName="dpi"
-                  />
-                </div>
+                <!-- Columna Derecha - Detalles del Servicio -->
+                <div class="col-md-6" >
+                  <h4 class="fw-normal mb-4" style="color: #0B2F9F;">Detalles del Servicio</h4>
 
-                <div class="mb-3">
-                  <label>Correo electronico</label>
-                  <input
-                  type="email"
-                  class="form-control form-control-sm"
-                  placeholder="Correo"
-                  formControlName="email"
-                  />
-                </div>
+                  <div class="mb-4">
+                    <label class="form-label">Departamento</label>
+                    <select
+                      class="form-select form-select-lg"
+                      formControlName="Colonia">
+                      <option value="" disabled selected>Selecciona un departamento</option>
+                      <option *ngFor="let depto of deptos" value="depto.id">{{depto}}</option>
+                    </select>
+                  </div>
 
-                <div class="mb-3">
-                  <label>Numero telefonico</label>
-                  <input
-                  type="text"
-                  class="form-control form-control-sm"
-                  placeholder="Numero telefonico"
-                  formControlName="phoneNumber"
-                  />
+                  <div class="mb-4">
+                    <label class="form-label">Tipo de Servicio</label>
+                    <select class="form-select form-select-lg custom-select" formControlName="serviceType">
+                      <option value="" disabled selected>Tipo de servicio</option>
+                      <option value="1">Doméstico</option>
+                      <option value="2">Comercial</option>
+                    </select>
+
+                  </div>
+
+                  <div class="mb-3">
+                    <label class="form-label">Dirección</label>
+                    <textarea
+                      class="form-control form-control-sm"
+                      placeholder="Calle/avenida/numeral/referencia"
+                      formControlName="Address"
+                      rows="5"
+                      style="height: 95px;"></textarea>
+                  </div>
                 </div>
               </div>
 
-              <div class="col-md-6 bg-indigo text-black">
-                <h4 class="fw-normal mb-4 text-black">Detalles del Servicio</h4>
-
-                <div class="mb-4 pb-2">
-                  <label class="form-label text-black">Departamento</label>
-                  <select
-                  class="form-select form-select-lg"
-                  formControlName="Colonia">
-                    <option value="" disabled selected>Selecciona un departamento</option>
-                    <option *ngFor="let depto of deptos" value="depto.id">{{depto}}</option>
-                  </select>
-                </div>
-
-                <div class="mb-4 pb-2">
-                  <label class="form-label text-black">Tipo de Servicio</label>
-                  <select
-                  class="form-select form-select-lg"
-                  formControlName="serviceType">
-                    <option value="" disabled selected>Tipo de servicio</option>
-                    <option value="1">Domestico</option>
-                    <option value="2">Comercial</option>
-                  </select>
-                </div>
-
-                <div class="mb-3">
-                  <label>Calle/avenida/numeral/referencia</label>
-                  <textarea
-                  style="height: 95px;"
-                  type="textarea" rows="3"
-                  class="form-control form-control-sm"
-                  placeholder="Direccion"
-                  formControlName="Address"></textarea>
-                </div>
+              <!-- Botón de Registro -->
+              <div class="text-center mt-4" >
+                <button type="submit" class="btn btn-primary btn-lg ">Registrar</button>
               </div>
-              <div class="text-center">
-                <button type="submit"  class="btn btn-primary btn-sm" >Registrar</button>
-              </div>
+
             </div>
           </div>
         </div>
       </div>
-    </div>
-  </div>
-</section>
 </form>
