@@ -1,7 +1,7 @@
 <div class="container mt-4">
   <!-- Encabezado del perfil -->
   <div class="profile-header">
-    <img src="path/to/profile-image.jpg" alt="Foto de perfil" class="profile-img" *ngIf="user">
+    <img src="../../../assets/imgProfile.jpg" alt="Foto de perfil" class="profile-img" *ngIf="user">
     <h2 *ngIf="user">{{ user.name }}</h2>
     <p *ngIf="user">Email: {{ user.email }}</p>
   </div>
@@ -17,6 +17,17 @@
           <p><strong>Nombre:</strong> {{ user?.name }}</p>
           <p><strong>Correo Electrónico:</strong> {{ user?.email }}</p>
           <p><strong>Teléfono:</strong> {{ user?.phoneNumber }}</p>
+          <!-- Acciones -->
+          <div class="row mt-4">
+            <div class="col-md-12">
+              <div class="d-flex justify-content-center">
+                <button class="btn btn-custom me-3" data-bs-toggle="modal" data-bs-target="#changePasswordModal">Cambiar
+                  Contraseña</button>
+                <button class="btn btn-custom me-3" data-bs-toggle="modal" data-bs-target="#uploadPhotoModal">Cargar
+                  Fotografía</button>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </div>
@@ -35,20 +46,11 @@
       </div>
     </div>
   </div>
-
-  <!-- Acciones -->
-  <div class="row mt-4">
-    <div class="col-md-12">
-      <div class="d-flex justify-content-center">
-        <button class="btn btn-custom me-3" data-bs-toggle="modal" data-bs-target="#changePasswordModal">Cambiar Contraseña</button>
-        <button class="btn btn-outline-primary" data-bs-toggle="modal" data-bs-target="#uploadPhotoModal">Cargar Fotografía</button>
-      </div>
-    </div>
-  </div>
 </div>
 
 <!-- Modal para cambiar la contraseña -->
-<div class="modal fade" id="changePasswordModal" tabindex="-1" aria-labelledby="changePasswordModalLabel" aria-hidden="true">
+<div class="modal fade" id="changePasswordModal" tabindex="-1" aria-labelledby="changePasswordModalLabel"
+  aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">

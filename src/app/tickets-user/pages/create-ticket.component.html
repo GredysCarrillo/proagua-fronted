@@ -1,67 +1,64 @@
 <div class="container mt-4">
   <div class="row">
     <!-- Formulario para registrar un ticket -->
-     <form class="col-md-6" [formGroup]="myForm" (submit)="createTicket()">
-      <div class="card">
-        <div class="card-header bg-primary text-white">
-          <h4>Agregar reporte</h4>
+    <form class="col-md-6" [formGroup]="myForm" (submit)="createTicket()">
+      <div class="card report-card">
+        <div class="card-header">
+          <h4>Agregar Reporte</h4>
         </div>
         <div class="card-body">
-            <!-- Selección del problema predefinido -->
-            <div class="mb-3">
-              <label for="problemType"
-              class="form-label">Seleccionar Tipo de Problema</label>
-              <select
-              class="form-select"
-              id="problemType" required
-              formControlName="problemType">
-                <option value="0">-- Selecciona un problema --</option>
-                <option value="1">No tengo agua potable</option>
-                <option value="2">El agua llega sucia</option>
-                <option value="3">Llega muy poca agua</option>
-                <option value="4">Tuberia rota en calle</option>
-                <option value="5">Otros</option>
-              </select>
-            </div>
+          <!-- Selección del problema predefinido -->
+          <div class="mb-3">
+            <label for="problemType" class="form-label">Seleccionar Tipo de Problema</label>
+            <select class="form-select" id="problemType" required formControlName="problemType">
+              <option value="0">-- Selecciona un problema --</option>
+              <option value="1">No tengo agua potable</option>
+              <option value="2">El agua llega sucia</option>
+              <option value="3">Llega muy poca agua</option>
+              <option value="4">Tubería rota en calle</option>
+              <option value="5">Otros</option>
+            </select>
+          </div>
 
-            <!-- Descripción del problema -->
-            <div class="mb-3">
-              <label
-              for="problemDescription"
-              class="form-label">Descripción del Problema</label>
-              <textarea
-              class="form-control"
-              formControlName="description"
-              rows="4"
-              placeholder="Describe tu problema aquí..."
-              required></textarea>
-            </div>
+          <!-- Descripción del problema -->
+          <div class="mb-3">
+            <label for="problemDescription" class="form-label">Descripción del Problema</label>
+            <textarea class="form-control" formControlName="description" rows="4"
+              placeholder="Describe tu problema aquí..." required></textarea>
+          </div>
 
-            <!-- Botón para enviar el ticket -->
-            <div class="d-grid">
-              <button type="submit" class="btn btn-primary">Agregar reporte</button>
-            </div>
+          <!-- Carga de fotografía -->
+          <div class="mb-3">
+            <label for="problemPhoto" class="form-label">Cargar Fotografía</label>
+            <input type="file" class="form-control" id="problemPhoto" accept="image/*" formControlName="photo">
+          </div>
+
+          <!-- Botón para enviar el ticket -->
+          <div class="d-grid">
+            <button type="submit" class="btn btn-custom-primary">Agregar Reporte</button>
+          </div>
         </div>
       </div>
-  </form>
+    </form>
 
     <!-- Historial de tickets -->
     <div class="col-md-6">
-      <div class="card">
-        <div class="card-header bg-info text-white">
-          <h4>Historial de reportes</h4>
+      <div class="card report-card">
+        <div class="card-header">
+          <h4>Historial de Reportes</h4>
         </div>
         <div class="card-body">
           <ul class="list-group">
             <!-- Ejemplo de ticket -->
-            <li *ngFor="let ticket of tickets | paginate: { itemsPerPage: 5, currentPage: p } ; let i = index" class="list-group-item">
+            <li *ngFor="let ticket of tickets | paginate: { itemsPerPage: 5, currentPage: p } ; let i = index"
+              class="list-group-item" style="margin: 5px; border: solid 1px #161D6F; border-radius: 5px;">
               <div class="d-flex justify-content-between">
                 <div>
                   <h5 class="mb-1">Reporte: #{{i + 1}}: {{ticket._id}}</h5>
-                  <p class="mb-1"> Fecha: {{ ticket.CreatedAt | date: 'yyyy-MM-dd' }}</p>
+                  <p class="mb-1">Fecha: {{ ticket.CreatedAt | date: 'yyyy-MM-dd' }}</p>
                   <p class="mb-1"><strong>Estado:</strong> {{ticket.status}}</p>
                 </div>
-                <button class="btn btn-outline-info btn-sm" >Ver Detalles</button>
+                <button class="btn btn-custom-datalles btn-sm">Ver Detalles</button>
               </div>
             </li>
           </ul>
@@ -71,6 +68,29 @@
         <div class="d-flex justify-content-center align-items-center">
           <pagination-controls (pageChange)="p = $event"></pagination-controls>
         </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="modal fade" id="detailsModal" tabindex="-1" aria-labelledby="detailsModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="detailsModalLabel">Detalles del Reporte</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <p><strong>Tipo de Problema:</strong> Sin servicio de agua</p>
+        <p><strong>Descripción:</strong> Breve descripcion del problema</p>
+        <p><strong>Estado:</strong> activo</p>
+        <p><strong>Fecha de Creación:</strong> 29/09/2023</p>
+        <div *ngIf="">
+          <img [src]="" alt="Fotografía del Reporte" class="img-fluid mt-3" />
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
       </div>
     </div>
   </div>

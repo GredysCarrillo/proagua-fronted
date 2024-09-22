@@ -1,0 +1,65 @@
+.report-card {
+  min-height: 450px;
+}
+
+.btn-custom-primary {
+  background-color: #161D6F;
+  color: #C7FFD8;
+  border: none;
+}
+
+.btn-custom-primary:hover {
+  background-color: #0B2F9F;
+}
+
+.btn-custom-datalles {
+  background-color: #0B2F9F;
+  color: white;
+  border: none;
+}
+
+.btn-custom-datalles:hover {
+  background-color: #98DED9;
+}
+
+.card-header {
+  background-color: #161D6F;
+  color: white;
+}
+
+.card-body {
+  background-color: white;
+  color: #161D6F;
+}
+
+.list-group-item {
+  background-color: #C7FFD8;
+  border-color: #0B2F9F;
+}
+
+.list-group-item h5 {
+  color: #161D6F;
+}
+
+.list-group-item p {
+  color: #0B2F9F;
+}
+
+.modal-header {
+  background-color: #161D6F;
+  color: #C7FFD8;
+}
+
+.modal-body {
+  background-color: #C7FFD8;
+}
+
+.modal-footer {
+  background-color: #98DED9;
+}
+
+img.img-fluid {
+  border-radius: 10px;
+  max-height: 300px;
+  object-fit: cover;
+}
