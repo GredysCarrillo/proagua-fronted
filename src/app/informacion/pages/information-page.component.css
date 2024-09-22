@@ -1,0 +1,21 @@
+.text-primary-custom {
+  color: #161D6F;
+}
+
+.text-justify {
+  text-align: justify;
+}
+
+.bg-light {
+  background-color: #C7FFD8 !important;
+}
+
+.list-group-item {
+  background-color: #C7FFD8;
+  border-color: #0B2F9F;
+}
+
+.carousel-inner img {
+  height: 400px;
+  object-fit: cover;
+}
