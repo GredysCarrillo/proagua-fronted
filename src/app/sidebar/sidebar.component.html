@@ -1,8 +1,23 @@
-<div class="sidebar">
-  <ul class="unorded-list list-unstyled" style="color: white;">
-    <li *ngFor="let item of items" style="cursor: pointer;"
+<div class="sidebar" style="background-color: #161D6F; padding: 20px; width: 220px; height: 100vh;">
+  <!-- Sección del usuario logueado -->
+  <div class="user-info d-flex align-items-center mb-4">
+    <img src="../../assets/imgProfile.jpg" alt="Foto de perfil" class="user-photo rounded-circle me-2">
+    <div class="user-details">
+      <h6 class="text-white mb-0">Anner Ronaldo</h6>
+      <small class="text-muted">usuario</small>
+    </div>
+  </div>
+
+  <!-- Lista de opciones del sidebar -->
+<!-- Lista de opciones del sidebar -->
+<ul class="unorded-list list-unstyled" style="color: white; margin-top: 20px;">
+  <ng-container *ngFor="let item of items">
+    <li *ngIf="item.rolesAllowed.includes(userRole)"
+        style="cursor: pointer;"
         [routerLink]="item.route">
-      <i [class]="item.icon" style="font-size: 28px; color: #98DED9; margin-left: 15px; margin-right: 10px;"></i> {{ item.name }}
+      <i [class]="item.icon" style="font-size: 28px; color: #98DED9; margin-left: 15px; margin-right: 10px;"></i>
+      {{ item.name }}
     </li>
-  </ul>
-</div>
+  </ng-container>
+</ul>
+

@@ -34,16 +34,17 @@ export const routes: Routes = [
   },
   {
     path: 'create-ticket',
+    canActivate: [isAuthenticatedGuard],
     loadChildren: ()=> import('./tickets-user/ticket-routing.module').then(m => m.TicketRoutingModule),
   },
   {
     path: 'informacion',
+    canActivate:[isAuthenticatedGuard],
     component: InformationPageComponent
   },
   {
     path: '**',
     redirectTo: 'auth'
   },
-
 
 ];

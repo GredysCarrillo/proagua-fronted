@@ -41,5 +41,15 @@ textarea{
   color:#161D6F ;
 }
 
+.btSend{
+  background-color: #0B2F9F;
+  color: white;
+}
+
+.btSend:hover{
+  background-color: #0B2F9F;
+  color: #C7FFD8;
+}
+
 
 /* Para que ocupe toda la pantalla */

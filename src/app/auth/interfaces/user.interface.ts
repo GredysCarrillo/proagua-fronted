@@ -8,4 +8,5 @@ export interface User {
   colonia:string;
   serviceType:string;
   address:string;
+  roles:string;
 }

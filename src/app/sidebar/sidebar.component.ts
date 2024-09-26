@@ -1,11 +1,13 @@
 import { CommonModule } from '@angular/common';
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Router, RouterModule } from '@angular/router';
+import { SidebaService } from './services/sideba.service';
 
 interface MenuItem {
   name: string;
   icon: string;
   route: string;
+  rolesAllowed: string[];
 }
 
 @Component({
@@ -15,15 +17,28 @@ interface MenuItem {
   templateUrl: './sidebar.component.html',
   styleUrl: './sidebar.component.css'
 })
-export class SidebarComponent {
+export class SidebarComponent implements OnInit {
+
+  userRole: string = 'user';
+
+  constructor(
+    private sidebarService: SidebaService
+  ) { }
+
+
+  ngOnInit(): void {
+    this.userRole = this.sidebarService.getUserRole();
+    this.items;
+  }
 
   items: MenuItem[] = [
-    { name: 'Dashboard', icon: 'bi bi-speedometer2', route: '/dashboard' },
-    { name: 'Registro', icon: 'bi bi-person-plus', route: '/registrar' },
-    { name: 'Reportes', icon: 'bi bi-file-earmark-text', route: '/dashboard-tickets' },
-    { name: 'Perfil', icon: 'bi bi-person-bounding-box', route: '/profile' },
-    { name: 'Crear Reporte', icon: 'bi bi-folder-plus', route: '/create-ticket' },
-    { name: 'Informacion', icon: 'bi bi-info-circle', route: '/informacion' },
+
+    { name: 'Dashboard', icon: 'bi bi-speedometer2', route: '/dashboard', rolesAllowed: ['admin'] },
+    { name: 'Registro', icon: 'bi bi-person-plus', route: '/registrar', rolesAllowed: ['admin'] },
+    { name: 'Reportes', icon: 'bi bi-file-earmark-text', route: '/dashboard-tickets', rolesAllowed: ['admin'] },
+    { name: 'Perfil', icon: 'bi bi-person-bounding-box', route: '/profile', rolesAllowed: ['user', 'admin'] },
+    { name: 'Crear Reporte', icon: 'bi bi-folder-plus', route: '/create-ticket', rolesAllowed: ['user'] },
+    { name: 'Informacion', icon: 'bi bi-info-circle', route: '/informacion', rolesAllowed: ['user'] },
   ];
 
 }

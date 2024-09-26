@@ -39,6 +39,7 @@ export class AuthService {
     this._currentUser.set(user);
     localStorage.setItem('token', token);
     localStorage.setItem('userId', user._id);
+    localStorage.setItem('rol', user.roles)
     return true
   }
 
