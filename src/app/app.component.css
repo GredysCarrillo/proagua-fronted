@@ -12,10 +12,14 @@
 }
 
 .container-router{
-width: 100%;
+width: 85%;
 margin-top: 70px;
 flex: 1;
 height: 100%;
+}
+
+.container-router.sidebar-hidden{
+  width: 100%;
 }
 
 app-navbar {
@@ -34,3 +38,4 @@ app-navbar {
   position: absolute;
   color: #000;
 }
+

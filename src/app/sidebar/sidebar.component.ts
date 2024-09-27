@@ -1,7 +1,8 @@
 import { CommonModule } from '@angular/common';
-import { Component, OnInit } from '@angular/core';
-import { Router, RouterModule } from '@angular/router';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { RouterModule } from '@angular/router';
 import { SidebaService } from './services/sideba.service';
+
 
 interface MenuItem {
   name: string;
@@ -19,6 +20,9 @@ interface MenuItem {
 })
 export class SidebarComponent implements OnInit {
 
+  @Input() isSidebarCollapsed = false;
+  @Output()toggleSidebar = new EventEmitter<boolean>();
+
   userRole: string = 'user';
 
   constructor(
@@ -29,6 +33,11 @@ export class SidebarComponent implements OnInit {
   ngOnInit(): void {
     this.userRole = this.sidebarService.getUserRole();
     this.items;
+  }
+
+  onToggleSidebar() {
+    this.isSidebarCollapsed = !this.isSidebarCollapsed;
+    this.toggleSidebar.emit(this.isSidebarCollapsed);  // Emite el estado si es necesario
   }
 
   items: MenuItem[] = [

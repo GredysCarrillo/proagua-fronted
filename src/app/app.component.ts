@@ -3,7 +3,6 @@ import { Router, RouterOutlet } from '@angular/router';
 import { AuthLayoutComponent } from "./auth/layouts/auth-layout.component";
 import { AuthStatus } from './auth/interfaces/auth-status.enum';
 import { AuthService } from './auth/services/login-service.service';
-import { delay } from 'rxjs';
 import { SidebarComponent } from "./sidebar/sidebar.component";
 import { CommonModule } from '@angular/common';
 import { NavbarComponent } from "./navBar/navbar.component";
@@ -11,21 +10,27 @@ import { NavbarComponent } from "./navBar/navbar.component";
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [RouterOutlet, AuthLayoutComponent, SidebarComponent, CommonModule, NavbarComponent],
+
+  imports: [
+  RouterOutlet,
+  AuthLayoutComponent,
+  SidebarComponent,
+  CommonModule,
+  NavbarComponent],
+
   templateUrl: './app.component.html',
   styleUrl: './app.component.css'
 })
 export class AppComponent {
 
   title = 'proagua';
-  isSidebarVisible = true;
+  isSidebarCollapsed = false;
 
   private authService = inject(AuthService);
   private router = inject(Router);
 
-  toggleSidebar() {
-    console.log(this.isSidebarVisible);
-    this.isSidebarVisible = !this.isSidebarVisible; // Cambia el estado
+  toggleSidebar(isCollapsed: boolean) {
+    this.isSidebarCollapsed = isCollapsed;
   }
 
   public finishedAuthCheck = computed<boolean>(() => {

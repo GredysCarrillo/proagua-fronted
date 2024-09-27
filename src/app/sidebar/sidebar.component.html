@@ -1,4 +1,5 @@
-<div class="sidebar" style="background-color: #161D6F; padding: 20px; width: 220px; height: 100vh;">
+
+<div class="sidebar" [ngClass]="{'collapsed': isSidebarCollapsed}">
   <!-- Sección del usuario logueado -->
   <div class="user-info d-flex align-items-center mb-4">
     <img src="../../assets/imgProfile.jpg" alt="Foto de perfil" class="user-photo rounded-circle me-2">
@@ -9,15 +10,12 @@
   </div>
 
   <!-- Lista de opciones del sidebar -->
-<!-- Lista de opciones del sidebar -->
-<ul class="unorded-list list-unstyled" style="color: white; margin-top: 20px;">
-  <ng-container *ngFor="let item of items">
-    <li *ngIf="item.rolesAllowed.includes(userRole)"
-        style="cursor: pointer;"
-        [routerLink]="item.route">
-      <i [class]="item.icon" style="font-size: 28px; color: #98DED9; margin-left: 15px; margin-right: 10px;"></i>
-      {{ item.name }}
-    </li>
-  </ng-container>
-</ul>
-
+  <ul class="unorded-list list-unstyled" style="color: white; margin-top: 20px;">
+    <ng-container *ngFor="let item of items">
+      <li *ngIf="item.rolesAllowed.includes(userRole)" style="cursor: pointer;" [routerLink]="item.route">
+        <i [class]="item.icon" style="font-size: 28px; color: #98DED9; margin-left: 0; margin-right: 10px;"></i>
+        <span>{{ item.name }}</span>
+      </li>
+    </ng-container>
+  </ul>
+</div>

@@ -6,34 +6,27 @@
   color: white; /* Color del texto */
   top: 0;
   left: 0;
-  padding: 10px;
+  padding: 10px; /* Espaciado */
   position: fixed; /* Mantiene el sidebar fijo en su lugar */
-  transition: width 0.3s;
+  transition: width 0.3s; /* Transición suave */
 }
 
-.sidebar.hidden {
-  width: 0; /* Oculte el sidebar */
-  padding: 0; /* Remover padding */
+.sidebar.collapsed {
+  width: 50px; /* Ajusta el ancho cuando esté colapsado */
 }
 
-.main-content {
-  margin-left: 250px; /* Deja espacio para el sidebar */
-  transition: margin-left 0.3s; /* Animación para el cambio de margen */
+.sidebar.collapsed .user-info,
+.sidebar.collapsed .unorded-list li span {
+  display: none; /* Oculta el texto del usuario y de los ítems */
 }
 
-.main-content.sidebar-hidden {
-  margin-left: 0; /* Sin margen si el sidebar está oculto */
-}
-
-body {
-  margin-left: 250px; /* Deja espacio para el sidebar */
+.sidebar.collapsed .unorded-list li {
+  justify-content: center; /* Centra los íconos cuando esté colapsado */
 }
 
 .unorded-list li {
-  list-style: none; /* Elimina los puntos de la lista */
-}
-
-li {
+  display: flex; /* Asegura que los elementos de la lista estén en fila */
+  align-items: center; /* Alinea verticalmente el contenido */
   width: 100%; /* Asegura que los elementos de la lista ocupen todo el ancho */
 }
 
@@ -41,19 +34,6 @@ li:hover {
   background-color: #0B2F9F; /* Color al pasar el ratón */
 }
 
-ul {
-  width: 100%; /* Asegura que las listas ocupen todo el ancho */
-}
-
-/* Ajustes adicionales opcionales */
-.sidebar h5 {
-  text-align: center; /* Centra el título */
-  margin-bottom: 15px; /* Añade un margen inferior */
-}
-
-.sidebar i {
-  margin-right: 10px; /* Espacio entre el icono y el texto */
-}
 
 .user-photo {
   width: 40px;

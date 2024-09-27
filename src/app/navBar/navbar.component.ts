@@ -10,17 +10,20 @@ import { AuthService } from '../auth/services/login-service.service';
 })
 export class NavbarComponent {
 
-constructor(
-  private authService: AuthService,
-){}
+  @Output() toggleSidebar = new EventEmitter<boolean>();
+  isSidebarCollapsed = false;
+
+  constructor(
+    private authService: AuthService,
+  ) { }
 
   closeSesion() {
     this.authService.closeSesion();
   }
 
-  @Output() toggleSidebar = new EventEmitter<void>();
 
   onToggleSidebar() {
-    this.toggleSidebar.emit(); // Emitir el evento al hacer clic
+    this.isSidebarCollapsed = !this.isSidebarCollapsed;
+    this.toggleSidebar.emit(this.isSidebarCollapsed  );
   }
 }
