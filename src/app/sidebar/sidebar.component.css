@@ -43,11 +43,24 @@ li:hover {
   margin-right: 10px;
 }
 
+.sidebar.collapsed .user-photo{
+  width: 30px;
+  height: 30px;
+  object-fit: cover;
+  border-radius: 50%;
+  text-align: center;
+}
+
 .user-details h6 {
   margin-bottom: 0;
   font-size: 16px;
 }
 
+.sidebar.collapsed .user-details{
+  display: none;
+}
+
 .user-details small {
   color: #98DED9;
 }
+
