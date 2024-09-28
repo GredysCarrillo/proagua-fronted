@@ -3,6 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { ProfileService } from '../services/profile-servide.service';
 import { RegisterData } from '../interfaces/user-register.interface';
 import { CommonModule } from '@angular/common';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-profile-page',
@@ -17,7 +18,8 @@ export class ProfilePageComponent implements OnInit {
 
   constructor(
     private authService: AuthService,
-    private profileService: ProfileService
+    private profileService: ProfileService,
+    private toast: ToastrService
   ) { }
 
   ngOnInit(): void {
@@ -31,11 +33,10 @@ export class ProfilePageComponent implements OnInit {
       this.profileService.getUserInfo(userId)
         .subscribe({
           next: (data) => {
-            console.log("Una data del usuarios",data);
             this.user = data;
           },
           error: (error) => {
-            console.log('Ha ocurrido un error', error)
+            this.toast.error('No se pudo cargar el perfil', 'Error', error )
           }
         })
     }
