@@ -64,7 +64,6 @@ export class AuthService {
   }
 
   registerService(body: RegisterService): Observable<RegisterService> {
-    console.log('Datos enviados para crear el servicio:', body);
     return this.http.post<RegisterService>(`${this.baseUrl}/data/createService`, body)
       .pipe(
         catchError(err => throwError(() => err.error.message))

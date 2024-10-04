@@ -1,7 +1,9 @@
+import { AuthService } from './../auth/services/login-service.service';
 import { CommonModule } from '@angular/common';
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { SidebaService } from './services/sideba.service';
+import { ProfileService } from '../profile/services/profile-servide.service';
 
 
 interface MenuItem {
@@ -24,15 +26,20 @@ export class SidebarComponent implements OnInit {
   @Output()toggleSidebar = new EventEmitter<boolean>();
 
   userRole: string = 'user';
+  userId = this.authService.getUserId();
+  userPhotoUrl: string | undefined;
 
   constructor(
-    private sidebarService: SidebaService
+    private sidebarService: SidebaService,
+    private profileService: ProfileService,
+    private authService: AuthService
   ) { }
 
 
   ngOnInit(): void {
     this.userRole = this.sidebarService.getUserRole();
     this.items;
+    this.loadUserPhoto();
   }
 
   onToggleSidebar() {
@@ -49,5 +56,21 @@ export class SidebarComponent implements OnInit {
     { name: 'Crear Reporte', icon: 'bi bi-folder-plus', route: '/create-ticket', rolesAllowed: ['user'] },
     { name: 'Informacion', icon: 'bi bi-info-circle', route: '/informacion', rolesAllowed: ['user'] },
   ];
+
+
+
+  loadUserPhoto(): void {
+    if(this.userId){
+    this.profileService.getUserPhoto(this.userId).subscribe({
+      next: (blob) => {
+        const objectUrl = URL.createObjectURL(blob);
+        this.userPhotoUrl = objectUrl;
+      },
+      error: (err) => {
+        console.error('Error al cargar la imagen del usuario en el sidebar', err);
+      }
+    });
+  }
+  }
 
 }

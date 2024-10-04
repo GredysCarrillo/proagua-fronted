@@ -68,7 +68,6 @@ export class RegisterComponent {
   onSubmitService(_Id:string |null |undefined){
     const {Colonia, serviceType, Address} = this.myForm.value;
     const body: RegisterService = {_Id, Address, Colonia, serviceType };
-    console.log('otro body',{body})
     this.authService.registerService(body)
     .subscribe({
       next: () =>{

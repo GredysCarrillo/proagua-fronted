@@ -1,12 +1,12 @@
-
 <div class="container mt-4" style="padding-top: 0;">
   <div class="container" style="padding: 0;">
-    <h2 class="text-primary"><i class="i bi-person-bounding-box" style="font-size: 35px; color: black; padding: 0;">Perfil de Usuario</i></h2>
+    <h2 class="text-primary"><i class="i bi-person-bounding-box"
+        style="font-size: 35px; color: black; padding: 0;">Perfil de Usuario</i></h2>
   </div>
 
   <!-- Encabezado del perfil -->
   <div class="profile-header">
-    <img src="" alt="Foto de perfil" alt="Image" class="profile-img" *ngIf="user">
+    <img [src]="userPhotoUrl" alt="Foto de perfil" alt="Image" class="profile-img" *ngIf="user">
     <h2 *ngIf="user">{{ user.name }}</h2>
     <p *ngIf="user">Email: {{ user.email }}</p>
   </div>
@@ -95,16 +95,17 @@
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
-        <form>
+        <form (submit)="uploadPhoto()">
           <div class="mb-3">
             <label for="profilePhoto" class="form-label">Seleccionar Archivo</label>
-            <input type="file" class="form-control" id="profilePhoto" accept="image/*" required>
+            <input type="file" class="form-control" id="profilePhoto" (change)="onFileSelect($event)" alt="No image found"
+              accept="image/*" required>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+            <button type="submit" class="btn btn-custom">Cargar Foto</button>
           </div>
         </form>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
-        <button type="button" class="btn btn-custom">Cargar Foto</button>
       </div>
     </div>
   </div>

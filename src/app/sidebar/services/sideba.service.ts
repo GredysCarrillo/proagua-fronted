@@ -1,6 +1,7 @@
 import { isPlatformBrowser } from '@angular/common';
 import { Inject, Injectable, PLATFORM_ID } from '@angular/core';
 import { Observable, of } from 'rxjs';
+import { ProfileService } from '../../profile/services/profile-servide.service';
 
 @Injectable({
   providedIn: 'root'
@@ -22,4 +23,9 @@ export class SidebaService {
       return 'NaN';
     }
   }
+
+
+
+
+
 }
