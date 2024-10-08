@@ -4,8 +4,11 @@ import { ProfileService } from '../services/profile-servide.service';
 import { RegisterData } from '../interfaces/user-register.interface';
 import { CommonModule } from '@angular/common';
 import { ToastrService } from 'ngx-toastr';
-import { ReactiveFormsModule } from '@angular/forms';
+import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import bootstrap from '../../../main.server';
+import { delay } from 'rxjs';
+import { ResourceLoader } from '@angular/compiler';
 
 @Component({
   selector: 'app-profile-page',
@@ -14,10 +17,12 @@ import { Router } from '@angular/router';
   templateUrl: './profile-page.component.html',
   styleUrl: './profile-page.component.css'
 })
+
+
 export class ProfilePageComponent implements OnInit {
 
   user: RegisterData | null = null;
-  selectedFile: File | null = null;
+  selectedFile: File | undefined;
   userPhotoUrl: string | undefined;
   userId = this.authService.getUserId();
 
@@ -25,7 +30,8 @@ export class ProfilePageComponent implements OnInit {
     private authService: AuthService,
     private profileService: ProfileService,
     private toast: ToastrService,
-    private rout: Router
+    private rout: Router,
+    private fb: FormBuilder
   ) { }
 
   ngOnInit(): void {
@@ -33,8 +39,13 @@ export class ProfilePageComponent implements OnInit {
     this.loadUserPhoto();
   }
 
-  getUser() {
+  myForm = this.fb.group({
+    currentPassword: ['', Validators.required],
+    newPassword: ['', [Validators.required, Validators.minLength(6)]],
+    confirmPassword: ['', Validators.required],
+  });
 
+  getUser() {
     const userId = this.authService.getUserId();
     if (userId) {
       this.profileService.getUserInfo(userId)
@@ -61,14 +72,15 @@ export class ProfilePageComponent implements OnInit {
   uploadPhoto(): void {
     const userId = this.authService.getUserId();
     if (this.selectedFile && userId) {
+      console.log(this.selectedFile, userId, "Enviando datos a la foto")
       const formData = new FormData();
       formData.append('file', this.selectedFile);
-      console.log('metodo de subir foto')
       this.profileService.uploadPhoto(formData, userId)
         .subscribe({
           next: () => {
-            console.log('la foto ya fue cargada, uploadFoto method')
             this.toast.success('Fotografía cargada exitosamente', 'Éxito');
+            location.reload();
+            this.rout.navigateByUrl('/profile')
           },
           error: (message) => {
             this.toast.error('La fotografía no fue cargada', 'Error');
@@ -78,19 +90,52 @@ export class ProfilePageComponent implements OnInit {
   }
 
   loadUserPhoto(): void {
-    console.log('fuera del if')
-    if(this.userId){
-    this.profileService.getUserPhoto(this.userId).subscribe({
-      next: (blob) => {
-        const objectUrl = URL.createObjectURL(blob);
-        this.userPhotoUrl = objectUrl;
-      },
-      error: (err) => {
-        console.error('Error al cargar la imagen del usuario', err);
-      }
-    });
-  }
+    if (this.userId) {
+      this.profileService.getUserPhoto(this.userId).subscribe({
+        next: (blob) => {
+          const objectUrl = URL.createObjectURL(blob);
+          this.userPhotoUrl = objectUrl;
+        },
+        error: (err) => {
+          console.error('Error al cargar la imagen del usuario', err);
+        }
+      });
+    }
   }
 
+  // Método para enviar el cambio de contraseña
+  onSubmit() {
+    if (this.myForm.valid) {
+      const { currentPassword, newPassword, confirmPassword } = this.myForm.value;
+
+      if (newPassword !== confirmPassword) {
+        alert('Las nuevas contraseñas no coinciden');
+        return;
+      }
+
+      const userId = this.authService.getUserId();
+      console.log(userId);
+      if (userId && currentPassword && newPassword && confirmPassword) {// Obtén el ID del usuario autenticado
+        this.profileService.changePassword(userId, currentPassword, newPassword, confirmPassword).subscribe({
+          next: () => {
+            this.toast.success('Contraseña cambiada exitosamente');
+            localStorage.removeItem('token');
+            this.rout.navigateByUrl('/login')
+            this.myForm.reset(); // Reinicia el formulario
+          },
+          error: (err) => {
+            this.toast.error('Error al cambiar la contraseña: ' + err.message);
+          },
+        });
+      }
+    } else {
+      alert('Por favor, completa todos los campos correctamente.');
+    }
+  }
+
+
+  funcionButton() {
+    console.log('Estoy clickeando en el boton de abrir modal')
+  }
 
 }

@@ -63,30 +63,41 @@
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
-        <form>
+        <form [formGroup]="myForm" (ngSubmit)="onSubmit()">
           <div class="mb-3">
             <label for="currentPassword" class="form-label">Contraseña Actual</label>
-            <input type="password" class="form-control" id="currentPassword" required>
+            <input type="password" class="form-control" id="currentPassword" formControlName="currentPassword" required>
+            <div *ngIf="myForm.get('currentPassword')?.invalid && myForm.get('currentPassword')?.touched"
+              class="text-danger">
+              La contraseña actual es requerida.
+            </div>
           </div>
           <div class="mb-3">
             <label for="newPassword" class="form-label">Nueva Contraseña</label>
-            <input type="password" class="form-control" id="newPassword" required>
+            <input type="password" class="form-control" id="newPassword" formControlName="newPassword" required>
+            <div *ngIf="myForm.get('newPassword')?.invalid && myForm.get('newPassword')?.touched" class="text-danger">
+              La nueva contraseña es requerida y debe tener al menos 6 caracteres.
+            </div>
           </div>
           <div class="mb-3">
             <label for="confirmPassword" class="form-label">Confirmar Nueva Contraseña</label>
-            <input type="password" class="form-control" id="confirmPassword" required>
+            <input type="password" class="form-control" id="confirmPassword" formControlName="confirmPassword" required>
+            <div *ngIf="myForm.get('confirmPassword')?.invalid && myForm.get('confirmPassword')?.touched"
+              class="text-danger">
+              La confirmación de la nueva contraseña es requerida.
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+            <button type="submit" class="btn btn-custom" [disabled]="myForm.invalid">Guardar Cambios</button>
           </div>
         </form>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
-        <button type="button" class="btn btn-custom">Guardar Cambios</button>
       </div>
     </div>
   </div>
 </div>
 
-<!-- Modal para cargar una fotografía -->
+<!--Moda para cargar una foto-->
 <div class="modal fade" id="uploadPhotoModal" tabindex="-1" aria-labelledby="uploadPhotoModalLabel" aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content">
@@ -95,17 +106,16 @@
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
-        <form (submit)="uploadPhoto()">
+        <form>
           <div class="mb-3">
             <label for="profilePhoto" class="form-label">Seleccionar Archivo</label>
-            <input type="file" class="form-control" id="profilePhoto" (change)="onFileSelect($event)" alt="No image found"
-              accept="image/*" required>
-          </div>
-          <div class="modal-footer">
-            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
-            <button type="submit" class="btn btn-custom">Cargar Foto</button>
+            <input type="file" class="form-control" id="profilePhoto" accept="image/*" (change)="onFileSelect($event)" required>
           </div>
         </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+        <button type="button" (click)="uploadPhoto()" class="btn btn-custom">Cargar Foto</button>
       </div>
     </div>
   </div>

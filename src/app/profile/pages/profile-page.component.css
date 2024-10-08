@@ -1,6 +1,7 @@
 /* Estilos generales */
 body {
-  background-color: white; /* Color de fondo suave para generar contraste */
+  background-color: white;
+  /* Color de fondo suave para generar contraste */
   font-family: 'Arial', sans-serif;
 }
 
@@ -13,7 +14,8 @@ body {
 /* Estilos del encabezado del perfil */
 .profile-header {
   text-align: center;
-  background-color: #0B2F9F; /* Fondo azul oscuro para resaltar la foto y nombre */
+  background-color: #0B2F9F;
+  /* Fondo azul oscuro para resaltar la foto y nombre */
   color: #fff;
   padding: 20px;
   border-radius: 10px;
@@ -49,7 +51,8 @@ body {
 }
 
 .card-header {
-  background-color: #161D6F; /* Azul oscuro para resaltar los títulos */
+  background-color: #161D6F;
+  /* Azul oscuro para resaltar los títulos */
   color: #fff;
   padding: 15px;
   border-top-left-radius: 10px;
@@ -68,7 +71,8 @@ body {
 }
 
 strong {
-  color: #0B2F9F; /* Azul intermedio para destacar los títulos */
+  color: #0B2F9F;
+  /* Azul intermedio para destacar los títulos */
 }
 
 /* Estilos de los botones */
