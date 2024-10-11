@@ -22,8 +22,8 @@ export class LoginComponent {
   ){}
 
   public myForm = this.fb.group({
-    dpi: ['3423354132201', [Validators.required, Validators.minLength(13)]],
-    password: ['123456789', [Validators.required]]
+    dpi: ['', [Validators.required, Validators.minLength(13)]],
+    password: ['', [Validators.required]]
   });
 
 
