@@ -25,6 +25,7 @@ export class ProfilePageComponent implements OnInit {
   selectedFile: File | undefined;
   userPhotoUrl: string | undefined;
   userId = this.authService.getUserId();
+  servicio: any = {};
 
   constructor(
     private authService: AuthService,
@@ -37,6 +38,7 @@ export class ProfilePageComponent implements OnInit {
   ngOnInit(): void {
     this.getUser();
     this.loadUserPhoto();
+    this.loadServicio();
   }
 
   myForm = this.fb.group({
@@ -51,6 +53,7 @@ export class ProfilePageComponent implements OnInit {
       this.profileService.getUserInfo(userId)
         .subscribe({
           next: (data) => {
+            console.log("Esta es la data del usuario en el perfil", data)
             this.user = data;
           },
           error: (error) => {
@@ -132,9 +135,21 @@ export class ProfilePageComponent implements OnInit {
     }
   }
 
-
-  funcionButton() {
-    console.log('Estoy clickeando en el boton de abrir modal')
+  loadServicio() {
+    let id = this.authService.getUserId();
+    console.log(id)
+    if (id) {
+      this.profileService.getServicioById(id)
+        .subscribe({
+          next: (data) => {
+            console.log('esta es la data del servicio:',data)
+            this.servicio = data;
+          },
+          error: (err) => {
+            this.toast.error('Error', 'El servicio no se pudo cargar', err.message);
+          }
+        })
+    }
   }
 
 }

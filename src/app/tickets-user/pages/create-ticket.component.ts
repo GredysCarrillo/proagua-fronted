@@ -37,8 +37,8 @@ export class CreateTicketComponent implements OnInit {
   }
 
   myForm = this.fb.group({
-    problemType: ['1', [Validators.required]],
-    description: ['Mi problema es con el agua', [Validators.required]],
+    problemType: ['', [Validators.required]],
+    description: ['', [Validators.required]],
     photo: [null]
   })
 

@@ -29,13 +29,17 @@ export class ProfileService {
     return this.http.get(url, { responseType: 'blob' });
   }
 
-   // Método para cambiar la contraseña
-   changePassword(userId: string, currentPassword: string, newPassword: string, confirmPassword: string): Observable<any> {
+  // Método para cambiar la contraseña
+  changePassword(userId: string, currentPassword: string, newPassword: string, confirmPassword: string): Observable<any> {
     return this.http.patch(`${this.baseUrl}/auth/change-password/${userId}`, {
       currentPassword,
       newPassword,
       confirmPassword
     });
+  }
+
+  getServicioById(id: string) {
+    return this.http.get<any>(`${this.baseUrl}/data/servicio/${id}`)
   }
 
 

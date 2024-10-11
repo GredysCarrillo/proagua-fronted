@@ -6,5 +6,6 @@ export interface RegisterData {
   dpi:string | undefined | null;
   email: string | undefined | null;
   phoneNumber:string | undefined | null;
+  roles: string;
 
 }

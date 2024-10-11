@@ -15,6 +15,7 @@ export class CreatTicketServiceService {
     private http: HttpClient
   ) { }
 
+
   ccreateTicket(formData: FormData): Observable<any> {
     return this.http.post<any>(`${this.url}/data-tickets/create-ticket`, formData).pipe(
       catchError((error) => {
@@ -23,8 +24,6 @@ export class CreatTicketServiceService {
       })
     );
   }
-
-
 
   getTickets(userId:string):Observable<ticket[]>{
     return this.http.get<ticket[]>(`${this.url}/data-tickets/user/${userId}`)

@@ -22,6 +22,7 @@
           <p><strong>Nombre:</strong> {{ user?.name }}</p>
           <p><strong>Correo Electrónico:</strong> {{ user?.email }}</p>
           <p><strong>Teléfono:</strong> {{ user?.phoneNumber }}</p>
+          <p></p>
           <!-- Acciones -->
           <div class="row mt-4">
             <div class="col-md-12">
@@ -36,19 +37,18 @@
         </div>
       </div>
     </div>
-
-    <!-- Datos del servicio -->
-    <div class="col-md-6">
-      <div class="card">
-        <div class="card-header section-header">
-          <h5>Datos del Servicio</h5>
-        </div>
-        <div class="card-body">
-          <p><strong>Servicio:</strong> Agua Potable</p>
-          <p><strong>Estado:</strong> Activo</p>
-          <p><strong>Última Facturación:</strong> 2024-09-01</p>
-        </div>
-      </div>
+<!-- Datos del servicio -->
+<div class="col-md-6" *ngIf="user?.roles != 'admin'">
+  <div class="card">
+    <div class="card-header section-header">
+      <h5>Datos del Servicio</h5>
+    </div>
+    <div class="card-body">
+      <p><strong>ID del Servicio:</strong> {{servicio[0]._id}}</p>
+      <p><strong>Dirección:</strong> {{servicio[0].Address}}</p>
+      <p><strong>Colonia:</strong> {{servicio[0].Colonia}}</p>
+      <p><strong>Tipo de Servicio:</strong> {{servicio[0].serviceType }}</p>
+      <!-- Puedes agregar más campos según necesites -->
     </div>
   </div>
 </div>
