@@ -1,7 +1,8 @@
 <div class="container mt-5">
   <!-- Encabezado del Dashboard -->
   <div class="d-flex justify-content-between align-items-center mb-4">
-    <h2 class="text-primary"><i class="bi bi-speedometer2" style="font-size: 35px; color: black;">Dashboard - Reportes</i></h2>
+    <h2 class="text-primary"><i class="bi bi-speedometer2" style="font-size: 35px; color: black;">Dashboard -
+        Reportes</i></h2>
     <div class="d-flex align-items-center">
       <!-- Barra de Búsqueda -->
       <form class="d-flex me-3">
@@ -9,8 +10,8 @@
           <span class="input-group-text" id="search-icon">
             <i class="bi bi-search" style="color: #0B2F9F;"></i>
           </span>
-          <input class="form-control" type="text" name="search" (input)="filterUsers()"
-            placeholder="Buscar cliente" aria-label="Buscar">
+          <input class="form-control" type="text" name="search" (input)="filterUsers()" placeholder="Buscar cliente"
+            aria-label="Buscar">
         </div>
       </form>
     </div>
@@ -76,16 +77,15 @@
             <td>{{ ticket.status }}</td>
             <td>{{ ticket.CreatedAt | date: 'shortDate'}}</td>
             <td>
-              <button class="btn btn-primary"
-                (click)="ticket._id && changeTicketStatus(ticket._id, 'En Proceso')"
+              <button class="btn btn-primary" (click)="ticket._id && changeTicketStatus(ticket._id, 'En Proceso')"
                 [disabled]="ticket.status === 'En Proceso' || ticket.status === 'Cerrado'">
                 Marcar en Proceso
               </button>
             </td>
             <td><button class="btn btn-primary" (click)="ticket._id && changeTicketStatus(ticket._id, 'Cerrado')"
-              [disabled]="ticket.status === 'Cerrado'">
-              Cerrar Reporte
-            </button></td>
+                [disabled]="ticket.status === 'Cerrado'">
+                Cerrar Reporte
+              </button></td>
             <td><button class="btn ver"><i class="bi bi-eye"></i></button></td>
           </tr>
         </tbody>
@@ -99,4 +99,4 @@
     </div>
   </div>
 
-  </div>
+</div>

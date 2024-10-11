@@ -15,15 +15,15 @@ export class CreatTicketServiceService {
     private http: HttpClient
   ) { }
 
-  ccreateTicket(body:ticket): Observable<any> {
-    return this.http.post<any>(`${this.url}/data-tickets/create-ticket`, body).pipe(
+  ccreateTicket(formData: FormData): Observable<any> {
+    return this.http.post<any>(`${this.url}/data-tickets/create-ticket`, formData).pipe(
       catchError((error) => {
         console.error('Error creating ticket:', error);
-        console.log('Eror en en el servicio');
         return throwError(error);
       })
     );
   }
+
 
 
   getTickets(userId:string):Observable<ticket[]>{

@@ -72,7 +72,6 @@ export class ProfilePageComponent implements OnInit {
   uploadPhoto(): void {
     const userId = this.authService.getUserId();
     if (this.selectedFile && userId) {
-      console.log(this.selectedFile, userId, "Enviando datos a la foto")
       const formData = new FormData();
       formData.append('file', this.selectedFile);
       this.profileService.uploadPhoto(formData, userId)

@@ -1,14 +1,16 @@
 <div class="container mt-4">
   <div class="row">
     <h2 class="text-primary"><i class="bi bi-file-text" style="font-size: 35px; color: black;">Reportes</i></h2>
-    <!-- Formulario para registrar un ticket -->
+
+
     <form class="col-md-6" [formGroup]="myForm" (submit)="createTicket()">
       <div class="card report-card">
         <div class="card-header">
           <h4>Agregar Reporte</h4>
         </div>
+
+
         <div class="card-body">
-          <!-- Selección del problema predefinido -->
           <div class="mb-3">
             <label for="problemType" class="form-label">Seleccionar Tipo de Problema</label>
             <select class="form-select" id="problemType" required formControlName="problemType">
@@ -21,6 +23,8 @@
             </select>
           </div>
 
+
+
           <!-- Descripción del problema -->
           <div class="mb-3">
             <label for="problemDescription" class="form-label">Descripción del Problema</label>
@@ -28,11 +32,14 @@
               placeholder="Describe tu problema aquí..." required></textarea>
           </div>
 
+
           <!-- Carga de fotografía -->
           <div class="mb-3">
             <label for="problemPhoto" class="form-label">Cargar Fotografía</label>
-            <input type="file" class="form-control" id="problemPhoto" accept="image/*" formControlName="photo">
+            <input type="file" class="form-control" id="problemPhoto" accept="image/*" formControlName="photo"
+              (change)="onFileChange($event)">
           </div>
+
 
           <!-- Botón para enviar el ticket -->
           <div class="d-grid">
@@ -42,6 +49,7 @@
       </div>
     </form>
 
+
     <!-- Historial de tickets -->
     <div class="col-md-6">
       <div class="card report-card">
@@ -50,16 +58,20 @@
         </div>
         <div class="card-body">
           <ul class="list-group">
+
+
+
             <!-- Ejemplo de ticket -->
             <li *ngFor="let ticket of tickets | paginate: { itemsPerPage: 3, currentPage: p } ; let i = index"
               class="list-group-item" style="margin: 5px; border: solid 1px #161D6F; border-radius: 5px;">
               <div class="d-flex justify-content-between">
                 <div>
-                  <h5 class="mb-1">Reporte: #{{i + 1}}: {{ticket._id}}</h5>
+                  <h5 class="mb-1">Reporte No: {{ticket._id}}</h5>
                   <p class="mb-1">Fecha: {{ ticket.CreatedAt | date: 'yyyy-MM-dd' }}</p>
                   <p class="mb-1"><strong>Estado:</strong> {{ticket.status}}</p>
                 </div>
-                <button class="btn btn-custom-datalles btn-sm">Ver Detalles</button>
+                <button class="btn btn-custom-datalles btn-sm" data-bs-toggle="modal" data-bs-target="#detailsModal"
+                  (click)="showDetails(ticket)">Ver Detalles</button>
               </div>
             </li>
           </ul>
@@ -74,6 +86,8 @@
   </div>
 </div>
 
+
+<!-- Modal de detalles -->
 <div class="modal fade" id="detailsModal" tabindex="-1" aria-labelledby="detailsModalLabel" aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content">
@@ -81,17 +95,20 @@
         <h5 class="modal-title" id="detailsModalLabel">Detalles del Reporte</h5>
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
+
       <div class="modal-body">
-        <p><strong>Tipo de Problema:</strong> Sin servicio de agua</p>
-        <p><strong>Descripción:</strong> Breve descripcion del problema</p>
-        <p><strong>Estado:</strong> activo</p>
-        <p><strong>Fecha de Creación:</strong> 29/09/2023</p>
-        <div *ngIf="">
-          <img [src]="" alt="Fotografía del Reporte" class="img-fluid mt-3" />
+        <p><strong>Tipo de Problema: </strong>{{ selectedTicket?.problemType}}</p>
+        <p><strong>Descripción: </strong>{{ selectedTicket?.description}}</p>
+        <p><strong>Estado: </strong>{{ selectedTicket?.status}}</p>
+        <p><strong>Fecha de Creación: </strong>{{ selectedTicket?.CreatedAt | date: 'yyyy-MM-dd'}}</p>
+        <div style="text-align: center;">
+          <img [src]="selectedTicket?.imagenUrl" alt="Fotografía del Reporte" class="img-fluid mt-3" style="width: 400px; height: 300px;"/>
         </div>
+
+
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+        <button type="button" class="btn btn-custom-primary" data-bs-dismiss="modal">Cerrar</button>
       </div>
     </div>
   </div>
