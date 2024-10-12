@@ -28,11 +28,13 @@ export class SidebarComponent implements OnInit {
   userRole: string = 'user';
   userId = this.authService.getUserId();
   userPhotoUrl: string | undefined;
+  userName = this.getUserName();
+  userRol = this.getUserRol();
 
   constructor(
     private sidebarService: SidebaService,
     private profileService: ProfileService,
-    private authService: AuthService
+    private authService: AuthService,
   ) { }
 
 
@@ -57,8 +59,6 @@ export class SidebarComponent implements OnInit {
     { name: 'Informacion', icon: 'bi bi-info-circle', route: '/informacion', rolesAllowed: ['user'] },
   ];
 
-
-
   loadUserPhoto(): void {
     if(this.userId){
     this.profileService.getUserPhoto(this.userId).subscribe({
@@ -71,6 +71,14 @@ export class SidebarComponent implements OnInit {
       }
     });
   }
+  }
+
+  getUserName(){
+    this.authService.getname();
+  }
+
+  getUserRol(){
+    this.authService.getRol();
   }
 
 }

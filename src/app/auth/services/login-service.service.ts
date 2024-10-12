@@ -39,12 +39,21 @@ export class AuthService {
     this._currentUser.set(user);
     localStorage.setItem('token', token);
     localStorage.setItem('userId', user._id);
-    localStorage.setItem('rol', user.roles)
+    localStorage.setItem('rol', user.roles);
+    localStorage.setItem('name', user.name);
     return true
   }
 
   getUserId(): string | null {
     return localStorage.getItem('userId');
+  }
+
+  getname(): string | null{
+    return localStorage.getItem('name');
+  }
+
+  getRol():string | null{
+    return localStorage.getItem('rol');
   }
 
   login(dpi: string, password: string): Observable<boolean> {
