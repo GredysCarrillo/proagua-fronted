@@ -48,6 +48,7 @@ export class TicketDashbordComponent implements OnInit {
       .subscribe({
         next: (data: ticket[]) => {
           // Mapeamos y ordenamos los tickets
+          console.log(data, 'Esta es la data de todos los tiickets')
           this.allTickets = data.map(ticket => ({
             ...ticket,
             CreatedAt: ticket.CreatedAt ? new Date(ticket.CreatedAt) : undefined,
@@ -58,6 +59,11 @@ export class TicketDashbordComponent implements OnInit {
 
             return priorityOrder.indexOf(a.status) - priorityOrder.indexOf(b.status);
           });
+          this.allTickets.forEach(ticket => {
+            if(ticket.userId){
+              this.getUserName(ticket.userId);
+            }
+          })
         },
         error: (error) => {
           this.toast.error('Error al cargar los tickets', error);
@@ -94,6 +100,22 @@ export class TicketDashbordComponent implements OnInit {
         this.normalizeString(user.name).toLowerCase().includes(normalizedSearchTerm.toLowerCase())
       );
     }
+  }
+
+  getUserName(userId: string): void{
+    this.dashService.getUserById(userId)
+    .subscribe({
+      next: (user: any) => {
+        // Encontramos el ticket correspondiente y le asignamos el nombre del usuario
+        const ticketToUpdate = this.allTickets.find(ticket => ticket.userId === userId);
+        if (ticketToUpdate) {
+          ticketToUpdate.userId = user.name; // Asignamos el nombre del usuario al ticket
+        }
+      },
+      error: (error) => {
+        this.toast.error('Error al obtener el nombre del usuario', error);
+      }
+    });
   }
 
 

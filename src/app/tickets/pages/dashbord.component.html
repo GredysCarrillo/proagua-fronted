@@ -77,7 +77,7 @@
                 <td>{{ ticket.userId }}</td>
                 <td>{{ ticket.description }}</td>
                 <td>{{ ticket.status }}</td>
-                <td>{{ ticket.CreatedAt | date: 'shortDate'}}</td>
+                <td>{{ ticket.CreatedAt | date}}</td>
                 <td>
                   <button class="btn btn-primary" (click)="ticket._id && changeTicketStatus(ticket._id, 'En Proceso')"
                     [disabled]="ticket.status === 'En Proceso' || ticket.status === 'Cerrado'">

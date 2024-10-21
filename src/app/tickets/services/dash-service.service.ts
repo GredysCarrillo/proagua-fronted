@@ -28,6 +28,12 @@ export class dashBoardService {
     return this.http.patch(`${this.url}/data-tickets/update-status/${ticketId}`, { status: newStatus });
   }
 
+  //Traer el nombre del usuario
+  getUserById(userId: string) {
+    return this.http.get<any>(`${this.url}/auth/${userId}`);
+  }
+
+
 
 
 }
