@@ -137,7 +137,7 @@ export class ProfilePageComponent implements OnInit {
             this.servicio = data;
           },
           error: (err) => {
-            this.toast.error('Error', 'El servicio no se pudo cargar');
+            //elimine el mensjae de error
           }
         })
     }

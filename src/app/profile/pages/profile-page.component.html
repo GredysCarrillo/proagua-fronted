@@ -66,7 +66,7 @@
         <form [formGroup]="myForm" (ngSubmit)="onSubmit()">
           <div class="mb-3">
             <label for="currentPassword" class="form-label">Contraseña Actual</label>
-            <input type="password" class="form-control" id="currentPassword" formControlName="currentPassword" required>
+            <input type="password" class="form-control" id="currentPassword" formControlName="currentPassword" required autocomplete="current-password">
             <div *ngIf="myForm.get('currentPassword')?.invalid && myForm.get('currentPassword')?.touched"
               class="text-danger">
               La contraseña actual es requerida.
@@ -74,14 +74,14 @@
           </div>
           <div class="mb-3">
             <label for="newPassword" class="form-label">Nueva Contraseña</label>
-            <input type="password" class="form-control" id="newPassword" formControlName="newPassword" required>
+            <input type="password" class="form-control" id="newPassword" formControlName="newPassword" required autocomplete="new-password">
             <div *ngIf="myForm.get('newPassword')?.invalid && myForm.get('newPassword')?.touched" class="text-danger">
               La nueva contraseña es requerida y debe tener al menos 6 caracteres.
             </div>
           </div>
           <div class="mb-3">
             <label for="confirmPassword" class="form-label">Confirmar Nueva Contraseña</label>
-            <input type="password" class="form-control" id="confirmPassword" formControlName="confirmPassword" required>
+            <input type="password" class="form-control" id="confirmPassword" formControlName="confirmPassword" required autocomplete="new-password">
             <div *ngIf="myForm.get('confirmPassword')?.invalid && myForm.get('confirmPassword')?.touched"
               class="text-danger">
               La confirmación de la nueva contraseña es requerida.
