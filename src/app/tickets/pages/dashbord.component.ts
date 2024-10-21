@@ -1,36 +1,42 @@
 import { ticket } from './../../tickets-user/interfaces/ticket-interface';
-import { map } from 'rxjs';
 import { dashBoardService } from './../services/dash-service.service';
 import { Component, OnInit } from '@angular/core';
 import { ToastrService } from 'ngx-toastr';
 import { CommonModule } from '@angular/common';
 import { NgxPaginationModule } from 'ngx-pagination';
+import { FormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-dashbord',
   standalone: true,
-  imports: [CommonModule, NgxPaginationModule],
+  imports: [CommonModule, NgxPaginationModule, FormsModule],
   templateUrl: './dashbord.component.html',
   styleUrl: './dashbord.component.css'
 })
 export class TicketDashbordComponent implements OnInit {
 
+
+  //Variables y arrays
   ticketCounts: any = { abiertos: 0, enProceso: 0, cerrados: 0 };
   allTickets: ticket[] = [];
-  p: number = 1; // Página actual
-  searchTerm: string = '';
-  filteredUsers: any[] = [];
-  users: any[] = [];
+  p: number = 1;
+  filteredTickets: ticket[] = []; // Array para tickets filtrados
+  searchTerm: string = ''; // Término de búsqueda
 
   constructor(
     private dashService: dashBoardService,
     private toast: ToastrService) { }
 
+
+  //Metodo ngOnInit
   ngOnInit(): void {
+
     this.getTicketsCount();
     this.getAllTickets();
+    console.log('desde el ngOnInit jajaja', this.getAllTickets())
   }
 
+  //Metodo para obtener los contadores de tickets
   getTicketsCount(): void {
     this.dashService.getTicketsCount()
       .subscribe({
@@ -43,24 +49,23 @@ export class TicketDashbordComponent implements OnInit {
       })
   }
 
+  //Metodo para obtener todos los tickets
   getAllTickets(): void {
     this.dashService.getAllTickets()
       .subscribe({
         next: (data: ticket[]) => {
-          // Mapeamos y ordenamos los tickets
-          console.log(data, 'Esta es la data de todos los tiickets')
           this.allTickets = data.map(ticket => ({
             ...ticket,
             CreatedAt: ticket.CreatedAt ? new Date(ticket.CreatedAt) : undefined,
-            status: ticket.status ?? 'Cerrado' // Proporcionamos un valor por defecto para 'status'
+            status: ticket.status ?? 'Cerrado'
           })).sort((a, b) => {
-            // Priorizar tickets en estado 'Abierto' y 'En Proceso'
-            const priorityOrder = ['Abierto', 'En Proceso', 'Cerrado'];
 
+            const priorityOrder = ['Abierto', 'En Proceso', 'Cerrado'];
             return priorityOrder.indexOf(a.status) - priorityOrder.indexOf(b.status);
           });
+          this.filteredTickets = [...this.allTickets];
           this.allTickets.forEach(ticket => {
-            if(ticket.userId){
+            if (ticket.userId) {
               this.getUserName(ticket.userId);
             }
           })
@@ -77,7 +82,6 @@ export class TicketDashbordComponent implements OnInit {
     this.dashService.updateTicketStatus(ticketId, newStatus).subscribe(
       (response) => {
         console.log('Estado actualizado:', response);
-        // Actualizar la lista de tickets después de cambiar el estado
         this.ngOnInit();
       },
       (error) => {
@@ -86,37 +90,32 @@ export class TicketDashbordComponent implements OnInit {
     );
   }
 
-  normalizeString(str: string): string {
-    return str.normalize('NFD').replace(/[\u0300-\u036f]/g, '');
-  }
 
-  filterUsers(): void {
-    const normalizedSearchTerm = this.normalizeString(this.searchTerm);
-
-    if (normalizedSearchTerm.trim() === '') {
-      this.filteredUsers = this.users;
-    } else {
-      this.filteredUsers = this.users.filter(user =>
-        this.normalizeString(user.name).toLowerCase().includes(normalizedSearchTerm.toLowerCase())
-      );
-    }
-  }
-
-  getUserName(userId: string): void{
+  //Metodo para obtener el nombre del usuario correspondiente al ticket
+  getUserName(userId: string): void {
     this.dashService.getUserById(userId)
-    .subscribe({
-      next: (user: any) => {
-        // Encontramos el ticket correspondiente y le asignamos el nombre del usuario
-        const ticketToUpdate = this.allTickets.find(ticket => ticket.userId === userId);
-        if (ticketToUpdate) {
-          ticketToUpdate.userId = user.name; // Asignamos el nombre del usuario al ticket
+      .subscribe({
+        next: (user: any) => {
+          const ticketToUpdate = this.allTickets.find(ticket => ticket.userId === userId);
+          if (ticketToUpdate) {
+            ticketToUpdate.userId = user.name;
+          }
+        },
+        error: (error) => {
+          this.toast.error('Error al obtener el nombre del usuario', error);
         }
-      },
-      error: (error) => {
-        this.toast.error('Error al obtener el nombre del usuario', error);
-      }
-    });
+      });
   }
 
+  // Método para filtrar tickets
+  filterTickets(): void {
+    const searchTermLower = this.searchTerm.toLowerCase();
+    this.filteredTickets = this.allTickets.filter(ticket =>
+      this.searchTerm.trim() === ' ' ||
+      ticket.userId?.toLowerCase().includes(searchTermLower) ||
+      ticket.description?.toLowerCase().includes(searchTermLower) ||
+      console.log(this.filteredTickets, 'Estos son los tickets filtrados')
+    );
+  }
 
 }
