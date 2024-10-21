@@ -82,7 +82,6 @@ onFileChange(event: any): void {
         this.route.navigateByUrl('/information');
       },
       error: (message) => {
-        console.log(message);
         this.toast.error('No se creó el ticket', 'Error');
       }
     });
@@ -94,7 +93,6 @@ onFileChange(event: any): void {
     if (userId) {
       this.ticketService.getTickets(userId).subscribe({
         next: (data: ticket[]) => {
-          console.log('Datos recibidos del backend:', data); // Verifica qué datos llegan desde el backend
           this.tickets = data.map(ticket => {
             if (ticket.image && Array.isArray(ticket.image.data)) {
               // Convertimos el array de números en un Blob
@@ -109,11 +107,8 @@ onFileChange(event: any): void {
             }
             return ticket; // Si no hay imagen, devolvemos el ticket sin modificar
           });
-
-          console.log('Tickets procesados:', this.tickets); // Verifica qué tickets están siendo asignados
         },
         error: (error) => {
-          console.log(error);
           this.toast.error('Error al obtener los tickets', error);
         }
       });

@@ -14,12 +14,9 @@ export class SidebaService {
 
   getUserRole(): string {
     if (typeof window !== 'undefined' && typeof localStorage !== 'undefined') {
-      // Si localStorage está disponible, obtenemos el rol
       const userRole = localStorage.getItem('rol');
-      console.log(userRole, 'este es')
       return userRole ? userRole : 'user';
     } else {
-      // Si estamos en el servidor (SSR) o localStorage no está disponible
       return 'NaN';
     }
   }

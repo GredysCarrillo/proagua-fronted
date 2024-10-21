@@ -35,7 +35,6 @@ export class TicketDashbordComponent implements OnInit {
     this.dashService.getTicketsCount()
       .subscribe({
         next: (data) => {
-          console.log('data de los contadores', { data })
           this.ticketCounts = data;
         },
         error: (error) => {
@@ -48,8 +47,6 @@ export class TicketDashbordComponent implements OnInit {
     this.dashService.getAllTickets()
       .subscribe({
         next: (data: ticket[]) => {
-          console.log('datos de los tickets', { data });
-
           // Mapeamos y ordenamos los tickets
           this.allTickets = data.map(ticket => ({
             ...ticket,

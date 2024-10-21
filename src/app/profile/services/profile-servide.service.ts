@@ -20,7 +20,6 @@ export class ProfileService {
   }
 
   uploadPhoto(formData: FormData, userId: string): Observable<any> {
-    console.log("Este es el formDAta", formData);
     return this.http.put(`${this.baseUrl}/auth/uploadPhoto/${userId}`, formData);
   }
 

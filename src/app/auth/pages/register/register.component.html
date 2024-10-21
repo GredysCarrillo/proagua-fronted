@@ -1,10 +1,11 @@
 <form [formGroup]="myForm" (submit)="onSubmitUser()">
-  <!-- Encabezado del formulario -->
+
   <div class="d-flex justify-content-between align-items-center mb-4"
     style="padding-top: 5px; margin: 0px; margin-bottom: 0px; padding-bottom: 0px;">
     <h2 class="text-primary" style="margin-left: 15px;"><i class="bi bi-person-add"
         style="font-size: 35px; color: black;"> Agregar Usuario</i></h2>
   </div>
+
 
   <div class="row justify-content-center" style="padding-bottom: 0px;">
     <div class="col-12">
@@ -19,22 +20,36 @@
               <div class="mb-3">
                 <label class="form-label">Nombre del cliente</label>
                 <input type="text" class="form-control form-control-sm" placeholder="Nombre" formControlName="name" />
+                <div *ngIf="myForm.get('name')?.invalid && myForm.get('name')?.touched" class="text-danger">El nombre es obligatorio</div>
               </div>
 
               <div class="mb-3">
                 <label class="form-label">Número de Identificación</label>
                 <input type="text" class="form-control form-control-sm" placeholder="DPI" formControlName="dpi" />
+                <div *ngIf="myForm.get('dpi')?.invalid && myForm.get('dpi')?.touched" class="text-danger">
+                <div *ngIf="myForm.get('dpi')?.errors?.['required']">El DPI es obligatorio</div>
+                <div *ngIf="myForm.get('dpi')?.errors?.['minlength']">El DPI debe tener 13 digitos</div>
+              </div>
               </div>
 
               <div class="mb-3">
                 <label class="form-label">Correo electrónico</label>
                 <input type="email" class="form-control form-control-sm" placeholder="Correo" formControlName="email" />
+                <div *ngIf="myForm.get('email')?.invalid && myForm.get('email')?.touched" class="text-danger">
+                  <div *ngIf="myForm.get('email')?.errors?.['required']">El correo es obligatorio</div>
+                  <div *ngIf="myForm.get('email')?.errors?.['email']">Debe ser un correo valido</div>
+                </div>
+                <div></div>
               </div>
 
               <div class="mb-3">
                 <label class="form-label">Número telefónico</label>
                 <input type="text" class="form-control form-control-sm" placeholder="Número telefónico"
                   formControlName="phoneNumber" />
+                  <div *ngIf="myForm.get('phoneNumber')?.invalid && myForm.get('phoneNumber')?.touched" class="text-danger">
+                    <div *ngIf="myForm.get('phoneNumber')?.errors?.['required']">El numero es obligatorio</div>
+                   <div *ngIf="myForm.get('phoneNumber')?.errors?.['minlength']">El numero debe tener 08 digitos</div>
+                  </div>
               </div>
             </div>
 
@@ -48,6 +63,9 @@
                   <option value="" disabled selected>Selecciona un Barrio/Colonia/localidad</option>
                   <option *ngFor="let depto of deptos" value="depto.id">{{depto}}</option>
                 </select>
+                <div *ngIf="myForm.get('Colonia')?.invalid && myForm.get('Colonia')?.touched" class="text-danger">
+                  Selecciona una una localidad
+                </div>
               </div>
 
               <div class="mb-4">
@@ -57,19 +75,20 @@
                   <option value="Doméstico">Doméstico</option>
                   <option value="Comercial">Comercial</option>
                 </select>
-
+                <div *ngIf="myForm.get('serviceType')?.invalid && myForm.get('serviceType')?.touched">Selecciona un tipo de servicio</div>
               </div>
 
               <div class="mb-3">
                 <label class="form-label">Dirección</label>
                 <textarea class="form-control form-control-sm" placeholder="Calle/avenida/numeral/referencia"
-                  formControlName="Address" rows="5" style="height: 95px;"></textarea>
+                  formControlName="Address" rows="5" style="height: 95px;" (resize)="0"></textarea>
+                  <div *ngIf="myForm.get('Address')?.invalid && myForm.get('Address')?.touched" class="text-danger">La direccion es obligatoria</div>
               </div>
             </div>
           </div>
           <!-- Botón de Registro -->
           <div class="text-center mt-4" style="padding-top: 0px;">
-            <button type="submit" class="btn btSend btn-lg ">Registrar</button>
+            <button type="submit" class="btn btSend btn-lg">Registrar</button>
           </div>
 
         </div>

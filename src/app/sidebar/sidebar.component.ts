@@ -4,6 +4,7 @@ import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { SidebaService } from './services/sideba.service';
 import { ProfileService } from '../profile/services/profile-servide.service';
+import { Toast } from 'ngx-toastr';
 
 
 interface MenuItem {
@@ -28,13 +29,14 @@ export class SidebarComponent implements OnInit {
   userRole: string = 'user';
   userId = this.authService.getUserId();
   userPhotoUrl: string | undefined;
-  userName = this.getUserName();
+  userName = this.authService.getname();
   userRol = this.getUserRol();
 
   constructor(
     private sidebarService: SidebaService,
     private profileService: ProfileService,
     private authService: AuthService,
+
   ) { }
 
 
@@ -46,8 +48,9 @@ export class SidebarComponent implements OnInit {
 
   onToggleSidebar() {
     this.isSidebarCollapsed = !this.isSidebarCollapsed;
-    this.toggleSidebar.emit(this.isSidebarCollapsed);  // Emite el estado si es necesario
+    this.toggleSidebar.emit(this.isSidebarCollapsed);
   }
+
 
   items: MenuItem[] = [
 
@@ -67,14 +70,10 @@ export class SidebarComponent implements OnInit {
         this.userPhotoUrl = objectUrl;
       },
       error: (err) => {
-        console.error('Error al cargar la imagen del usuario en el sidebar', err);
+        console.log('Error al cargar la imagen del usuario en el sidebar', err);
       }
     });
   }
-  }
-
-  getUserName(){
-    this.authService.getname();
   }
 
   getUserRol(){

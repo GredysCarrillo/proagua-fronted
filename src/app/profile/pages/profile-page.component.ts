@@ -6,9 +6,6 @@ import { CommonModule } from '@angular/common';
 import { ToastrService } from 'ngx-toastr';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import bootstrap from '../../../main.server';
-import { delay } from 'rxjs';
-import { ResourceLoader } from '@angular/compiler';
 
 @Component({
   selector: 'app-profile-page',
@@ -53,11 +50,10 @@ export class ProfilePageComponent implements OnInit {
       this.profileService.getUserInfo(userId)
         .subscribe({
           next: (data) => {
-            console.log("Esta es la data del usuario en el perfil", data)
             this.user = data;
           },
           error: (error) => {
-            this.toast.error('No se pudo cargar el perfil', 'Error', error)
+            this.toast.error('No se pudo cargar el perfil', 'Error')
           }
         })
     }
@@ -99,7 +95,7 @@ export class ProfilePageComponent implements OnInit {
           this.userPhotoUrl = objectUrl;
         },
         error: (err) => {
-          console.error('Error al cargar la imagen del usuario', err);
+          this.toast.error('Error','Error al cargar la imagen del usuario');
         }
       });
     }
@@ -111,19 +107,16 @@ export class ProfilePageComponent implements OnInit {
       const { currentPassword, newPassword, confirmPassword } = this.myForm.value;
 
       if (newPassword !== confirmPassword) {
-        alert('Las nuevas contraseñas no coinciden');
+        this.toast.error('Error','Las nuevas contraseñas no coinciden');
         return;
       }
 
       const userId = this.authService.getUserId();
-      console.log(userId);
       if (userId && currentPassword && newPassword && confirmPassword) {// Obtén el ID del usuario autenticado
         this.profileService.changePassword(userId, currentPassword, newPassword, confirmPassword).subscribe({
           next: () => {
             this.toast.success('Contraseña cambiada exitosamente');
-            localStorage.removeItem('token');
-            this.rout.navigateByUrl('/login')
-            this.myForm.reset(); // Reinicia el formulario
+            this.myForm.reset();
           },
           error: (err) => {
             this.toast.error('Error al cambiar la contraseña: ' + err.message);
@@ -131,22 +124,20 @@ export class ProfilePageComponent implements OnInit {
         });
       }
     } else {
-      alert('Por favor, completa todos los campos correctamente.');
+      this.toast.warning('Por favor, completa todos los campos correctamente.');
     }
   }
 
   loadServicio() {
     let id = this.authService.getUserId();
-    console.log(id)
     if (id) {
       this.profileService.getServicioById(id)
         .subscribe({
           next: (data) => {
-            console.log('esta es la data del servicio:',data)
             this.servicio = data;
           },
           error: (err) => {
-            this.toast.error('Error', 'El servicio no se pudo cargar', err.message);
+            this.toast.error('Error', 'El servicio no se pudo cargar');
           }
         })
     }

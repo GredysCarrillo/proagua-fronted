@@ -41,14 +41,12 @@ export class DashboardComponent implements OnInit {
   getUsers(): void {
     this.dashService.getUsers()
       .subscribe(data => {
-        console.log({ data });
-        this.users = data;
-        this.filteredUsers = data;
+        this.users = data.filter((user: { roles: string | string[]; }) => user.roles.includes('user'));
+        this.filteredUsers = this.users;
         this.countUserStatus();
       },
         (error) => {
           this.toast.error('Error al obtener la data', 'Error', error)
-          console.log(error)
         }
       )
   }
@@ -79,7 +77,6 @@ export class DashboardComponent implements OnInit {
     this.dashService.getActiveTickes()
       .subscribe({
         next: (data) => {
-          console.log('Contador tickets activos', {data})
           this.activeTickets = data;
         },
         error: (error) => {

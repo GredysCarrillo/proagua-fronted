@@ -1,6 +1,6 @@
-<div class="container mt-5">
+
   <!-- Encabezado del Dashboard -->
-  <div class="d-flex justify-content-between align-items-center mb-4">
+  <div class="d-flex justify-content-between align-items-center mb-4" style="padding: 20px 30px 0px 30px;">
     <h2 class="text-primary"><i class="bi bi-speedometer2" style="font-size: 35px; color: black;">Dashboard -
         Reportes</i></h2>
     <div class="d-flex align-items-center">
@@ -18,7 +18,7 @@
   </div>
 
   <!-- Tarjetas de resumen -->
-  <div class="row mb-4">
+  <div class="row mb-4" style="padding: 0px 30px 0px 30px">
     <div class="col-lg-4 col-md-6 mb-3">
       <div class="card text-center text-white" style="background-color: #0B2F9F;">
         <div class="card-body">
@@ -51,52 +51,56 @@
     </div>
   </div>
 
-  <div class="card">
-    <div class="card-header" style="background-color: #98DED9; color: white;">
-      Reportes de usuarios
-    </div>
-    <div class="card-body">
-      <table class="table table-hover">
-        <thead style="background-color: #161D6F; color: white;">
-          <tr>
-            <th>#</th>
-            <th>Usuario</th>
-            <th>Descripción</th>
-            <th>Estado</th>
-            <th>Fecha de creación</th>
-            <th>Marcar en Proceso</th>
-            <th>Cerrar Reporte</th>
-            <th>Ver detalles</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr *ngFor="let ticket of allTickets | paginate: { itemsPerPage: 10, currentPage: p }; let i = index">
-            <td>{{ i + 1 }}</td>
-            <td>{{ ticket.userId }}</td>
-            <td>{{ ticket.description }}</td>
-            <td>{{ ticket.status }}</td>
-            <td>{{ ticket.CreatedAt | date: 'shortDate'}}</td>
-            <td>
-              <button class="btn btn-primary" (click)="ticket._id && changeTicketStatus(ticket._id, 'En Proceso')"
-                [disabled]="ticket.status === 'En Proceso' || ticket.status === 'Cerrado'">
-                Marcar en Proceso
-              </button>
-            </td>
-            <td><button class="btn btn-primary" (click)="ticket._id && changeTicketStatus(ticket._id, 'Cerrado')"
-                [disabled]="ticket.status === 'Cerrado'">
-                Cerrar Reporte
-              </button></td>
-            <td><button class="btn ver"><i class="bi bi-eye"></i></button></td>
-          </tr>
-        </tbody>
-      </table>
+  <div class="row justify-content-center" style="padding: 0px 30px 0px 30px">
+    <div class="col-12">
+      <div class="card">
+        <div class="card-header" style="background-color: #98DED9; color: white;">
+          Reportes de usuarios
+        </div>
+        <div class="card-body">
+          <table class="table table-hover">
+            <thead style="background-color: #161D6F; color: white;">
+              <tr>
+                <th>#</th>
+                <th>Usuario</th>
+                <th>Descripción</th>
+                <th>Estado</th>
+                <th>Fecha de creación</th>
+                <th>Marcar en Proceso</th>
+                <th>Cerrar Reporte</th>
+                <th>Ver detalles</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let ticket of allTickets | paginate: { itemsPerPage: 10, currentPage: p }; let i = index">
+                <td>{{ i + 1 }}</td>
+                <td>{{ ticket.userId }}</td>
+                <td>{{ ticket.description }}</td>
+                <td>{{ ticket.status }}</td>
+                <td>{{ ticket.CreatedAt | date: 'shortDate'}}</td>
+                <td>
+                  <button class="btn btn-primary" (click)="ticket._id && changeTicketStatus(ticket._id, 'En Proceso')"
+                    [disabled]="ticket.status === 'En Proceso' || ticket.status === 'Cerrado'">
+                    Marcar en Proceso
+                  </button>
+                </td>
+                <td><button class="btn btn-primary" (click)="ticket._id && changeTicketStatus(ticket._id, 'Cerrado')"
+                    [disabled]="ticket.status === 'Cerrado'">
+                    Cerrar Reporte
+                  </button></td>
+                <td><button class="btn ver"><i class="bi bi-eye"></i></button></td>
+              </tr>
+            </tbody>
+          </table>
 
-      <div class="container-fluid">
-        <div class="d-flex justify-content-center align-items-center">
-          <pagination-controls (pageChange)="p = $event"></pagination-controls>
+          <div class="container-fluid">
+            <div class="d-flex justify-content-center align-items-center">
+              <pagination-controls (pageChange)="p = $event"></pagination-controls>
+            </div>
+          </div>
         </div>
       </div>
+
     </div>
   </div>
 
-</div>
