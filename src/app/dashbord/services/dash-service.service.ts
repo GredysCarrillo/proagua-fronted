@@ -24,4 +24,13 @@ export class DashServiceService {
   getActiveTickes(): Observable<any>{
     return this.http.get(`${this.baseUrl}/data-tickets/count-active-ticket`)
   }
+
+  deleteUserById(userId: string): Observable<any>{
+    return this.http.delete(`${this.baseUrl}/auth/delete/${userId}`)
+  }
+
+  updateUserStatus(userId: string, status: boolean){
+    console.log("estado que se esta enviando",status)
+    return this.http.patch(`${this.baseUrl}/auth/updateStatus/${userId}`, {status})
+  }
 }

@@ -6,6 +6,7 @@ import { CommonModule } from '@angular/common';
 import { NgxPaginationModule } from 'ngx-pagination';
 import { userResponse } from '../interfaces/user-dash-response';
 import { FormsModule } from '@angular/forms';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-dashboard',
@@ -20,13 +21,15 @@ export class DashboardComponent implements OnInit {
   p: number = 1; // Página actual
   activeUsersCount: number = 0;
   suspendedUsersCount: number = 0;
-  searchTerm:string ='';
+  searchTerm: string = '';
   filteredUsers: any[] = [];
   activeTickets: any = { abiertos: 0 };
+  selectedUserId: string | null = null;
 
   constructor(
     private dashService: DashServiceService,
-    private toast: ToastrService
+    private toast: ToastrService,
+    private router: Router,
 
   ) { }
 
@@ -36,7 +39,9 @@ export class DashboardComponent implements OnInit {
     this.getTicketsCount();
   }
 
-
+  setUserToDelete(user: any): void {
+    this.selectedUserId = user._id;
+  }
 
   getUsers(): void {
     this.dashService.getUsers()
@@ -73,7 +78,7 @@ export class DashboardComponent implements OnInit {
     this.countUserStatus();
   }
 
-  getTicketsCount():void {
+  getTicketsCount(): void {
     this.dashService.getActiveTickes()
       .subscribe({
         next: (data) => {
@@ -85,5 +90,35 @@ export class DashboardComponent implements OnInit {
       })
   }
 
+  deleteUser(): void {
+    if(this.selectedUserId){
+      this.dashService.deleteUserById(this.selectedUserId).subscribe({
+        next:(response) => {
+          this.toast.success('Usuario y registros eliminados correctamente');
+          this.getUsers();
+        },
+        error: (error) =>{
+          this.toast.error('No se elimino el usuario')
+        }
+
+      })
+    }
+  }
+
+  toggleUserStatus(user:any):void{
+    const uspdateStatus = !user.status;
+    this.dashService.updateUserStatus(user._id, uspdateStatus)
+    .subscribe({
+      next:()=>{
+        user.status = uspdateStatus;
+        this.countUserStatus();
+        this.toast.success(`El usuario ha sido ${uspdateStatus ? 'activado' : 'supendido'}`)
+      },
+      error:() => {
+        this.toast.error('No se logro actualizar el estado del usuario')
+      }
+    })
+
+  }
 
 }
