@@ -108,4 +108,8 @@ export class AuthService {
     this._authStatus.set(AuthStatus.notAuthenticated);
   }
 
+  sendRecoveryEmail(email: string): Observable<any> {
+    return this.http.post<any>(`${this.baseUrl}/auth/recover-password`, { email });
+  }
+
 }

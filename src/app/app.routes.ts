@@ -5,6 +5,7 @@ import { RegisterComponent } from './auth/pages/register/register.component';
 import { DashboardComponent } from './dashbord/pages/dashboard.component';
 import { InformationPageComponent } from './informacion/pages/information-page.component';
 import { ProfilePageComponent } from './profile/pages/profile-page.component';
+import { RecoveryPasswordComponent } from './auth/pages/recovery-password/recovery-password.component';
 
 export const routes: Routes = [
 
