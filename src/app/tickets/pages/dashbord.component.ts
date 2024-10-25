@@ -32,7 +32,7 @@ export class TicketDashbordComponent implements OnInit {
   //Metodo ngOnInit
   ngOnInit(): void {
     console.log('tickets', this.allTickets),
-    console.log('filtered tickets', this.filteredTickets)
+    console.log('filtered tickets', this.filteredTickets),
     this.getTicketsCount();
     this.getAllTickets();
     console.log('desde el ngOnInit jajaja', this.getAllTickets())
@@ -51,42 +51,60 @@ export class TicketDashbordComponent implements OnInit {
       })
   }
 
-  //Metodo para obtener todos los tickets
-  getAllTickets(): void {
-    this.dashService.getAllTickets()
-      .subscribe({
-        next: (data: ticket[]) => {
-          this.allTickets = data.map(ticket => ({
+ // Método para obtener todos los tickets
+getAllTickets(): void {
+  this.dashService.getAllTickets()
+    .subscribe({
+      next: (data: ticket[]) => {
+        this.allTickets = data.map(ticket => {
+          // Comprobamos si hay una imagen y es un array
+          if (ticket.image && Array.isArray(ticket.image.data)) {
+            // Convertimos el array de números en un Blob
+            const byteArray = new Uint8Array(ticket.image.data);
+            const blob = new Blob([byteArray], { type: 'image/jpeg' }); // Asegúrate de que el tipo sea correcto
+            const imageUrl = URL.createObjectURL(blob); // Creamos la URL temporal del blob
+
+            return {
+              ...ticket,
+              CreatedAt: ticket.CreatedAt ? new Date(ticket.CreatedAt) : undefined,
+              status: ticket.status ?? 'Cerrado',
+              imagenUrl: imageUrl // Asignamos la URL temporal a `imagenUrl`
+            };
+          }
+          return {
             ...ticket,
             CreatedAt: ticket.CreatedAt ? new Date(ticket.CreatedAt) : undefined,
-            status: ticket.status ?? 'Cerrado'
+            status: ticket.status ?? 'Cerrado',
+            imagenUrl: null // No hay imagen, asignamos null
+          };
+        }).sort((a, b) => {
+          const priorityOrder = ['Abierto', 'En Proceso', 'Cerrado'];
+          return priorityOrder.indexOf(a.status) - priorityOrder.indexOf(b.status);
+        });
 
-          })).sort((a, b) => {
+        console.log('Tickets asignados:', this.allTickets); // Verificar contenido aquí
+        this.filteredTickets = [...this.allTickets];
+        this.allTickets.forEach(ticket => {
+          if (ticket.userId) {
+            this.getUserName(ticket.userId);
+          }
+        });
+      },
+      error: (error) => {
+        this.toast.error('Error al cargar los tickets', error);
+      }
+    });
+}
 
-            const priorityOrder = ['Abierto', 'En Proceso', 'Cerrado'];
-            return priorityOrder.indexOf(a.status) - priorityOrder.indexOf(b.status);
-          });
-          console.log('Tickets asignados:', this.allTickets); // Verificar contenido aquí
-          this.filteredTickets = [...this.allTickets];
-          this.allTickets.forEach(ticket => {
-            if (ticket.userId) {
-              this.getUserName(ticket.userId);
-            }
-          })
-        },
-        error: (error) => {
-          this.toast.error('Error al cargar los tickets', error);
-        }
-      });
-  }
 
   clic(){
     console.log('clic en el boton')
+    console.log(this.selectedTicket)
   }
 
   // Método para cambiar el estado del ticket
   changeTicketStatus(ticketId: string, newStatus: string) {
-    console.log(`intentando cambiar el ticket id no. ${ticketId}`)
+    console.log(`intentando cambiar el ticket idno. ${ticketId}`)
     this.dashService.updateTicketStatus(ticketId, newStatus).subscribe(
       (response) => {
         console.log('Estado actualizado:', response);
