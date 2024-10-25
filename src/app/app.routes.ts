@@ -4,6 +4,7 @@ import { isAuthenticatedGuard } from './auth/guards/is-authenticated.guard';
 import { RegisterComponent } from './auth/pages/register/register.component';
 import { DashboardComponent } from './dashbord/pages/dashboard.component';
 import { InformationPageComponent } from './informacion/pages/information-page.component';
+import { ProfilePageComponent } from './profile/pages/profile-page.component';
 
 export const routes: Routes = [
 
@@ -30,7 +31,7 @@ export const routes: Routes = [
   {
     path: 'profile',
     canActivate: [isAuthenticatedGuard],
-    loadChildren: () => import('./profile/profile-routing.module').then(m => m.ProfileRoutingModule),
+    component: ProfilePageComponent,
   },
   {
     path: 'create-ticket',

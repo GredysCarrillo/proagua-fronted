@@ -1,8 +1,8 @@
 .sidebar-container{
   height: 100vh;
-  width: 15%;
   padding: 0;
   margin-top: 0;
+  z-index: 999;
 }
 
 .container-principal{
@@ -13,17 +13,17 @@
 }
 
 .container-router{
-width: 85%;
 margin-top: 70px;
 flex: 1;
 height: 100%;
+/* z-index: 998; */
+margin-left: 220px;
+ transition: 0.5s ease-in-out;
 }
 
 .container-router.sidebar-hidden{
-  width: 97%;
-  position: absolute;
+
   margin-left: 50px;
-  transition: 0.5s ease-in-out;
 }
 
 app-navbar {
@@ -32,6 +32,7 @@ app-navbar {
   left: 220px; /* Ajusta según el ancho del sidebar */
   width: calc(100% - 220px); /* Asegúrate de que ocupe el resto del ancho */
   z-index: 1000; /* Asegura que esté por encima de otros elementos */
+  transition: 0.5s ease-in-out;
 }
 
 app-navbar.navbar-hidden{

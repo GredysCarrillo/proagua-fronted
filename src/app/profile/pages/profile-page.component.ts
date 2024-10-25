@@ -78,7 +78,6 @@ export class ProfilePageComponent implements OnInit {
           next: () => {
             this.toast.success('Fotografía cargada exitosamente', 'Éxito');
             location.reload();
-            this.rout.navigateByUrl('/profile')
           },
           error: (message) => {
             this.toast.error('La fotografía no fue cargada', 'Error');

@@ -6,9 +6,8 @@
   color: white; /* Color del texto */
   top: 0;
   left: 0;
-  padding: 10px; /* Espaciado */
   position: fixed; /* Mantiene el sidebar fijo en su lugar */
-  transition: width 0.3s; /* Transición suave */
+  transition: 0.5s ease-in-out; /* Transición suave */
 }
 
 .sidebar.collapsed {
@@ -18,6 +17,7 @@
 .sidebar.collapsed .user-info,
 .sidebar.collapsed .unorded-list li span {
   display: none; /* Oculta el texto del usuario y de los ítems */
+  padding: 10px;
 }
 
 .sidebar.collapsed .unorded-list li {
@@ -31,7 +31,19 @@
 }
 
 li:hover {
+  width: 100%;
   background-color: #0B2F9F; /* Color al pasar el ratón */
+  color: white;
+}
+
+li .icon{
+  font-size: 26px;
+  color: #F5F5F5;
+  margin-left: 0;
+   margin-right: 10px;
+}
+li:hover .icon{
+  color: #161D6F;
 }
 
 .user-photo {
@@ -50,7 +62,7 @@ li:hover {
   text-align: center;
 }
 
-.user-details h6 {
+.user-details h5 {
   margin-bottom: 0;
   font-size: 16px;
 }
@@ -60,6 +72,7 @@ li:hover {
 }
 
 .user-details small {
-  color: #98DED9;
+  color: #F5F5F5;
+  font-size: 11px;
 }
 

@@ -1,17 +1,16 @@
 <div class="container mt-4">
+  <h2 class="text-primary"><i class="bi bi-file-text" style="font-size: 35px; color: black;">Reportes</i></h2>
   <div class="row">
-    <h2 class="text-primary"><i class="bi bi-file-text" style="font-size: 35px; color: black;">Reportes</i></h2>
+
 
 
     <form class="col-md-6" [formGroup]="myForm" (submit)="createTicket()">
-      <div class="card report-card">
+      <div class="card ">
         <div class="card-header">
           <h4>Agregar Reporte</h4>
         </div>
-
-
         <div class="card-body">
-          <div class="mb-3">
+          <div >
             <label for="problemType" class="form-label">Seleccionar Tipo de Problema</label>
             <select class="form-select" id="problemType" required formControlName="problemType">
               <option value="">-- Selecciona un problema --</option>
@@ -26,7 +25,7 @@
 
 
           <!-- Descripción del problema -->
-          <div class="mb-3">
+          <div >
             <label for="problemDescription" class="form-label">Descripción del Problema</label>
             <textarea class="form-control" formControlName="description" rows="4"
               placeholder="Describe tu problema aquí..." required></textarea>
@@ -34,7 +33,7 @@
 
 
           <!-- Carga de fotografía -->
-          <div class="mb-3">
+          <div >
             <label for="problemPhoto" class="form-label">Cargar Fotografía</label>
             <input type="file" class="form-control" id="problemPhoto" accept="image/*" formControlName="photo"
               (change)="onFileChange($event)">
@@ -43,6 +42,7 @@
 
           <!-- Botón para enviar el ticket -->
           <div class="d-grid">
+            <br />
             <button type="submit" class="btn btn-custom-primary">Agregar Reporte</button>
           </div>
         </div>
@@ -58,8 +58,6 @@
         </div>
         <div class="card-body">
           <ul class="list-group">
-
-
 
             <!-- Ejemplo de ticket -->
             <li *ngFor="let ticket of tickets | paginate: { itemsPerPage: 3, currentPage: p } ; let i = index"

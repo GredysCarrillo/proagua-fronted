@@ -12,11 +12,11 @@ import { NavbarComponent } from "./navBar/navbar.component";
   standalone: true,
 
   imports: [
-  RouterOutlet,
-  AuthLayoutComponent,
-  SidebarComponent,
-  CommonModule,
-  NavbarComponent],
+    RouterOutlet,
+    AuthLayoutComponent,
+    SidebarComponent,
+    CommonModule,
+    NavbarComponent],
 
   templateUrl: './app.component.html',
   styleUrl: './app.component.css'
@@ -49,17 +49,19 @@ export class AppComponent {
 
 
   public authStatusChangedEffect = effect(() => {
-
+    console.log(this.authService.authStatus())
     switch (this.authService.authStatus()) {
 
       case AuthStatus.checking:
         return;
 
       case AuthStatus.authenticated:
-        this.router.navigateByUrl('/dashboard');
+        console.log(this.authService.getRol())
+        this.router.navigateByUrl(this.authService.getRol() == 'admin' ? '/dashboard' : '/profile');
         return;
 
       case AuthStatus.notAuthenticated:
+        console.log('en el autenticador para login')
         this.router.navigateByUrl('/auth/login');
         return;
 

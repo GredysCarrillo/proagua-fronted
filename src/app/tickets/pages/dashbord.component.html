@@ -89,7 +89,8 @@
                     [disabled]="ticket.status === 'Cerrado'">
                     Cerrar Reporte
                   </button></td>
-                <td><button class="btn ver"><i class="bi bi-eye"></i></button></td>
+                <td><button class="btn btn-custom-datalles btn-sm" data-bs-toggle="modal" data-bs-target="#detailsModal"
+                  (click)="showDetails(ticket)">Ver Detalles</button></td>
               </tr>
             </tbody>
           </table>
@@ -105,3 +106,29 @@
     </div>
   </div>
 
+<!-- Modal de detalles -->
+<div class="modal fade" id="detailsModal" tabindex="-1" aria-labelledby="detailsModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="detailsModalLabel">Detalles del Reporte</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+
+      <div class="modal-body">
+        <p><strong>Tipo de Problema: </strong>{{ selectedTicket?.problemType}}</p>
+        <p><strong>Descripción: </strong>{{ selectedTicket?.description}}</p>
+        <p><strong>Estado: </strong>{{ selectedTicket?.status}}</p>
+        <p><strong>Fecha de Creación: </strong>{{ selectedTicket?.CreatedAt | date: 'yyyy-MM-dd'}}</p>
+        <div style="text-align: center;">
+          <img [src]="selectedTicket?.imagenUrl" alt="Fotografía del Reporte" class="img-fluid mt-3" style="width: 400px; height: 300px;"/>
+        </div>
+
+
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-custom-primary" data-bs-dismiss="modal">Cerrar</button>
+      </div>
+    </div>
+  </div>
+</div>

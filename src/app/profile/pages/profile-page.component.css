@@ -14,12 +14,13 @@ body {
 /* Estilos del encabezado del perfil */
 .profile-header {
   text-align: center;
-  background-color: #0B2F9F;
+  background-color: #F5F5F5;
   /* Fondo azul oscuro para resaltar la foto y nombre */
-  color: #fff;
+  color: black;
   padding: 20px;
   border-radius: 10px;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+  /* box-shadow: 0px 2px 1px -1px rgba(0, 0, 0, 0.2), 0px 1px 1px 0px rgba(0, 0, 0, 0.14), 0px 1px 3px 0px rgba(0, 0, 0, 0.12); */
+  width: 100%;
 }
 
 .profile-img {
@@ -45,9 +46,9 @@ body {
   background-color: white;
   border: none;
   border-radius: 10px;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
   margin-top: 20px;
   height: 250px;
+  box-shadow: 0px 2px 1px -1px rgba(0, 0, 0, 0.2), 0px 1px 1px 0px rgba(0, 0, 0, 0.14), 0px 1px 3px 0px rgba(0, 0, 0, 0.12);
 }
 
 .card-header {
@@ -67,33 +68,40 @@ body {
 
 .card-body p {
   font-size: 14px;
-  color: #333;
+  color: black;
 }
 
 strong {
-  color: #0B2F9F;
+  color: #161D6F;
   /* Azul intermedio para destacar los títulos */
 }
 
 /* Estilos de los botones */
 .btn-custom {
   background-color: #161D6F;
-  color: #fff;
+  color: white;
   border-radius: 5px;
   padding: 10px 20px;
 }
 
 .btn-custom:hover {
   background-color: #0B2F9F;
-  color: #C7FFD8;
+  color: white;
   transition: background-color 0.3s;
 }
+
+
+
 
 
 /* Estilos para los modales */
 .modal-header {
   background-color: #161D6F;
   color: #fff;
+}
+
+.modal-dialog{
+
 }
 
 .modal-footer .btn-custom {

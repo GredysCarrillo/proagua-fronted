@@ -1,35 +1,42 @@
-.report-card {
+.card{
+  background-color: white;
+  border: none;
+  border-radius: 10px;
+  margin-top: 20px;
   min-height: 450px;
+  box-shadow: 0px 2px 1px -1px rgba(0, 0, 0, 0.2), 0px 1px 1px 0px rgba(0, 0, 0, 0.14), 0px 1px 3px 0px rgba(0, 0, 0, 0.12);
 }
 
 .btn-custom-primary {
-  background-color: #161D6F;
-  color: #C7FFD8;
+  background-color: #D3D3D3;
+  color: white;
   border: none;
 }
 
 .btn-custom-primary:hover {
-  background-color: #0B2F9F;
+  background-color: #F5F5F5;
+  color: #161D6F;
 }
 
 .btn-custom-datalles {
-  background-color: #0B2F9F;
+  background-color: #161D6F;
   color: white;
   border: none;
 }
 
 .btn-custom-datalles:hover {
-  background-color: #98DED9;
+  background-color: #F5F5F5;
+  color: #161D6F;
 }
 
 .card-header {
   background-color: #161D6F;
-  color: white;
+  color: #D3D3D3;
 }
 
 .card-body {
-  background-color: white;
-  color: #161D6F;
+  font-size: 14px;
+  color: black;
 }
 
 .list-group-item {

@@ -22,6 +22,7 @@ export class TicketDashbordComponent implements OnInit {
   p: number = 1;
   filteredTickets: ticket[] = []; // Array para tickets filtrados
   searchTerm: string = ''; // Término de búsqueda
+  selectedTicket: ticket | null = null;
 
   constructor(
     private dashService: dashBoardService,
@@ -30,7 +31,8 @@ export class TicketDashbordComponent implements OnInit {
 
   //Metodo ngOnInit
   ngOnInit(): void {
-
+    console.log('tickets', this.allTickets),
+    console.log('filtered tickets', this.filteredTickets)
     this.getTicketsCount();
     this.getAllTickets();
     console.log('desde el ngOnInit jajaja', this.getAllTickets())
@@ -58,11 +60,13 @@ export class TicketDashbordComponent implements OnInit {
             ...ticket,
             CreatedAt: ticket.CreatedAt ? new Date(ticket.CreatedAt) : undefined,
             status: ticket.status ?? 'Cerrado'
+
           })).sort((a, b) => {
 
             const priorityOrder = ['Abierto', 'En Proceso', 'Cerrado'];
             return priorityOrder.indexOf(a.status) - priorityOrder.indexOf(b.status);
           });
+          console.log('Tickets asignados:', this.allTickets); // Verificar contenido aquí
           this.filteredTickets = [...this.allTickets];
           this.allTickets.forEach(ticket => {
             if (ticket.userId) {
@@ -76,9 +80,13 @@ export class TicketDashbordComponent implements OnInit {
       });
   }
 
+  clic(){
+    console.log('clic en el boton')
+  }
 
   // Método para cambiar el estado del ticket
-  changeTicketStatus(ticketId: string, newStatus: string): void {
+  changeTicketStatus(ticketId: string, newStatus: string) {
+    console.log(`intentando cambiar el ticket id no. ${ticketId}`)
     this.dashService.updateTicketStatus(ticketId, newStatus).subscribe(
       (response) => {
         console.log('Estado actualizado:', response);
@@ -89,7 +97,6 @@ export class TicketDashbordComponent implements OnInit {
       }
     );
   }
-
 
   //Metodo para obtener el nombre del usuario correspondiente al ticket
   getUserName(userId: string): void {
@@ -116,6 +123,11 @@ export class TicketDashbordComponent implements OnInit {
       ticket.description?.toLowerCase().includes(searchTermLower) ||
       console.log(this.filteredTickets, 'Estos son los tickets filtrados')
     );
+  }
+
+
+  showDetails(ticket: ticket) {
+    this.selectedTicket = ticket;
   }
 
 }
