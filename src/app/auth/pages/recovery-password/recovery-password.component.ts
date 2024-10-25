@@ -14,36 +14,36 @@ import { Router, RouterModule } from '@angular/router';
 export class RecoveryPasswordComponent {
   recoveryForm: FormGroup;
 
-  constructor(
-    private fb: FormBuilder,
-    private toast: ToastrService,
-    private authServide: AuthService, // Inyección del servicio
-    private route: Router
-  ) {
+  constructor(private fb: FormBuilder, private authService: AuthService, private toastr: ToastrService, private route: Router) {
+    // Inicializar el formulario
     this.recoveryForm = this.fb.group({
       email: ['', [Validators.required, Validators.email]],
+      dpi: ['', [Validators.required]],
     });
   }
 
-  ngOnInit(): void {}
+  ngOnInit(): void { }
 
-  onSubmit(): void {
-    if (this.recoveryForm.valid) {
-      const email = this.recoveryForm.value.email;
-      this.authServide.sendRecoveryEmail(email).subscribe({
-        next: () => {
-          this.toast.success('Se ha enviado un correo de recuperación a ' + email);
-          this.recoveryForm.reset(); // Restablecer el formulario
-          this.route.navigateByUrl('/login')
-        },
-        error: (error: any) => {
-          this.toast.error('Error al enviar el correo de recuperación. Intente de nuevo.');
-          console.error('Error:', error);
-          console.error('Error al recuperar la contraseña', error);
-        }
-      });
-    } else {
-      this.toast.error('Por favor, ingresa un correo válido');
+  async onSubmit() {
+    if (this.recoveryForm.invalid) {
+      return;
     }
+
+    const { email, dpi } = this.recoveryForm.value;
+
+    this.authService.sendRecoveryEmail(email, dpi).subscribe(
+      response => {
+        if (response && response.message === 'Correo enviado con éxito') {
+          this.toastr.success('Se ha enviado un correo con la nueva contraseña.');
+          this.route.navigate(['/login']); // Redirige al login
+        } else {
+          this.toastr.error('Hubo un problema al enviar el correo.');
+        }
+      },
+      error => {
+        this.toastr.error('Error al intentar recuperar la contraseña. Por favor, verifica tus datos.');
+      }
+    );
+
   }
 }
