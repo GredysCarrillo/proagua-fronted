@@ -10,7 +10,7 @@
           <h4>Agregar Reporte</h4>
         </div>
         <div class="card-body">
-          <div >
+          <div>
             <label for="problemType" class="form-label">Seleccionar Tipo de Problema</label>
             <select class="form-select" id="problemType" required formControlName="problemType">
               <option value="">-- Selecciona un problema --</option>
@@ -25,7 +25,7 @@
 
 
           <!-- Descripción del problema -->
-          <div >
+          <div>
             <label for="problemDescription" class="form-label">Descripción del Problema</label>
             <textarea class="form-control" formControlName="description" rows="4"
               placeholder="Describe tu problema aquí..." required></textarea>
@@ -33,7 +33,7 @@
 
 
           <!-- Carga de fotografía -->
-          <div >
+          <div>
             <label for="problemPhoto" class="form-label">Cargar Fotografía</label>
             <input type="file" class="form-control" id="problemPhoto" accept="image/*" formControlName="photo"
               (change)="onFileChange($event)">
@@ -100,7 +100,8 @@
         <p><strong>Estado: </strong>{{ selectedTicket?.status}}</p>
         <p><strong>Fecha de Creación: </strong>{{ selectedTicket?.CreatedAt | date: 'yyyy-MM-dd'}}</p>
         <div style="text-align: center;">
-          <img [src]="selectedTicket?.imagenUrl" alt="Fotografía del Reporte" class="img-fluid mt-3" style="width: 400px; height: 300px;"/>
+          <img [src]="selectedTicket?.imagenUrl" alt="Fotografía del Reporte" class="img-fluid mt-3"
+            style="width: 400px; height: 300px;" />
         </div>
 
 

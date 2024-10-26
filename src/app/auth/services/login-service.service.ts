@@ -48,11 +48,11 @@ export class AuthService {
     return localStorage.getItem('userId');
   }
 
-  getname(): string | null{
+  getname(): string | null {
     return localStorage.getItem('name');
   }
 
-  getRol():string | null{
+  getRol(): string | null {
     return localStorage.getItem('rol');
   }
 
@@ -80,20 +80,23 @@ export class AuthService {
   }
 
   checkAuthStatus(): Observable<boolean> {
+
     const url = `${this.baseUrl}/auth/check-token`;
     const token = localStorage.getItem('token');
+
     if (!token) {
       this.closeSesion();
       return of(false);
     }
+
     const headers = new HttpHeaders()
       .set('Authorization', `Bearer ${token}`);
     return this.http.get<checkTokenResponse>(url, { headers })
       .pipe(
         map(({ user, token }) => {
-          this.setAuthentication(user, token)
+          this.setAuthentication(user, token);
           return true
-        } ),
+        }),
         catchError(() => {
           this._authStatus.set(AuthStatus.notAuthenticated);
           return of(false)
@@ -108,7 +111,7 @@ export class AuthService {
     this._authStatus.set(AuthStatus.notAuthenticated);
   }
 
-  sendRecoveryEmail(email: string, dpi:string): Observable<any> {
+  sendRecoveryEmail(email: string, dpi: string): Observable<any> {
     return this.http.post<any>(`${this.baseUrl}/auth/recover-password`, { email, dpi });
   }
 

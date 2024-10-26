@@ -3,14 +3,14 @@ import { CanActivateFn, Router } from '@angular/router';
 import { AuthService } from '../services/login-service.service';
 import { AuthStatus } from '../interfaces/auth-status.enum';
 
-export const isNotAuthenticatedGuard: CanActivateFn = (route, state) => {
+export const isNotAuthenticatedGuard: CanActivateFn = (_route, _state) => {
 
 
   const authService = inject(AuthService);
   const router      = inject(Router);
-  console.log('en el isNotAuthenticatedGuard')
+
+
   if(authService.authStatus()=== AuthStatus.authenticated){
-    console.log('en el isNotAuthenticatedGuard')
     router.navigateByUrl(authService.getRol() == 'admin'? '/dashboard' : '/profile');
     return false;
   }

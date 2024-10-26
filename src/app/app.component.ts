@@ -1,4 +1,4 @@
-import { Component, computed, effect, inject } from '@angular/core';
+import { Component, computed, effect, inject, OnInit } from '@angular/core';
 import { Router, RouterOutlet } from '@angular/router';
 import { AuthLayoutComponent } from "./auth/layouts/auth-layout.component";
 import { AuthStatus } from './auth/interfaces/auth-status.enum';
@@ -25,9 +25,11 @@ export class AppComponent {
 
   title = 'proagua';
   isSidebarCollapsed = false;
+  isloading: boolean = true;
 
   private authService = inject(AuthService);
   private router = inject(Router);
+
 
   toggleSidebar(isCollapsed: boolean) {
     this.isSidebarCollapsed = isCollapsed;
@@ -49,25 +51,21 @@ export class AppComponent {
 
 
   public authStatusChangedEffect = effect(() => {
-    console.log(this.authService.authStatus())
     switch (this.authService.authStatus()) {
 
       case AuthStatus.checking:
         return;
 
       case AuthStatus.authenticated:
-        console.log(this.authService.getRol())
         this.router.navigateByUrl(this.authService.getRol() == 'admin' ? '/dashboard' : '/profile');
         return;
 
       case AuthStatus.notAuthenticated:
-        console.log('en el autenticador para login')
         this.router.navigateByUrl('/auth/login');
         return;
 
     }
 
   });
-
 
 }

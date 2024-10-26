@@ -21,7 +21,6 @@ export class NavbarComponent {
     this.authService.closeSesion();
   }
 
-
   onToggleSidebar() {
     this.isSidebarCollapsed = !this.isSidebarCollapsed;
     this.toggleSidebar.emit(this.isSidebarCollapsed  );

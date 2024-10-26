@@ -17,7 +17,8 @@
   margin: 0;
 }
 
-.form-control-sm, .form-select-lg {
+.form-control-sm,
+.form-select-lg {
   font-size: 1rem;
   padding: 0.75rem;
 }
@@ -27,29 +28,28 @@
   padding: 0.75rem 1.5rem;
 }
 
-.section, .card-body, .row {
+.section,
+.card-body,
+.row {
   padding: 0;
   margin: 0;
 }
 
-textarea{
+textarea {
   resize: none;
 
 }
 
-.form-label{
-  color:#161D6F ;
+.form-label {
+  color: #161D6F;
 }
 
-.btSend{
+.btSend {
   background-color: #0B2F9F;
   color: white;
 }
 
-.btSend:hover{
+.btSend:hover {
   background-color: #0B2F9F;
   color: #C7FFD8;
 }
-
-
-/* Para que ocupe toda la pantalla */

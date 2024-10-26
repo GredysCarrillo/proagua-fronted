@@ -42,12 +42,12 @@ export class CreateTicketComponent implements OnInit {
     photo: [null]
   })
 
-// Actualiza el método onFileChange
-onFileChange(event: any): void {
-  if (event.target.files.length > 0) {
-    this.selectedImage = event.target.files[0];
+  // Actualiza el método onFileChange
+  onFileChange(event: any): void {
+    if (event.target.files.length > 0) {
+      this.selectedImage = event.target.files[0];
+    }
   }
-}
 
 
   createTicket() {
@@ -59,7 +59,7 @@ onFileChange(event: any): void {
     const status = 'Abierto';
     const userId = this.authService.getUserId();
     const CreatedAt = new Date();
-    const { problemType, description, photo } = this.myForm.value;
+    const { problemType, description } = this.myForm.value;
 
     // Crear un FormData para enviar datos del formulario y archivo
     const formData = new FormData();
@@ -72,7 +72,7 @@ onFileChange(event: any): void {
     if (CreatedAt) formData.append('CreatedAt', CreatedAt.toISOString());
 
     // Si hay un archivo seleccionado, lo agregamos a formData
-  if (this.selectedImage) {
+    if (this.selectedImage) {
       formData.append('photo', this.selectedImage, this.selectedImage.name);
     }
 
@@ -81,7 +81,7 @@ onFileChange(event: any): void {
         this.toast.success('Ticket creado correctamente', 'Registro');
         this.route.navigateByUrl('/information');
       },
-      error: (message) => {
+      error: () => {
         this.toast.error('No se creó el ticket', 'Error');
       }
     });
@@ -117,14 +117,8 @@ onFileChange(event: any): void {
     }
   }
 
-
-
-
-   showDetails(ticket: ticket) {
+  showDetails(ticket: ticket) {
     this.selectedTicket = ticket;
   }
-
-
-
 
 }

@@ -1,47 +1,46 @@
-
-.btn-outline-danger{
-  background-color: #0B2F9F; /* Fondo azul */
-  color: white;              /* Texto blanco */
-  padding: 10px 20px;         /* Espaciado interno */
-  border-radius: 5px;         /* Bordes redondeados */
-  border: none;               /* Sin borde */
-  cursor: pointer;            /* Cambio de cursor al pasar por encima */
-  font-size: 16px;            /* Tamaño de fuente */
+.btn-outline-danger {
+  background-color: #0B2F9F;
+  color: white;
+  padding: 10px 20px;
+  border-radius: 5px;
+  border: none;
+  cursor: pointer;
+  font-size: 16px;
   width: auto;
 }
 
 .btn-outline-danger:hover {
-  background-color: #161D6F;  /* Cambia el fondo al color azul oscuro en hover */
+  background-color: #161D6F;
 }
 
 .menu-toggle {
-  background-color: #0B2F9F;  /* Fondo azul */
-  color: white;               /* Icono blanco */
-  padding: 10px;              /* Espaciado interno */
-  border-radius: 5px;         /* Bordes redondeados */
-  border: none;               /* Sin borde */
-  cursor: pointer;            /* Cambia el cursor al pasar */
-  font-size: 20px;            /* Tamaño del icono */
-  display: flex;              /* Para alinear el icono correctamente */
-  align-items: center;        /* Centra el contenido verticalmente */
-  justify-content: center;    /* Centra el icono horizontalmente */
-  transition: background-color 0.3s ease; /* Transición suave para hover */
+  background-color: #0B2F9F;
+  color: white;
+  padding: 10px;
+  border-radius: 5px;
+  border: none;
+  cursor: pointer;
+  font-size: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background-color 0.3s ease;
 }
 
 .menu-toggle:hover {
-  background-color: #161D6F;  /* Fondo azul más oscuro en hover */
+  background-color: #161D6F;
 }
 
 .menu-toggle:focus {
-  outline: none;              /* Elimina el borde de enfoque */
+  outline: none;
 }
 
 .menu-toggle {
-  background: transparent; /* Fondo transparente */
-  border: none; /* Sin borde */
-  cursor: pointer; /* Cambiar cursor */
+  background: transparent;
+  border: none;
+  cursor: pointer;
 }
 
 .menu-toggle:hover {
-  opacity: 0.8; /* Efecto hover */
+  opacity: 0.8;
 }

@@ -62,7 +62,7 @@
     </div>
     <div class="card-body">
       <table class="table table-hover">
-        <thead >
+        <thead>
           <tr>
             <th>#</th>
             <th>Nombre del Cliente</th>
@@ -85,17 +85,11 @@
                 {{ user.status === true ? 'Activo' : 'Suspendido' }}
               </span>
             </td>
-            <td><button
-              type="button"
-              class="btn btn-outline-info"
-              (click)="toggleUserStatus(user)">
+            <td><button type="button" class="btn btn-outline-info" (click)="toggleUserStatus(user)">
                 {{user.status === true ? 'Suspender' : 'Activar'}}</button></td>
-            <td><button
-              type="button"
-              class="btn btn-outline-info"
-              data-bs-toggle="modal"
-              data-bs-target="#confirmDeleteModal"
-              (click)="setUserToDelete(user)"><i class="bi bi-trash3-fill">Eliminar</i></button></td>
+            <td><button type="button" class="btn btn-outline-info" data-bs-toggle="modal"
+                data-bs-target="#confirmDeleteModal" (click)="setUserToDelete(user)"><i
+                  class="bi bi-trash3-fill">Eliminar</i></button></td>
           </tr>
         </tbody>
       </table>
@@ -111,7 +105,8 @@
 </div>
 
 <!-- Modal de Confirmación de Eliminación -->
-<div class="modal fade" id="confirmDeleteModal" tabindex="-1" aria-labelledby="confirmDeleteModalLabel" aria-hidden="true">
+<div class="modal fade" id="confirmDeleteModal" tabindex="-1" aria-labelledby="confirmDeleteModalLabel"
+  aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
@@ -123,9 +118,9 @@
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
-        <button type="button" class="btn btn-danger" id="confirmDeleteBtn" (click)="deleteUser()" data-bs-dismiss="modal" >Eliminar</button>
+        <button type="button" class="btn btn-danger" id="confirmDeleteBtn" (click)="deleteUser()"
+          data-bs-dismiss="modal">Eliminar</button>
       </div>
     </div>
   </div>
 </div>
-

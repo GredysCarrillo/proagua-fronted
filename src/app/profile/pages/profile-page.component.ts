@@ -28,7 +28,6 @@ export class ProfilePageComponent implements OnInit {
     private authService: AuthService,
     private profileService: ProfileService,
     private toast: ToastrService,
-    private rout: Router,
     private fb: FormBuilder
   ) { }
 
@@ -52,7 +51,7 @@ export class ProfilePageComponent implements OnInit {
           next: (data) => {
             this.user = data;
           },
-          error: (error) => {
+          error: () => {
             this.toast.error('No se pudo cargar el perfil', 'Error')
           }
         })
@@ -79,7 +78,7 @@ export class ProfilePageComponent implements OnInit {
             this.toast.success('Fotografía cargada exitosamente', 'Éxito');
             location.reload();
           },
-          error: (message) => {
+          error: () => {
             this.toast.error('La fotografía no fue cargada', 'Error');
           }
         });
@@ -93,7 +92,7 @@ export class ProfilePageComponent implements OnInit {
           const objectUrl = URL.createObjectURL(blob);
           this.userPhotoUrl = objectUrl;
         },
-        error: (err) => {
+        error: () => {
           this.toast.error('Error','Error al cargar la imagen del usuario');
         }
       });
@@ -104,7 +103,6 @@ export class ProfilePageComponent implements OnInit {
   onSubmit() {
     if (this.myForm.valid) {
       const { currentPassword, newPassword, confirmPassword } = this.myForm.value;
-
       if (newPassword !== confirmPassword) {
         this.toast.error('Error','Las nuevas contraseñas no coinciden');
         return;
@@ -135,8 +133,7 @@ export class ProfilePageComponent implements OnInit {
           next: (data) => {
             this.servicio = data;
           },
-          error: (err) => {
-            //elimine el mensjae de error
+          error: () => {
           }
         })
     }

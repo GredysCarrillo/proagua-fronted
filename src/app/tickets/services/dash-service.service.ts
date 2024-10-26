@@ -25,9 +25,7 @@ export class dashBoardService {
 
   // Método para actualizar el estado de un ticket
   updateTicketStatus(ticketId: string, newStatus: string): Observable<any> {
-    console.log('clic en el servicio');
     return this.http.patch(`${this.url}/data-tickets/update-status/${ticketId}`, { status: newStatus });
-    console.log(ticketId);
   }
 
   //Traer el nombre del usuario

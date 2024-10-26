@@ -14,8 +14,13 @@ import { Router, RouterModule } from '@angular/router';
 export class RecoveryPasswordComponent {
   recoveryForm: FormGroup;
 
-  constructor(private fb: FormBuilder, private authService: AuthService, private toastr: ToastrService, private route: Router) {
-    // Inicializar el formulario
+  constructor(
+    private fb: FormBuilder,
+    private authService: AuthService,
+    private toastr: ToastrService,
+    private route: Router) {
+
+
     this.recoveryForm = this.fb.group({
       email: ['', [Validators.required, Validators.email]],
       dpi: ['', [Validators.required]],
@@ -35,7 +40,7 @@ export class RecoveryPasswordComponent {
       response => {
         if (response && response.message === 'Correo enviado con éxito') {
           this.toastr.success('Se ha enviado un correo con la nueva contraseña.');
-          this.route.navigate(['/login']); // Redirige al login
+          this.route.navigate(['/login']);
         } else {
           this.toastr.error('Hubo un problema al enviar el correo.');
         }

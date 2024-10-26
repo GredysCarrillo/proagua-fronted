@@ -1,10 +1,8 @@
 import { DashServiceService } from './../services/dash-service.service';
 import { Component, OnInit } from '@angular/core';
-import { AuthService } from '../../auth/services/login-service.service';
 import { ToastrService } from 'ngx-toastr';
 import { CommonModule } from '@angular/common';
 import { NgxPaginationModule } from 'ngx-pagination';
-import { userResponse } from '../interfaces/user-dash-response';
 import { FormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
 
@@ -91,13 +89,13 @@ export class DashboardComponent implements OnInit {
   }
 
   deleteUser(): void {
-    if(this.selectedUserId){
+    if (this.selectedUserId) {
       this.dashService.deleteUserById(this.selectedUserId).subscribe({
-        next:(response) => {
+        next: (response) => {
           this.toast.success('Usuario y registros eliminados correctamente');
           this.getUsers();
         },
-        error: (error) =>{
+        error: (error) => {
           this.toast.error('No se elimino el usuario')
         }
 
@@ -105,19 +103,19 @@ export class DashboardComponent implements OnInit {
     }
   }
 
-  toggleUserStatus(user:any):void{
+  toggleUserStatus(user: any): void {
     const uspdateStatus = !user.status;
     this.dashService.updateUserStatus(user._id, uspdateStatus)
-    .subscribe({
-      next:()=>{
-        user.status = uspdateStatus;
-        this.countUserStatus();
-        this.toast.success(`El usuario ha sido ${uspdateStatus ? 'activado' : 'supendido'}`)
-      },
-      error:() => {
-        this.toast.error('No se logro actualizar el estado del usuario')
-      }
-    })
+      .subscribe({
+        next: () => {
+          user.status = uspdateStatus;
+          this.countUserStatus();
+          this.toast.success(`El usuario ha sido ${uspdateStatus ? 'activado' : 'supendido'}`)
+        },
+        error: () => {
+          this.toast.error('No se logro actualizar el estado del usuario')
+        }
+      })
 
   }
 

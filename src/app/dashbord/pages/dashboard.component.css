@@ -10,17 +10,14 @@
   background-color: #C7FFD8;
 }
 
-/* Estilo de la tabla */
 .table {
   width: 100%;
   border-collapse: collapse;
   margin-bottom: 20px;
 }
 
-/* Estilo del encabezado */
 .table thead {
   background-color: #161D6F;
-  /* Azul oscuro */
   color: white;
   text-align: left;
 }
@@ -30,53 +27,39 @@
   font-size: 16px;
 }
 
-/* Estilo de las filas */
+
 .table tbody tr {
   border-bottom: 1px solid #0B2F9F;
-  /* Azul más claro */
   background-color: #C7FFD8;
-  /* Fondo verde claro */
 }
 
-/* Cambiar el color del hover */
 .table tbody tr:hover {
   background-color: #0B2F9F;
-  /* Azul intermedio al hacer hover */
   color: white;
-  /* Cambiar el color del texto a blanco en hover */
   cursor: pointer;
 }
 
-/* Estilo de las celdas */
 .table tbody td {
   padding: 12px;
   text-align: left;
   color: #161D6F;
-  /* Texto azul oscuro */
 }
 
-/* Estado con etiquetas de color */
 .text-bg-succes {
   background-color: #C7FFD8 !important;
-  /* Verde claro para "Activo" */
   color: #161D6F;
-  /* Azul oscuro para el texto */
 }
 
 .text-bg-dange {
   background-color: #98DED9 !important;
-  /* Verde aguamarina para "Suspendido" */
   color: #161D6F;
 }
 
-/* Estilo del encabezado de la tarjeta */
 .card-header {
   background-color: #0B2F9F;
-  /* Azul intermedio */
   color: white;
 }
 
-/* Botones de acción */
 .btn {
   padding: 5px 10px;
   font-size: 14px;
@@ -85,16 +68,11 @@
 
 .btn-outline-info {
   border-color: #161D6F;
-  /* Borde azul oscuro */
   color: #161D6F;
-  /* Texto azul oscuro */
 }
 
 .btn-outline-info:hover {
   background-color: #98DED9;
-  /* Fondo verde aguamarina al hacer hover */
   color: white;
   border-color: #98DED9;
-  /* Borde verde aguamarina */
 }
-

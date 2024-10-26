@@ -1,16 +1,13 @@
-<app-navbar
-(toggleSidebar)="toggleSidebar($event)" *ngIf="isAunthenticated()"
-[ngClass]="{'navbar-hidden': isSidebarCollapsed}"
-></app-navbar>
+<app-navbar (toggleSidebar)="toggleSidebar($event)" *ngIf="isAunthenticated()"
+  [ngClass]="{'navbar-hidden': isSidebarCollapsed}"></app-navbar>
 
 <div class="container-principal">
 
-  <div class="sidebar-container"  *ngIf="isAunthenticated()">
+  <div class="sidebar-container" *ngIf="isAunthenticated()">
     <app-sidebar [isSidebarCollapsed]="isSidebarCollapsed"></app-sidebar>
   </div>
 
-  <div class="container-router" [ngClass]="{'sidebar-hidden': isSidebarCollapsed}" >
+  <div class="container-router" [ngClass]="{'sidebar-hidden': isSidebarCollapsed}">
     <router-outlet />
   </div>
 </div>
-

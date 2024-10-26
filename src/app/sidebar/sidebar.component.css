@@ -1,48 +1,49 @@
 .sidebar {
-  height: 100vh; /* Mantiene el sidebar con la altura completa de la ventana */
-  overflow-y: auto; /* Permite el desplazamiento en el sidebar si es necesario */
-  width: 220px; /* Ancho del sidebar */
-  background-color: #161D6F; /* Color de fondo del sidebar */
-  color: white; /* Color del texto */
+  height: 100vh;
+  overflow-y: auto;
+  width: 220px;
+  background-color: #161D6F;
+  color: white;
   top: 0;
   left: 0;
-  position: fixed; /* Mantiene el sidebar fijo en su lugar */
-  transition: 0.5s ease-in-out; /* Transición suave */
+  position: fixed;
+  transition: 0.5s ease-in-out;
 }
 
 .sidebar.collapsed {
-  width: 50px; /* Ajusta el ancho cuando esté colapsado */
+  width: 50px;
 }
 
 .sidebar.collapsed .user-info,
 .sidebar.collapsed .unorded-list li span {
-  display: none; /* Oculta el texto del usuario y de los ítems */
+  display: none;
   padding: 10px;
 }
 
 .sidebar.collapsed .unorded-list li {
-  justify-content: center; /* Centra los íconos cuando esté colapsado */
+  justify-content: center;
 }
 
 .unorded-list li {
-  display: flex; /* Asegura que los elementos de la lista estén en fila */
-  align-items: center; /* Alinea verticalmente el contenido */
-  width: 100%; /* Asegura que los elementos de la lista ocupen todo el ancho */
+  display: flex;
+  align-items: center;
+  width: 100%;
 }
 
 li:hover {
   width: 100%;
-  background-color: #0B2F9F; /* Color al pasar el ratón */
+  background-color: #0B2F9F;
   color: white;
 }
 
-li .icon{
+li .icon {
   font-size: 26px;
   color: #F5F5F5;
   margin-left: 0;
-   margin-right: 10px;
+  margin-right: 10px;
 }
-li:hover .icon{
+
+li:hover .icon {
   color: #161D6F;
 }
 
@@ -54,7 +55,7 @@ li:hover .icon{
   margin-right: 10px;
 }
 
-.sidebar.collapsed .user-photo{
+.sidebar.collapsed .user-photo {
   width: 30px;
   height: 30px;
   object-fit: cover;
@@ -67,7 +68,7 @@ li:hover .icon{
   font-size: 16px;
 }
 
-.sidebar.collapsed .user-details{
+.sidebar.collapsed .user-details {
   display: none;
 }
 
@@ -75,4 +76,3 @@ li:hover .icon{
   color: #F5F5F5;
   font-size: 11px;
 }
-

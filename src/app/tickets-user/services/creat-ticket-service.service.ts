@@ -19,13 +19,12 @@ export class CreatTicketServiceService {
   ccreateTicket(formData: FormData): Observable<any> {
     return this.http.post<any>(`${this.url}/data-tickets/create-ticket`, formData).pipe(
       catchError((error) => {
-        console.error('Error creating ticket:', error);
         return throwError(error);
       })
     );
   }
 
-  getTickets(userId:string):Observable<ticket[]>{
+  getTickets(userId: string): Observable<ticket[]> {
     return this.http.get<ticket[]>(`${this.url}/data-tickets/user/${userId}`)
   }
 

@@ -6,7 +6,8 @@
 
   <!-- Encabezado del perfil -->
   <div class="profile-header">
-    <img [src]="userPhotoUrl" alt="Foto de perfil" alt="../../../assets/imgDefaultProfile.jpeg" class="profile-img" *ngIf="user">
+    <img [src]="userPhotoUrl" alt="Foto de perfil" alt="../../../assets/imgDefaultProfile.jpeg" class="profile-img"
+      *ngIf="user">
     <h2 *ngIf="user">{{ user.name }}</h2>
     <p *ngIf="user">Email: {{ user.email }}</p>
   </div>
@@ -37,86 +38,92 @@
         </div>
       </div>
     </div>
-<!-- Datos del servicio -->
-<div class="col-md-6" *ngIf="user?.roles != 'admin'">
-  <div class="card">
-    <div class="card-header section-header">
-      <h5>Datos del Servicio</h5>
-    </div>
-    <div class="card-body">
-      <p><strong>ID del Servicio:</strong> {{servicio[0]._id}}</p>
-      <p><strong>Dirección:</strong> {{servicio[0].Address}}</p>
-      <p><strong>Colonia:</strong> {{servicio[0].Colonia}}</p>
-      <p><strong>Tipo de Servicio:</strong> {{servicio[0].serviceType }}</p>
-      <!-- Puedes agregar más campos según necesites -->
-    </div>
-  </div>
-</div>
-
-<!-- Modal para cambiar la contraseña -->
-<div class="modal fade" id="changePasswordModal" tabindex="-1" aria-labelledby="changePasswordModalLabel"
-  aria-hidden="true">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="changePasswordModalLabel">Cambiar Contraseña</h5>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+    <!-- Datos del servicio -->
+    <div class="col-md-6" *ngIf="user?.roles != 'admin'">
+      <div class="card">
+        <div class="card-header section-header">
+          <h5>Datos del Servicio</h5>
+        </div>
+        <div class="card-body">
+          <p><strong>ID del Servicio:</strong> {{servicio[0]._id}}</p>
+          <p><strong>Dirección:</strong> {{servicio[0].Address}}</p>
+          <p><strong>Colonia:</strong> {{servicio[0].Colonia}}</p>
+          <p><strong>Tipo de Servicio:</strong> {{servicio[0].serviceType }}</p>
+          <!-- Puedes agregar más campos según necesites -->
+        </div>
       </div>
-      <div class="modal-body">
-        <form [formGroup]="myForm" (ngSubmit)="onSubmit()">
-          <div class="mb-3">
-            <label for="currentPassword" class="form-label">Contraseña Actual</label>
-            <input type="password" class="form-control" id="currentPassword" formControlName="currentPassword" required autocomplete="current-password">
-            <div *ngIf="myForm.get('currentPassword')?.invalid && myForm.get('currentPassword')?.touched"
-              class="text-danger">
-              La contraseña actual es requerida.
-            </div>
+    </div>
+
+    <!-- Modal para cambiar la contraseña -->
+    <div class="modal fade" id="changePasswordModal" tabindex="-1" aria-labelledby="changePasswordModalLabel"
+      aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="changePasswordModalLabel">Cambiar Contraseña</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
           </div>
-          <div class="mb-3">
-            <label for="newPassword" class="form-label">Nueva Contraseña</label>
-            <input type="password" class="form-control" id="newPassword" formControlName="newPassword" required autocomplete="new-password">
-            <div *ngIf="myForm.get('newPassword')?.invalid && myForm.get('newPassword')?.touched" class="text-danger">
-              La nueva contraseña es requerida y debe tener al menos 6 caracteres.
-            </div>
+          <div class="modal-body">
+            <form [formGroup]="myForm" (ngSubmit)="onSubmit()">
+              <div class="mb-3">
+                <label for="currentPassword" class="form-label">Contraseña Actual</label>
+                <input type="password" class="form-control" id="currentPassword" formControlName="currentPassword"
+                  required autocomplete="current-password">
+                <div *ngIf="myForm.get('currentPassword')?.invalid && myForm.get('currentPassword')?.touched"
+                  class="text-danger">
+                  La contraseña actual es requerida.
+                </div>
+              </div>
+              <div class="mb-3">
+                <label for="newPassword" class="form-label">Nueva Contraseña</label>
+                <input type="password" class="form-control" id="newPassword" formControlName="newPassword" required
+                  autocomplete="new-password">
+                <div *ngIf="myForm.get('newPassword')?.invalid && myForm.get('newPassword')?.touched"
+                  class="text-danger">
+                  La nueva contraseña es requerida y debe tener al menos 6 caracteres.
+                </div>
+              </div>
+              <div class="mb-3">
+                <label for="confirmPassword" class="form-label">Confirmar Nueva Contraseña</label>
+                <input type="password" class="form-control" id="confirmPassword" formControlName="confirmPassword"
+                  required autocomplete="new-password">
+                <div *ngIf="myForm.get('confirmPassword')?.invalid && myForm.get('confirmPassword')?.touched"
+                  class="text-danger">
+                  La confirmación de la nueva contraseña es requerida.
+                </div>
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                <button type="submit" class="btn btn-custom" [disabled]="myForm.invalid">Guardar Cambios</button>
+              </div>
+            </form>
           </div>
-          <div class="mb-3">
-            <label for="confirmPassword" class="form-label">Confirmar Nueva Contraseña</label>
-            <input type="password" class="form-control" id="confirmPassword" formControlName="confirmPassword" required autocomplete="new-password">
-            <div *ngIf="myForm.get('confirmPassword')?.invalid && myForm.get('confirmPassword')?.touched"
-              class="text-danger">
-              La confirmación de la nueva contraseña es requerida.
-            </div>
+        </div>
+      </div>
+    </div>
+
+    <!--Moda para cargar una foto-->
+    <div class="modal fade" id="uploadPhotoModal" tabindex="-1" aria-labelledby="uploadPhotoModalLabel"
+      aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="uploadPhotoModalLabel">Cargar Fotografía de Perfil</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+            <form>
+              <div class="mb-3">
+                <label for="profilePhoto" class="form-label">Seleccionar Archivo</label>
+                <input type="file" class="form-control" id="profilePhoto" accept="image/*"
+                  (change)="onFileSelect($event)" required>
+              </div>
+            </form>
           </div>
           <div class="modal-footer">
             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
-            <button type="submit" class="btn btn-custom" [disabled]="myForm.invalid">Guardar Cambios</button>
+            <button type="button" (click)="uploadPhoto()" class="btn btn-custom">Cargar Foto</button>
           </div>
-        </form>
+        </div>
       </div>
     </div>
-  </div>
-</div>
-
-<!--Moda para cargar una foto-->
-<div class="modal fade" id="uploadPhotoModal" tabindex="-1" aria-labelledby="uploadPhotoModalLabel" aria-hidden="true">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="uploadPhotoModalLabel">Cargar Fotografía de Perfil</h5>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-      </div>
-      <div class="modal-body">
-        <form>
-          <div class="mb-3">
-            <label for="profilePhoto" class="form-label">Seleccionar Archivo</label>
-            <input type="file" class="form-control" id="profilePhoto" accept="image/*" (change)="onFileSelect($event)" required>
-          </div>
-        </form>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
-        <button type="button" (click)="uploadPhoto()" class="btn btn-custom">Cargar Foto</button>
-      </div>
-    </div>
-  </div>
-</div>

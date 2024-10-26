@@ -1,11 +1,9 @@
-<nav style="background-color: #98DED9; padding: 10px; display: flex; justify-content: space-between; align-items: center;">
-  <!-- Botón para desplegar el menú, alineado a la izquierda -->
-  <button class="menu-toggle" (click)="onToggleSidebar()"
-  style="background: transparent; border: none;">
-  <i class="bi bi-list" style="color: #0B2F9F; font-size: 24px;"></i> <!-- Cambiar color y tamaño -->
+<nav
+  style="background-color: #98DED9; padding: 10px; display: flex; justify-content: space-between; align-items: center;">
+  <button class="menu-toggle" (click)="onToggleSidebar()" style="background: transparent; border: none;">
+    <i class="bi bi-list" style="color: #0B2F9F; font-size: 24px;"></i>
   </button>
 
-  <!-- Botón de cerrar sesión, alineado a la derecha -->
   <button class="btn btn-outline-danger" (click)="closeSesion()" type="button">
     <i class="bi bi-box-arrow-left" style="font-size: 16px; margin-right: 8px; color: white"></i>
     Cerrar Sesión

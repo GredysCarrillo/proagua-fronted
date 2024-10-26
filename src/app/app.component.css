@@ -1,48 +1,46 @@
-.sidebar-container{
+.sidebar-container {
   height: 100vh;
   padding: 0;
   margin-top: 0;
   z-index: 999;
 }
 
-.container-principal{
+.container-principal {
   display: flex;
   margin-top: 0;
   height: 100vh;
   width: 100%;
 }
 
-.container-router{
-margin-top: 70px;
-flex: 1;
-height: 100%;
-/* z-index: 998; */
-margin-left: 220px;
- transition: 0.5s ease-in-out;
+.container-router {
+  margin-top: 70px;
+  flex: 1;
+  height: 100%;
+  margin-left: 220px;
+  transition: 0.5s ease-in-out;
 }
 
-.container-router.sidebar-hidden{
-
+.container-router.sidebar-hidden {
   margin-left: 50px;
 }
 
 app-navbar {
   position: fixed;
-  top: 0; /* Asegúrate de que esté en la parte superior */
-  left: 220px; /* Ajusta según el ancho del sidebar */
-  width: calc(100% - 220px); /* Asegúrate de que ocupe el resto del ancho */
-  z-index: 1000; /* Asegura que esté por encima de otros elementos */
+  top: 0;
+  left: 220px;
+  width: calc(100% - 220px);
+  z-index: 1000;
   transition: 0.5s ease-in-out;
 }
 
-app-navbar.navbar-hidden{
+app-navbar.navbar-hidden {
   margin-left: 50px;
   transition: 0.5s ease-in-out;
   width: 97%;
   left: 0;
 }
 
-.hidden{
+.hidden {
   height: 100vh;
   width: 3%;
   padding: 0;
@@ -50,4 +48,3 @@ app-navbar.navbar-hidden{
   position: absolute;
   color: #000;
 }
-

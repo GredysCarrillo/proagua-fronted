@@ -70,6 +70,7 @@
                 <th>Marcar en Proceso</th>
                 <th>Cerrar Reporte</th>
                 <th>Ver detalles</th>
+                <th>Descargar</th>
               </tr>
             </thead>
             <tbody>
@@ -90,7 +91,8 @@
                     Cerrar Reporte
                   </button></td>
                 <td><button class="btn btn-custom-datalles btn-sm" data-bs-toggle="modal" data-bs-target="#detailsModal"
-                  (click)="showDetails(ticket)" (click)="clic()">Ver Detalles</button></td>
+                  (click)="showDetails(ticket)">Ver Detalles</button></td>
+                  <td><button class="btn btnt-outline" style="text-align: center;" (click)="generatePDF(ticket)"><i class="bi bi-arrow-down-circle"  style="font-size: 28px; color: #98DED9; margin-left: 0; margin-right: 10px;"></i></button></td>
               </tr>
             </tbody>
           </table>

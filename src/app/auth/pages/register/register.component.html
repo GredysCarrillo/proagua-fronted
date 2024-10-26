@@ -19,22 +19,26 @@
 
               <div class="mb-3">
                 <label class="form-label">Nombre del cliente</label>
-                <input type="text" class="form-control form-control-sm" placeholder="Nombre" formControlName="name" autocomplete="name" />
-                <div *ngIf="myForm.get('name')?.invalid && myForm.get('name')?.touched" class="text-danger">El nombre es obligatorio</div>
+                <input type="text" class="form-control form-control-sm" placeholder="Nombre" formControlName="name"
+                  autocomplete="name" />
+                <div *ngIf="myForm.get('name')?.invalid && myForm.get('name')?.touched" class="text-danger">El nombre es
+                  obligatorio</div>
               </div>
 
               <div class="mb-3">
                 <label class="form-label">Número de Identificación</label>
-                <input type="text" class="form-control form-control-sm" placeholder="DPI" formControlName="dpi" autocomplete="id" />
+                <input type="text" class="form-control form-control-sm" placeholder="DPI" formControlName="dpi"
+                  autocomplete="id" />
                 <div *ngIf="myForm.get('dpi')?.invalid && myForm.get('dpi')?.touched" class="text-danger">
-                <div *ngIf="myForm.get('dpi')?.errors?.['required']">El DPI es obligatorio</div>
-                <div *ngIf="myForm.get('dpi')?.errors?.['minlength']">El DPI debe tener 13 digitos</div>
-              </div>
+                  <div *ngIf="myForm.get('dpi')?.errors?.['required']">El DPI es obligatorio</div>
+                  <div *ngIf="myForm.get('dpi')?.errors?.['minlength']">El DPI debe tener 13 digitos</div>
+                </div>
               </div>
 
               <div class="mb-3">
                 <label class="form-label">Correo electrónico</label>
-                <input type="email" class="form-control form-control-sm" placeholder="Correo" formControlName="email" autocomplete="email"/>
+                <input type="email" class="form-control form-control-sm" placeholder="Correo" formControlName="email"
+                  autocomplete="email" />
                 <div *ngIf="myForm.get('email')?.invalid && myForm.get('email')?.touched" class="text-danger">
                   <div *ngIf="myForm.get('email')?.errors?.['required']">El correo es obligatorio</div>
                   <div *ngIf="myForm.get('email')?.errors?.['email']">Debe ser un correo valido</div>
@@ -45,11 +49,12 @@
               <div class="mb-3">
                 <label class="form-label">Número telefónico</label>
                 <input type="text" class="form-control form-control-sm" placeholder="Número telefónico"
-                  formControlName="phoneNumber" autocomplete="phone"/>
-                  <div *ngIf="myForm.get('phoneNumber')?.invalid && myForm.get('phoneNumber')?.touched" class="text-danger">
-                    <div *ngIf="myForm.get('phoneNumber')?.errors?.['required']">El numero es obligatorio</div>
-                   <div *ngIf="myForm.get('phoneNumber')?.errors?.['minlength']">El numero debe tener 08 digitos</div>
-                  </div>
+                  formControlName="phoneNumber" autocomplete="phone" />
+                <div *ngIf="myForm.get('phoneNumber')?.invalid && myForm.get('phoneNumber')?.touched"
+                  class="text-danger">
+                  <div *ngIf="myForm.get('phoneNumber')?.errors?.['required']">El numero es obligatorio</div>
+                  <div *ngIf="myForm.get('phoneNumber')?.errors?.['minlength']">El numero debe tener 08 digitos</div>
+                </div>
               </div>
             </div>
 
@@ -75,14 +80,17 @@
                   <option value="Doméstico">Doméstico</option>
                   <option value="Comercial">Comercial</option>
                 </select>
-                <div *ngIf="myForm.get('serviceType')?.invalid && myForm.get('serviceType')?.touched">Selecciona un tipo de servicio</div>
+                <div *ngIf="myForm.get('serviceType')?.invalid && myForm.get('serviceType')?.touched">Selecciona un tipo
+                  de servicio</div>
               </div>
 
               <div class="mb-3">
                 <label class="form-label">Dirección</label>
                 <textarea class="form-control form-control-sm" placeholder="Calle/avenida/numeral/referencia"
-                  formControlName="Address" rows="5" style="height: 95px;" (resize)="0" autocomplete="address"></textarea>
-                  <div *ngIf="myForm.get('Address')?.invalid && myForm.get('Address')?.touched" class="text-danger">La direccion es obligatoria</div>
+                  formControlName="Address" rows="5" style="height: 95px;" (resize)="0"
+                  autocomplete="address"></textarea>
+                <div *ngIf="myForm.get('Address')?.invalid && myForm.get('Address')?.touched" class="text-danger">La
+                  direccion es obligatoria</div>
               </div>
             </div>
           </div>

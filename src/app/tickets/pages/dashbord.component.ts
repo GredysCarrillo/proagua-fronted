@@ -5,6 +5,7 @@ import { ToastrService } from 'ngx-toastr';
 import { CommonModule } from '@angular/common';
 import { NgxPaginationModule } from 'ngx-pagination';
 import { FormsModule } from '@angular/forms';
+import { jsPDF } from 'jspdf';
 
 @Component({
   selector: 'app-dashbord',
@@ -15,13 +16,11 @@ import { FormsModule } from '@angular/forms';
 })
 export class TicketDashbordComponent implements OnInit {
 
-
-  //Variables y arrays
   ticketCounts: any = { abiertos: 0, enProceso: 0, cerrados: 0 };
   allTickets: ticket[] = [];
   p: number = 1;
-  filteredTickets: ticket[] = []; // Array para tickets filtrados
-  searchTerm: string = ''; // Término de búsqueda
+  filteredTickets: ticket[] = [];
+  searchTerm: string = '';
   selectedTicket: ticket | null = null;
 
   constructor(
@@ -29,13 +28,9 @@ export class TicketDashbordComponent implements OnInit {
     private toast: ToastrService) { }
 
 
-  //Metodo ngOnInit
   ngOnInit(): void {
-    console.log('tickets', this.allTickets),
-    console.log('filtered tickets', this.filteredTickets),
-    this.getTicketsCount();
+      this.getTicketsCount();
     this.getAllTickets();
-    console.log('desde el ngOnInit jajaja', this.getAllTickets())
   }
 
   //Metodo para obtener los contadores de tickets
@@ -51,67 +46,56 @@ export class TicketDashbordComponent implements OnInit {
       })
   }
 
- // Método para obtener todos los tickets
-getAllTickets(): void {
-  this.dashService.getAllTickets()
-    .subscribe({
-      next: (data: ticket[]) => {
-        this.allTickets = data.map(ticket => {
-          // Comprobamos si hay una imagen y es un array
-          if (ticket.image && Array.isArray(ticket.image.data)) {
-            // Convertimos el array de números en un Blob
-            const byteArray = new Uint8Array(ticket.image.data);
-            const blob = new Blob([byteArray], { type: 'image/jpeg' }); // Asegúrate de que el tipo sea correcto
-            const imageUrl = URL.createObjectURL(blob); // Creamos la URL temporal del blob
+  // Método para obtener todos los tickets
+  getAllTickets(): void {
+    this.dashService.getAllTickets()
+      .subscribe({
+        next: (data: ticket[]) => {
+          this.allTickets = data.map(ticket => {
+            if (ticket.image && Array.isArray(ticket.image.data)) {
+              const byteArray = new Uint8Array(ticket.image.data);
+              const blob = new Blob([byteArray], { type: 'image/jpeg' });
+              const imageUrl = URL.createObjectURL(blob);
 
+              return {
+                ...ticket,
+                CreatedAt: ticket.CreatedAt ? new Date(ticket.CreatedAt) : undefined,
+                status: ticket.status ?? 'Cerrado',
+                imagenUrl: imageUrl
+              };
+            }
             return {
               ...ticket,
               CreatedAt: ticket.CreatedAt ? new Date(ticket.CreatedAt) : undefined,
               status: ticket.status ?? 'Cerrado',
-              imagenUrl: imageUrl // Asignamos la URL temporal a `imagenUrl`
+              imagenUrl: null
             };
-          }
-          return {
-            ...ticket,
-            CreatedAt: ticket.CreatedAt ? new Date(ticket.CreatedAt) : undefined,
-            status: ticket.status ?? 'Cerrado',
-            imagenUrl: null // No hay imagen, asignamos null
-          };
-        }).sort((a, b) => {
-          const priorityOrder = ['Abierto', 'En Proceso', 'Cerrado'];
-          return priorityOrder.indexOf(a.status) - priorityOrder.indexOf(b.status);
-        });
-
-        console.log('Tickets asignados:', this.allTickets); // Verificar contenido aquí
-        this.filteredTickets = [...this.allTickets];
-        this.allTickets.forEach(ticket => {
-          if (ticket.userId) {
-            this.getUserName(ticket.userId);
-          }
-        });
-      },
-      error: (error) => {
-        this.toast.error('Error al cargar los tickets', error);
-      }
-    });
-}
-
-
-  clic(){
-    console.log('clic en el boton')
-    console.log(this.selectedTicket)
+          }).sort((a, b) => {
+            const priorityOrder = ['Abierto', 'En Proceso', 'Cerrado'];
+            return priorityOrder.indexOf(a.status) - priorityOrder.indexOf(b.status);
+          });
+          this.filteredTickets = [...this.allTickets];
+          this.allTickets.forEach(ticket => {
+            if (ticket.userId) {
+              this.getUserName(ticket.userId);
+            }
+          });
+        },
+        error: (error) => {
+          this.toast.error('Error al cargar los tickets', error);
+        }
+      });
   }
+
 
   // Método para cambiar el estado del ticket
   changeTicketStatus(ticketId: string, newStatus: string) {
-    console.log(`intentando cambiar el ticket idno. ${ticketId}`)
     this.dashService.updateTicketStatus(ticketId, newStatus).subscribe(
       (response) => {
-        console.log('Estado actualizado:', response);
         this.ngOnInit();
       },
       (error) => {
-        console.error('Error al actualizar el estado del ticket', error);
+        this.toast.error('Error al actualizar el estado del ticket');
       }
     );
   }
@@ -136,10 +120,9 @@ getAllTickets(): void {
   filterTickets(): void {
     const searchTermLower = this.searchTerm.toLowerCase();
     this.filteredTickets = this.allTickets.filter(ticket =>
-      this.searchTerm.trim() === ' ' ||
+      this.searchTerm.trim() === '' ||
       ticket.userId?.toLowerCase().includes(searchTermLower) ||
-      ticket.description?.toLowerCase().includes(searchTermLower) ||
-      console.log(this.filteredTickets, 'Estos son los tickets filtrados')
+      ticket.description?.toLowerCase().includes(searchTermLower)
     );
   }
 
@@ -148,4 +131,67 @@ getAllTickets(): void {
     this.selectedTicket = ticket;
   }
 
+
+  generatePDF(ticket: any): void {
+    const doc = new jsPDF();
+
+    doc.setFontSize(18);
+    doc.text('Detalles del Reporte', 10, 10);
+
+    // Crear tabla
+    const startY = 30;
+    const rowHeight = 10;
+    const columnWidth = 95;
+
+    // Encabezados
+    doc.setFontSize(12);
+    doc.setTextColor(255, 255, 255);
+    doc.setFillColor(0, 51, 102);
+    doc.rect(10, startY, 190, rowHeight, 'F');
+    doc.text('Campo', 12, startY + 7);
+    doc.text('Valor', 150, startY + 7, { align: 'right' });
+
+    // Datos
+    doc.setTextColor(0);
+    const data = [
+      { field: 'ID del Ticket', value: ticket._id || 'N/A' },
+      { field: 'Usuario', value: ticket.userId || 'N/A' },
+      { field: 'Descripción', value: ticket.description || 'N/A' },
+      { field: 'Estado', value: ticket.status || 'N/A' },
+      { field: 'Fecha de Creación', value: ticket.CreatedAt ? new Date(ticket.CreatedAt).toLocaleDateString() : 'N/A' },
+    ];
+
+    // Ajuste para mover los datos hacia abajo
+    const offsetY = 5;
+    data.forEach((item, index) => {
+      const yPosition = startY + (index + 1) * rowHeight + offsetY;
+      doc.text(item.field, 12, yPosition);
+      doc.text(item.value, 150, yPosition, { align: 'right' });
+
+      // Dibuja las líneas de la tabla
+      doc.line(10, yPosition + 1, 200, yPosition + 1);
+    });
+
+    // Dibuja la línea final de la tabla
+    doc.line(10, startY + data.length * rowHeight + offsetY + 1, 200, startY + data.length * rowHeight + offsetY + 1);
+
+    // Agregar una línea de espacio
+    doc.text('', 10, startY + (data.length + 1) * rowHeight + offsetY + 5);
+
+    // Agregar imagen si existe
+    if (ticket.imagenUrl) {
+      const img = new Image();
+      img.src = ticket.imagenUrl;
+      img.onload = () => {
+        const imgWidth = 180;
+        const imgHeight = (img.height * imgWidth) / img.width;
+        doc.addImage(img, 'JPEG', 10, startY + (data.length + 2) * rowHeight + offsetY + 10, imgWidth, imgHeight);
+        doc.save(`Ticket_${ticket._id}.pdf`);
+      };
+    } else {
+      doc.save(`Ticket_${ticket._id}.pdf`);
+    }
+  }
+
 }
+
